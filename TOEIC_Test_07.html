@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 6 – Test 07 – Grammar in Context</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+  :root{--navy:#00274C;--blue:#1565C0;--light-blue:#E3F0FF;--accent:#F59E0B;--green:#16A34A;--red:#DC2626;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;--border:#CBD5E1;--passage-bg:#FEFCE8;--passage-border:#FDE68A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  header{background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-brand{font-family:'Merriweather',serif;font-size:.85rem;line-height:1.4;opacity:.9}
+  .hdr-brand span{display:block;font-size:.75rem;opacity:.7}
+  .hdr-title{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;letter-spacing:.04em;text-align:center}
+  #timer{background:var(--accent);color:var(--navy);font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;padding:6px 18px;border-radius:6px;letter-spacing:.08em;min-width:90px;text-align:center;transition:background .3s}
+  #timer.warn{background:#EF4444;color:white;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  .directions{background:var(--white);border:2px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:.92rem}
+  .directions strong{display:block;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+  .section-header{background:var(--navy);color:white;padding:8px 16px;border-radius:6px 6px 0 0;font-family:'Merriweather',serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-top:32px}
+  .passage-label{font-size:.88rem;font-style:italic;color:var(--muted);margin:0 0 8px}
+  .passage-block{background:var(--passage-bg);border:1.5px solid var(--passage-border);border-radius:0 0 8px 8px;padding:18px 20px;margin-bottom:20px;font-family:'Merriweather',serif;font-size:.9rem;line-height:1.75}
+  .passage-block p{margin-bottom:.5em}
+  .blank{border-bottom:2px solid var(--navy);padding:0 8px;font-weight:700;color:var(--blue);font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+  .question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+  .question-card.answered{border-color:var(--blue)}
+  .q-label{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .options label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.4;transition:background .15s}
+  .options label:hover{background:var(--light-blue)}
+  .options input[type=radio]{margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .submit-wrap{text-align:center;margin:32px 0 8px}
+  #submit-btn{background:var(--blue);color:white;border:none;border-radius:8px;padding:14px 40px;font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .2s,transform .15s;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+  #submit-btn:hover:not(:disabled){background:var(--navy);transform:translateY(-1px)}
+  #submit-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none;transform:none}
+  .req-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:6px}
+  #results{display:none;margin-top:36px}
+  .score-banner{background:var(--navy);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+  .score-banner .score-num{font-family:'Merriweather',serif;font-size:3rem;font-weight:700;color:var(--accent)}
+  .score-banner .score-sub{font-size:.9rem;opacity:.8;margin-top:4px}
+  .correction-title{font-family:'Merriweather',serif;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:16px}
+  .corr-card{border-radius:8px;padding:14px 16px;margin-bottom:10px;border-left:5px solid}
+  .corr-card.correct{background:#F0FDF4;border-color:var(--green)}
+  .corr-card.wrong{background:#FEF2F2;border-color:var(--red)}
+  .c-head{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .badge-ok{background:var(--green);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .badge-err{background:var(--red);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .c-ans{font-size:.88rem;margin-bottom:6px}
+  .c-ans .good{color:var(--green);font-weight:700}
+  .c-ans .bad{color:var(--red);text-decoration:line-through}
+  .c-expl{font-size:.87rem;color:#374151;background:rgba(255,255,255,.7);border-radius:6px;padding:8px 10px;border-left:3px solid var(--muted);line-height:1.5}
+  @media(max-width:600px){header{padding:10px 14px;flex-wrap:wrap;gap:6px}.hdr-title{order:-1;width:100%;text-align:center}#timer{font-size:1.2rem}main{padding:16px 12px 48px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-brand">Marc VASSEUR<span>Polytech Lille · Intensif TOEIC</span></div>
+  <div class="hdr-title">TOEIC PART 6 — TEST 07</div>
+  <div id="timer">08:00</div>
+</header>
+<main>
+<div class="directions">
+  <strong>PART 6 – DIRECTIONS</strong>
+  Read the texts below. A word, phrase, or sentence is missing in parts of each text. Four answer choices are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D).
+</div>
+
+<!-- TEXT 1 -->
+<div class="section-header">Questions 131–134 — E-mail</div>
+<p class="passage-label" style="margin-top:12px">Questions 131–134 refer to the following e-mail.</p>
+<div class="passage-block">
+  <p>To: Project Leads | From: James Pek | Subject: Training Courses</p>
+  <p>To all Pek Designs project leaders:</p>
+  <p>In the coming weeks, we will be organizing several training sessions for <span class="blank">131</span> employees. At Pek Designs, we believe that with the proper help and support from our senior project leaders, less experienced staff can quickly <span class="blank">132</span> a deep understanding of the design process. <span class="blank">133</span>, they can improve their ability to communicate effectively across divisions. When employees at all experience levels interact, every employee's competency level rises and the business overall benefits.</p>
+  <p>For that reason, we are urging experienced project leaders to attend each one of the interactive seminars that will be held throughout the coming month. <span class="blank">134</span></p>
+  <p>Thank you for your support. James Pek, Pek Designs</p>
+</div>
+<!-- TEXT 2 -->
+<div class="section-header">Questions 135–138 — Advertisement</div>
+<p class="passage-label" style="margin-top:12px">Questions 135–138 refer to the following classified advertisement.</p>
+<div class="passage-block">
+  <p style="text-align:center;font-style:italic;font-weight:bold;">Are you ready to earn some extra cash over the holidays?</p>
+  <p>Paradise Clothing Store wants part-time store clerks needed to help out during our busy holiday shopping season. The positions are perfect for students, parents or anyone else who desires <span class="blank">135</span> in their work schedule. Come and apply today. We offer paid training, a competitive pay <span class="blank">136</span>, and generous employee discounts. But that's not all. We offer many more benefits <span class="blank">137</span> these, including free uniforms, sales bonuses, and regular pay increases.</p>
+  <p>To find out more about the positions, <span class="blank">138</span>.</p>
+</div>
+<!-- TEXT 3 -->
+<div class="section-header">Questions 139–142 — E-mail</div>
+<p class="passage-label" style="margin-top:12px">Questions 139–142 refer to the following e-mail.</p>
+<div class="passage-block">
+  <p>From: Brenda Cosworth | To: Ned's Home Supply | Subject: Thank you | Date: March 12</p>
+  <p>To whom it may concern,</p>
+  <p>On March 7, I had the chance <span class="blank">139</span> Ned's Home Supply for the first time, and I asked for assistance in choosing wallpaper for a living room. I am writing this e-mail to let you know how <span class="blank">140</span> I was with the service I received. Your sales associate, Jenny Lee, showed me several types of wallpaper and also gave me <span class="blank">141</span> advice for decorating my home. These days, it's rare to encounter such great customer service, so I feel it should be recognized. <span class="blank">142</span></p>
+  <p>Sincerely, Brenda Cosworth</p>
+</div>
+<!-- TEXT 4 -->
+<div class="section-header">Questions 143–146 — Article</div>
+<p class="passage-label" style="margin-top:12px">Questions 143–146 refer to the following article.</p>
+<div class="passage-block">
+  <p style="text-align:center;font-weight:bold;">Nahan-Messer Launches a New Division</p>
+  <p>January 11 — Nahan-Messer Publishing announced today the launch of a division dedicated to science fiction. The division, Lightspeed Press, <span class="blank">143</span>. It will be led by Clara Bryce, longtime fiction <span class="blank">144</span> at Nahan-Messer.</p>
+  <p>The publisher's roster of science fiction authors has grown large enough in recent years to merit its own division, according to Bryce. "Increasingly, readers are seeking a sense of wonder, conveyed so well by science fiction," said Bryce. "Lightspeed was created to address this <span class="blank">145</span>."</p>
+  <p>All of Nahan-Messer's established science fiction authors have been moved to the new division. <span class="blank">146</span>, Lightspeed has acquired several first-time novelists. Its first release, <em>A Giant of Industry</em> by Lily Riddle, will be published on March 15.</p>
+</div>
+
+<div class="question-card" id="qc131"><div class="q-label">131.</div><div class="options">
+  <label><input type="radio" name="q131" value="A"> (A)&nbsp;interest</label>
+  <label><input type="radio" name="q131" value="B"> (B)&nbsp;interests</label>
+  <label><input type="radio" name="q131" value="C"> (C)&nbsp;interested</label>
+  <label><input type="radio" name="q131" value="D"> (D)&nbsp;interesting</label>
+</div></div>
+<div class="question-card" id="qc132"><div class="q-label">132.</div><div class="options">
+  <label><input type="radio" name="q132" value="A"> (A)&nbsp;develop</label>
+  <label><input type="radio" name="q132" value="B"> (B)&nbsp;raise</label>
+  <label><input type="radio" name="q132" value="C"> (C)&nbsp;open</label>
+  <label><input type="radio" name="q132" value="D"> (D)&nbsp;complete</label>
+</div></div>
+<div class="question-card" id="qc133"><div class="q-label">133.</div><div class="options">
+  <label><input type="radio" name="q133" value="A"> (A)&nbsp;After all</label>
+  <label><input type="radio" name="q133" value="B"> (B)&nbsp;For</label>
+  <label><input type="radio" name="q133" value="C"> (C)&nbsp;Even so</label>
+  <label><input type="radio" name="q133" value="D"> (D)&nbsp;At the same time</label>
+</div></div>
+<div class="question-card" id="qc134"><div class="q-label">134.</div><div class="options">
+  <label><input type="radio" name="q134" value="A"> (A)&nbsp;Let me explain our plans for on-site staff training.</label>
+  <label><input type="radio" name="q134" value="B"> (B)&nbsp;We hope that you will strongly consider joining us.</label>
+  <label><input type="radio" name="q134" value="C"> (C)&nbsp;Today's training session will be postponed until Monday.</label>
+  <label><input type="radio" name="q134" value="D"> (D)&nbsp;This is the first in a series of such lectures.</label>
+</div></div>
+<div class="question-card" id="qc135"><div class="q-label">135.</div><div class="options">
+  <label><input type="radio" name="q135" value="A"> (A)&nbsp;flexible</label>
+  <label><input type="radio" name="q135" value="B"> (B)&nbsp;flexibly</label>
+  <label><input type="radio" name="q135" value="C"> (C)&nbsp;flexibility</label>
+  <label><input type="radio" name="q135" value="D"> (D)&nbsp;more flexible</label>
+</div></div>
+<div class="question-card" id="qc136"><div class="q-label">136.</div><div class="options">
+  <label><input type="radio" name="q136" value="A"> (A)&nbsp;weight</label>
+  <label><input type="radio" name="q136" value="B"> (B)&nbsp;value</label>
+  <label><input type="radio" name="q136" value="C"> (C)&nbsp;degree</label>
+  <label><input type="radio" name="q136" value="D"> (D)&nbsp;rate</label>
+</div></div>
+<div class="question-card" id="qc137"><div class="q-label">137.</div><div class="options">
+  <label><input type="radio" name="q137" value="A"> (A)&nbsp;besides</label>
+  <label><input type="radio" name="q137" value="B"> (B)&nbsp;except</label>
+  <label><input type="radio" name="q137" value="C"> (C)&nbsp;until</label>
+  <label><input type="radio" name="q137" value="D"> (D)&nbsp;between</label>
+</div></div>
+<div class="question-card" id="qc138"><div class="q-label">138.</div><div class="options">
+  <label><input type="radio" name="q138" value="A"> (A)&nbsp;download our 2018 Fashion catalogue</label>
+  <label><input type="radio" name="q138" value="B"> (B)&nbsp;call the support number of our electronic store</label>
+  <label><input type="radio" name="q138" value="C"> (C)&nbsp;visit our employment Web site at www.paradise.com</label>
+  <label><input type="radio" name="q138" value="D"> (D)&nbsp;ask your friend who was fired last month</label>
+</div></div>
+<div class="question-card" id="qc139"><div class="q-label">139.</div><div class="options">
+  <label><input type="radio" name="q139" value="A"> (A)&nbsp;visit</label>
+  <label><input type="radio" name="q139" value="B"> (B)&nbsp;to visit</label>
+  <label><input type="radio" name="q139" value="C"> (C)&nbsp;to be visited</label>
+  <label><input type="radio" name="q139" value="D"> (D)&nbsp;have visited</label>
+</div></div>
+<div class="question-card" id="qc140"><div class="q-label">140.</div><div class="options">
+  <label><input type="radio" name="q140" value="A"> (A)&nbsp;pleasing</label>
+  <label><input type="radio" name="q140" value="B"> (B)&nbsp;pleasingly</label>
+  <label><input type="radio" name="q140" value="C"> (C)&nbsp;pleased</label>
+  <label><input type="radio" name="q140" value="D"> (D)&nbsp;please</label>
+</div></div>
+<div class="question-card" id="qc141"><div class="q-label">141.</div><div class="options">
+  <label><input type="radio" name="q141" value="A"> (A)&nbsp;disposable</label>
+  <label><input type="radio" name="q141" value="B"> (B)&nbsp;winnable</label>
+  <label><input type="radio" name="q141" value="C"> (C)&nbsp;valuable</label>
+  <label><input type="radio" name="q141" value="D"> (D)&nbsp;avoidable</label>
+</div></div>
+<div class="question-card" id="qc142"><div class="q-label">142.</div><div class="options">
+  <label><input type="radio" name="q142" value="A"> (A)&nbsp;Thank you again for your attentive help.</label>
+  <label><input type="radio" name="q142" value="B"> (B)&nbsp;Thank you for understanding and refunding payment for the goods.</label>
+  <label><input type="radio" name="q142" value="C"> (C)&nbsp;Waiting for your help in choosing wallpaper.</label>
+  <label><input type="radio" name="q142" value="D"> (D)&nbsp;Sorry for lost time.</label>
+</div></div>
+<div class="question-card" id="qc143"><div class="q-label">143.</div><div class="options">
+  <label><input type="radio" name="q143" value="A"> (A)&nbsp;is responsible for overseeing the shooting and assembly of a film.</label>
+  <label><input type="radio" name="q143" value="B"> (B)&nbsp;will be closed soon due to lack of funding.</label>
+  <label><input type="radio" name="q143" value="C"> (C)&nbsp;will write a new sequel to a bestselling series.</label>
+  <label><input type="radio" name="q143" value="D"> (D)&nbsp;will publish twenty original titles this year.</label>
+</div></div>
+<div class="question-card" id="qc144"><div class="q-label">144.</div><div class="options">
+  <label><input type="radio" name="q144" value="A"> (A)&nbsp;editing</label>
+  <label><input type="radio" name="q144" value="B"> (B)&nbsp;editor</label>
+  <label><input type="radio" name="q144" value="C"> (C)&nbsp;edits</label>
+  <label><input type="radio" name="q144" value="D"> (D)&nbsp;editorial</label>
+</div></div>
+<div class="question-card" id="qc145"><div class="q-label">145.</div><div class="options">
+  <label><input type="radio" name="q145" value="A"> (A)&nbsp;question</label>
+  <label><input type="radio" name="q145" value="B"> (B)&nbsp;award</label>
+  <label><input type="radio" name="q145" value="C"> (C)&nbsp;invitation</label>
+  <label><input type="radio" name="q145" value="D"> (D)&nbsp;demand</label>
+</div></div>
+<div class="question-card" id="qc146"><div class="q-label">146.</div><div class="options">
+  <label><input type="radio" name="q146" value="A"> (A)&nbsp;In addition</label>
+  <label><input type="radio" name="q146" value="B"> (B)&nbsp;For example</label>
+  <label><input type="radio" name="q146" value="C"> (C)&nbsp;On the contrary</label>
+  <label><input type="radio" name="q146" value="D"> (D)&nbsp;On the whole</label>
+</div></div>
+
+
+<div class="submit-wrap">
+  <button id="submit-btn" disabled>Voir la correction</button>
+  <p class="req-note">Toutes les questions doivent être répondues avant d'afficher la correction.</p>
+</div>
+
+<div id="results">
+  <div class="score-banner">
+    <div class="score-num" id="score-display">—</div>
+    <div class="score-sub" id="score-pct"></div>
+  </div>
+  <p class="correction-title">Correction détaillée</p>
+  <div id="corr-list"></div>
+</div>
+</main>
+<script>
+
+  var TOTAL = 480;
+  var remaining = TOTAL;
+  var timerEl = document.getElementById('timer');
+  function fmt(s){var m=Math.floor(s/60);return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+  timerEl.textContent = fmt(remaining);
+  var iv = setInterval(function(){
+    remaining--;
+    timerEl.textContent = fmt(remaining);
+    if(remaining<=120) timerEl.classList.add('warn');
+    if(remaining<=0){clearInterval(iv);timerEl.textContent='00:00';}
+  }, 1000);
+
+  var KEYS   = {"131": "C", "132": "A", "133": "D", "134": "B", "135": "C", "136": "D", "137": "A", "138": "C", "139": "B", "140": "C", "141": "C", "142": "A", "143": "D", "144": "B", "145": "D", "146": "A"};
+  var EXPL   = {"131": "Interested (C) \u2014 training sessions for interested employees \u2014 means employees who are keen to participate. Interest is a noun and interesting describes something that arouses interest; neither fits as a modifier of employees.", "132": "Develop (A) \u2014 can quickly develop a deep understanding \u2014 is the correct collocation. Raise, open, and complete do not form natural collocations with understanding.", "133": "At the same time (D) \u2014 the training allows employees to improve design knowledge and communication simultaneously. After all concedes a point; For introduces purpose; Even so introduces contrast.", "134": "Option (B) \u2014 We hope that you will strongly consider joining us \u2014 is the logical motivational closing for a memo urging experienced leaders to attend the training seminars.", "135": "Flexibility (C) \u2014 desires flexibility in their work schedule \u2014 requires a noun after desires. Flexible (adjective), flexibly (adverb), and more flexible (comparative adjective) are all grammatically incorrect here.", "136": "Rate (D) \u2014 a competitive pay rate \u2014 is the fixed business English collocation for salary level. Pay weight, pay value, and pay degree are not standard expressions.", "137": "Besides (A) \u2014 many more benefits besides these \u2014 means in addition to. Except means excluding; until refers to time; between indicates a position or comparison between two items.", "138": "Option (C) \u2014 visit our employment Web site at www.paradise.com \u2014 is the appropriate and complete call-to-action for a classified job advertisement.", "139": "To visit (B) \u2014 I had the chance to visit \u2014 requires the infinitive after had the chance. Have visited (present perfect) and to be visited (passive) do not fit this structure.", "140": "Pleased (C) \u2014 how pleased I was with the service \u2014 uses an adjective to describe the writer's emotional state. Pleasing describes something that pleases others; pleasingly is an adverb.", "141": "Valuable (C) \u2014 gave me valuable advice \u2014 means very useful. Disposable and avoidable are negative; winnable does not collocate with advice.", "142": "Option (A) \u2014 Thank you again for your attentive help \u2014 is the natural closing for a customer appreciation letter, reinforcing the gratitude expressed throughout.", "143": "Option (D) \u2014 will publish twenty original titles this year \u2014 is the only sentence providing concrete factual information consistent with a press announcement about a new publishing division.", "144": "Editor (B) \u2014 longtime fiction editor at Nahan-Messer \u2014 is the correct job title noun. Editing (gerund) and editorial (adjective) do not work as standalone titles in this context.", "145": "Demand (D) \u2014 readers are seeking a sense of wonder... Lightspeed was created to address this demand \u2014 logically follows. The word demand means market need, which is what readers' seeking implies.", "146": "In addition (A) \u2014 in addition, Lightspeed has also acquired first-time novelists \u2014 introduces supplementary information. For example would require an illustration of something previously stated."};
+  var LABELS = {"131": {"A": "interest", "B": "interests", "C": "interested", "D": "interesting"}, "132": {"A": "develop", "B": "raise", "C": "open", "D": "complete"}, "133": {"A": "After all", "B": "For", "C": "Even so", "D": "At the same time"}, "134": {"A": "Let me explain our plans...", "B": "We hope that you will strongly consider joining us.", "C": "Today's training session will be postponed...", "D": "This is the first in a series..."}, "135": {"A": "flexible", "B": "flexibly", "C": "flexibility", "D": "more flexible"}, "136": {"A": "weight", "B": "value", "C": "degree", "D": "rate"}, "137": {"A": "besides", "B": "except", "C": "until", "D": "between"}, "138": {"A": "download our 2018 Fashion catalogue", "B": "call the support number...", "C": "visit our employment Web site at www.paradise.com", "D": "ask your friend who was fired last month"}, "139": {"A": "visit", "B": "to visit", "C": "to be visited", "D": "have visited"}, "140": {"A": "pleasing", "B": "pleasingly", "C": "pleased", "D": "please"}, "141": {"A": "disposable", "B": "winnable", "C": "valuable", "D": "avoidable"}, "142": {"A": "Thank you again for your attentive help.", "B": "Thank you for understanding and refunding payment...", "C": "Waiting for your help in choosing wallpaper.", "D": "Sorry for lost time."}, "143": {"A": "is responsible for overseeing the shooting...", "B": "will be closed soon...", "C": "will write a new sequel...", "D": "will publish twenty original titles this year."}, "144": {"A": "editing", "B": "editor", "C": "edits", "D": "editorial"}, "145": {"A": "question", "B": "award", "C": "invitation", "D": "demand"}, "146": {"A": "In addition", "B": "For example", "C": "On the contrary", "D": "On the whole"}};
+
+  var btn   = document.getElementById('submit-btn');
+  var qnums = Object.keys(KEYS).map(Number);
+
+  function allAnswered(){
+    return qnums.every(function(n){return document.querySelector('input[name="q'+n+'"]:checked');});
+  }
+
+  document.querySelectorAll('input[type=radio]').forEach(function(r){
+    r.addEventListener('change', function(){
+      var num = r.name.replace('q','');
+      var card = document.getElementById('qc'+num);
+      if(card) card.classList.add('answered');
+      btn.disabled = !allAnswered();
+    });
+  });
+
+  btn.addEventListener('click', function(){
+    if(!allAnswered()) return;
+    var score = 0;
+    var res  = document.getElementById('results');
+    var list = document.getElementById('corr-list');
+    list.innerHTML = '';
+    qnums.forEach(function(n){
+      var sel     = document.querySelector('input[name="q'+n+'"]:checked').value;
+      var correct = KEYS[n];
+      var ok      = sel === correct;
+      if(ok) score++;
+      var labelMap = LABELS[n] || {};
+      var card = document.createElement('div');
+      card.className = 'corr-card ' + (ok ? 'correct' : 'wrong');
+      card.innerHTML =
+        '<div class="c-head"><span class="badge-'+(ok?'ok':'err')+'">'+(ok?'✓':'✗')+'</span> Q.'+n+'</div>' +
+        '<div class="c-ans">' +
+          (ok
+            ? '<span class="good">('+correct+') '+labelMap[correct]+'</span>'
+            : '<span class="bad">('+sel+') '+labelMap[sel]+'</span> → <span class="good">('+correct+') '+labelMap[correct]+'</span>'
+          ) +
+        '</div>' +
+        '<div class="c-expl">'+EXPL[n]+'</div>';
+      list.appendChild(card);
+    });
+    document.getElementById('score-display').textContent = score+'/16';
+    document.getElementById('score-pct').textContent = Math.round(score/16*100)+'% correct';
+    res.style.display = 'block';
+    res.scrollIntoView({behavior:'smooth'});
+  });
+
+</script>
+</body>
+</html>

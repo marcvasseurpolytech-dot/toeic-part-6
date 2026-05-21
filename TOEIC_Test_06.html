@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 6 – Test 06 – Grammar in Context</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+  :root{--navy:#00274C;--blue:#1565C0;--light-blue:#E3F0FF;--accent:#F59E0B;--green:#16A34A;--red:#DC2626;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;--border:#CBD5E1;--passage-bg:#FEFCE8;--passage-border:#FDE68A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  header{background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-brand{font-family:'Merriweather',serif;font-size:.85rem;line-height:1.4;opacity:.9}
+  .hdr-brand span{display:block;font-size:.75rem;opacity:.7}
+  .hdr-title{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;letter-spacing:.04em;text-align:center}
+  #timer{background:var(--accent);color:var(--navy);font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;padding:6px 18px;border-radius:6px;letter-spacing:.08em;min-width:90px;text-align:center;transition:background .3s}
+  #timer.warn{background:#EF4444;color:white;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  .directions{background:var(--white);border:2px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:.92rem}
+  .directions strong{display:block;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+  .section-header{background:var(--navy);color:white;padding:8px 16px;border-radius:6px 6px 0 0;font-family:'Merriweather',serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-top:32px}
+  .passage-label{font-size:.88rem;font-style:italic;color:var(--muted);margin:0 0 8px}
+  .passage-block{background:var(--passage-bg);border:1.5px solid var(--passage-border);border-radius:0 0 8px 8px;padding:18px 20px;margin-bottom:20px;font-family:'Merriweather',serif;font-size:.9rem;line-height:1.75}
+  .passage-block p{margin-bottom:.5em}
+  .blank{border-bottom:2px solid var(--navy);padding:0 8px;font-weight:700;color:var(--blue);font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+  .question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+  .question-card.answered{border-color:var(--blue)}
+  .q-label{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .options label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.4;transition:background .15s}
+  .options label:hover{background:var(--light-blue)}
+  .options input[type=radio]{margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .submit-wrap{text-align:center;margin:32px 0 8px}
+  #submit-btn{background:var(--blue);color:white;border:none;border-radius:8px;padding:14px 40px;font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .2s,transform .15s;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+  #submit-btn:hover:not(:disabled){background:var(--navy);transform:translateY(-1px)}
+  #submit-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none;transform:none}
+  .req-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:6px}
+  #results{display:none;margin-top:36px}
+  .score-banner{background:var(--navy);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+  .score-banner .score-num{font-family:'Merriweather',serif;font-size:3rem;font-weight:700;color:var(--accent)}
+  .score-banner .score-sub{font-size:.9rem;opacity:.8;margin-top:4px}
+  .correction-title{font-family:'Merriweather',serif;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:16px}
+  .corr-card{border-radius:8px;padding:14px 16px;margin-bottom:10px;border-left:5px solid}
+  .corr-card.correct{background:#F0FDF4;border-color:var(--green)}
+  .corr-card.wrong{background:#FEF2F2;border-color:var(--red)}
+  .c-head{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .badge-ok{background:var(--green);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .badge-err{background:var(--red);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .c-ans{font-size:.88rem;margin-bottom:6px}
+  .c-ans .good{color:var(--green);font-weight:700}
+  .c-ans .bad{color:var(--red);text-decoration:line-through}
+  .c-expl{font-size:.87rem;color:#374151;background:rgba(255,255,255,.7);border-radius:6px;padding:8px 10px;border-left:3px solid var(--muted);line-height:1.5}
+  @media(max-width:600px){header{padding:10px 14px;flex-wrap:wrap;gap:6px}.hdr-title{order:-1;width:100%;text-align:center}#timer{font-size:1.2rem}main{padding:16px 12px 48px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-brand">Marc VASSEUR<span>Polytech Lille · Intensif TOEIC</span></div>
+  <div class="hdr-title">TOEIC PART 6 — TEST 06</div>
+  <div id="timer">08:00</div>
+</header>
+<main>
+<div class="directions">
+  <strong>PART 6 – DIRECTIONS</strong>
+  Read the texts below. A word, phrase, or sentence is missing in parts of each text. Four answer choices are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D).
+</div>
+
+<!-- TEXT 1 -->
+<div class="section-header">Questions 131–134 — Notice</div>
+<p class="passage-label" style="margin-top:12px">Questions 131–134 refer to the following notice.</p>
+<div class="passage-block">
+  <p>To: All Staff | From: Michael Davis, Head Technician | Subject: Network Upgrade</p>
+  <p>We regret to inform the staff that as of next week, from Monday the 13th of November to sometime midweek, the employee key card system will not be active. In order to get into and out of the building, you will need to buzz security. In order to unlock, or lock, any door, you will <span class="blank">131</span> assistance from the security team.</p>
+  <p>The old system was reviewed and many vulnerabilities were discovered. <span class="blank">132</span>, the company has decided to replace the old system. This process should take three to four days.</p>
+  <p>As part of the process, new key cards will be issued to each member of the staff. Key cards will be available for you to pick up from Wednesday, the 15th of November, in the security office. Please, feel free to stop by any time <span class="blank">133</span> the day to collect yours. <span class="blank">134</span></p>
+  <p>We apologize for any inconvenience this may cause.</p>
+</div>
+<!-- TEXT 2 -->
+<div class="section-header">Questions 135–138 — Notice</div>
+<p class="passage-label" style="margin-top:12px">Questions 135–138 refer to the following notice.</p>
+<div class="passage-block">
+  <p><strong>Music Teacher Needed</strong></p>
+  <p>Mike's Music School is <span class="blank">135</span> seeking a new piano instructor for weekend and evening classes. Mike's Music School has been operating in the Central district since 1992. <span class="blank">136</span> Because of this, we hope to hire a long-time resident of Central to join our team.</p>
+  <p>Applicants should be well versed in <span class="blank">137</span> teaching techniques. If you are interested in <span class="blank">138</span> for the position, we will be holding interviews and auditions this Saturday at 12:00 at our main studio on Elm Street and Dupont Ave.</p>
+</div>
+<!-- TEXT 3 -->
+<div class="section-header">Questions 139–142 — Advertisement</div>
+<p class="passage-label" style="margin-top:12px">Questions 139–142 refer to the following advertisement.</p>
+<div class="passage-block">
+  <p><strong>Saldesta — Rest Your Mind and Body</strong></p>
+  <p>It's what you've been dreaming of. Peaceful sleep without a struggle is what you need. That's what Saldesta <span class="blank">139</span>. Saldesta helps people fall asleep quickly and stay asleep the entire night. It's the only non-narcotic sleeping aid, and it's <span class="blank">140</span> for long-term use. <span class="blank">141</span> Talk to your doctor first before using sleeping aids for extended periods. Tonight, just close your eyes, and leave everything else to Saldesta.</p>
+  <p>Find out how to improve your sleep at www.saldesta.com. Or call 1-800-Saldesta.</p>
+  <p><strong>Important Safety Information:</strong> Saldesta works quickly and should be taken right <span class="blank">142</span> bed. Be sure you have at least eight hours to devote to sleep before coming active. Do not use alcohol while taking Saldesta. Most sleep medication carries some risk of dependency.</p>
+</div>
+<!-- TEXT 4 -->
+<div class="section-header">Questions 143–146 — Web Posting</div>
+<p class="passage-label" style="margin-top:12px">Questions 143–146 refer to the following posting on a website.</p>
+<div class="passage-block">
+  <p><strong>Employee Message Board — Request for Feedback</strong></p>
+  <p>Posted by James Frohm, Human Resources Director</p>
+  <p>Hello colleagues,</p>
+  <p>The holiday season is fast approaching and we need to <span class="blank">143</span> our office party! There have been several <span class="blank">144</span> for locations and themes made to me directly, but I wanted to invite everyone in the office to give me their feedback. All ideas are welcome, but I must remind everyone that our office <span class="blank">145</span>. Our party can include all forms of secular celebration, but out of respect for everyone, there may be no religious themes. Please respond to me directly by e-mail at jamesfrohm@ccn.net, so I can get started making plans. <span class="blank">146</span></p>
+  <p>Sincerely, James</p>
+</div>
+
+<div class="question-card" id="qc131"><div class="q-label">131.</div><div class="options">
+  <label><input type="radio" name="q131" value="A"> (A)&nbsp;is requesting</label>
+  <label><input type="radio" name="q131" value="B"> (B)&nbsp;has requested</label>
+  <label><input type="radio" name="q131" value="C"> (C)&nbsp;have to request</label>
+  <label><input type="radio" name="q131" value="D"> (D)&nbsp;had to request</label>
+</div></div>
+<div class="question-card" id="qc132"><div class="q-label">132.</div><div class="options">
+  <label><input type="radio" name="q132" value="A"> (A)&nbsp;Unfortunately</label>
+  <label><input type="radio" name="q132" value="B"> (B)&nbsp;Therefore</label>
+  <label><input type="radio" name="q132" value="C"> (C)&nbsp;Regardless</label>
+  <label><input type="radio" name="q132" value="D"> (D)&nbsp;Finally</label>
+</div></div>
+<div class="question-card" id="qc133"><div class="q-label">133.</div><div class="options">
+  <label><input type="radio" name="q133" value="A"> (A)&nbsp;upon</label>
+  <label><input type="radio" name="q133" value="B"> (B)&nbsp;during</label>
+  <label><input type="radio" name="q133" value="C"> (C)&nbsp;before</label>
+  <label><input type="radio" name="q133" value="D"> (D)&nbsp;at</label>
+</div></div>
+<div class="question-card" id="qc134"><div class="q-label">134.</div><div class="options">
+  <label><input type="radio" name="q134" value="A"> (A)&nbsp;The move from keys to keyless entry should make the facility more secure.</label>
+  <label><input type="radio" name="q134" value="B"> (B)&nbsp;We will be looking forward to seeing you sometime next week.</label>
+  <label><input type="radio" name="q134" value="C"> (C)&nbsp;The security office is open 24 hours a day.</label>
+  <label><input type="radio" name="q134" value="D"> (D)&nbsp;This is for product security.</label>
+</div></div>
+<div class="question-card" id="qc135"><div class="q-label">135.</div><div class="options">
+  <label><input type="radio" name="q135" value="A"> (A)&nbsp;active</label>
+  <label><input type="radio" name="q135" value="B"> (B)&nbsp;actived</label>
+  <label><input type="radio" name="q135" value="C"> (C)&nbsp;actively</label>
+  <label><input type="radio" name="q135" value="D"> (D)&nbsp;activated</label>
+</div></div>
+<div class="question-card" id="qc136"><div class="q-label">136.</div><div class="options">
+  <label><input type="radio" name="q136" value="A"> (A)&nbsp;Our company tries to work with outside communities.</label>
+  <label><input type="radio" name="q136" value="B"> (B)&nbsp;Our commitment to the community is as important as our commitment to our students.</label>
+  <label><input type="radio" name="q136" value="C"> (C)&nbsp;Our company is unique and uses unusual instruments.</label>
+  <label><input type="radio" name="q136" value="D"> (D)&nbsp;Our company is in a special location, next to the auto service center.</label>
+</div></div>
+<div class="question-card" id="qc137"><div class="q-label">137.</div><div class="options">
+  <label><input type="radio" name="q137" value="A"> (A)&nbsp;contemporary</label>
+  <label><input type="radio" name="q137" value="B"> (B)&nbsp;unknown</label>
+  <label><input type="radio" name="q137" value="C"> (C)&nbsp;strange</label>
+  <label><input type="radio" name="q137" value="D"> (D)&nbsp;boring</label>
+</div></div>
+<div class="question-card" id="qc138"><div class="q-label">138.</div><div class="options">
+  <label><input type="radio" name="q138" value="A"> (A)&nbsp;apply</label>
+  <label><input type="radio" name="q138" value="B"> (B)&nbsp;applied</label>
+  <label><input type="radio" name="q138" value="C"> (C)&nbsp;applying</label>
+  <label><input type="radio" name="q138" value="D"> (D)&nbsp;to apply</label>
+</div></div>
+<div class="question-card" id="qc139"><div class="q-label">139.</div><div class="options">
+  <label><input type="radio" name="q139" value="A"> (A)&nbsp;offers</label>
+  <label><input type="radio" name="q139" value="B"> (B)&nbsp;sustains</label>
+  <label><input type="radio" name="q139" value="C"> (C)&nbsp;mitigates</label>
+  <label><input type="radio" name="q139" value="D"> (D)&nbsp;maintains</label>
+</div></div>
+<div class="question-card" id="qc140"><div class="q-label">140.</div><div class="options">
+  <label><input type="radio" name="q140" value="A"> (A)&nbsp;to approve</label>
+  <label><input type="radio" name="q140" value="B"> (B)&nbsp;approves</label>
+  <label><input type="radio" name="q140" value="C"> (C)&nbsp;approving</label>
+  <label><input type="radio" name="q140" value="D"> (D)&nbsp;approved</label>
+</div></div>
+<div class="question-card" id="qc141"><div class="q-label">141.</div><div class="options">
+  <label><input type="radio" name="q141" value="A"> (A)&nbsp;So you can feel comfortable taking it night after night.</label>
+  <label><input type="radio" name="q141" value="B"> (B)&nbsp;Talk to your doctor today to see if it's right for you.</label>
+  <label><input type="radio" name="q141" value="C"> (C)&nbsp;This is the only stimulant approved for prolonged use by the FDA.</label>
+  <label><input type="radio" name="q141" value="D"> (D)&nbsp;Enter this code for a free sample and discounts.</label>
+</div></div>
+<div class="question-card" id="qc142"><div class="q-label">142.</div><div class="options">
+  <label><input type="radio" name="q142" value="A"> (A)&nbsp;during</label>
+  <label><input type="radio" name="q142" value="B"> (B)&nbsp;around</label>
+  <label><input type="radio" name="q142" value="C"> (C)&nbsp;before</label>
+  <label><input type="radio" name="q142" value="D"> (D)&nbsp;after</label>
+</div></div>
+<div class="question-card" id="qc143"><div class="q-label">143.</div><div class="options">
+  <label><input type="radio" name="q143" value="A"> (A)&nbsp;make</label>
+  <label><input type="radio" name="q143" value="B"> (B)&nbsp;plan</label>
+  <label><input type="radio" name="q143" value="C"> (C)&nbsp;conceive</label>
+  <label><input type="radio" name="q143" value="D"> (D)&nbsp;deliver</label>
+</div></div>
+<div class="question-card" id="qc144"><div class="q-label">144.</div><div class="options">
+  <label><input type="radio" name="q144" value="A"> (A)&nbsp;comments</label>
+  <label><input type="radio" name="q144" value="B"> (B)&nbsp;suggestions</label>
+  <label><input type="radio" name="q144" value="C"> (C)&nbsp;spots</label>
+  <label><input type="radio" name="q144" value="D"> (D)&nbsp;suggested</label>
+</div></div>
+<div class="question-card" id="qc145"><div class="q-label">145.</div><div class="options">
+  <label><input type="radio" name="q145" value="A"> (A)&nbsp;is a safe space for all customs and cultures</label>
+  <label><input type="radio" name="q145" value="B"> (B)&nbsp;stays open late on Tuesday</label>
+  <label><input type="radio" name="q145" value="C"> (C)&nbsp;needs a new janitor</label>
+  <label><input type="radio" name="q145" value="D"> (D)&nbsp;will move next week</label>
+</div></div>
+<div class="question-card" id="qc146"><div class="q-label">146.</div><div class="options">
+  <label><input type="radio" name="q146" value="A"> (A)&nbsp;I look forward to your ideas and enthusiasm.</label>
+  <label><input type="radio" name="q146" value="B"> (B)&nbsp;I am look forward to your ideas and enthusiasm.</label>
+  <label><input type="radio" name="q146" value="C"> (C)&nbsp;I look forward to your undivided attention.</label>
+  <label><input type="radio" name="q146" value="D"> (D)&nbsp;I hope you reply before it is too late.</label>
+</div></div>
+
+
+<div class="submit-wrap">
+  <button id="submit-btn" disabled>Voir la correction</button>
+  <p class="req-note">Toutes les questions doivent être répondues avant d'afficher la correction.</p>
+</div>
+
+<div id="results">
+  <div class="score-banner">
+    <div class="score-num" id="score-display">—</div>
+    <div class="score-sub" id="score-pct"></div>
+  </div>
+  <p class="correction-title">Correction détaillée</p>
+  <div id="corr-list"></div>
+</div>
+</main>
+<script>
+
+  var TOTAL = 480;
+  var remaining = TOTAL;
+  var timerEl = document.getElementById('timer');
+  function fmt(s){var m=Math.floor(s/60);return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+  timerEl.textContent = fmt(remaining);
+  var iv = setInterval(function(){
+    remaining--;
+    timerEl.textContent = fmt(remaining);
+    if(remaining<=120) timerEl.classList.add('warn');
+    if(remaining<=0){clearInterval(iv);timerEl.textContent='00:00';}
+  }, 1000);
+
+  var KEYS   = {"131": "C", "132": "B", "133": "B", "134": "A", "135": "C", "136": "B", "137": "A", "138": "C", "139": "A", "140": "D", "141": "A", "142": "C", "143": "B", "144": "B", "145": "A", "146": "A"};
+  var EXPL   = {"131": "Have to request (C) \u2014 you will have to request assistance \u2014 expresses future obligation. Is requesting (present continuous) and has requested (present perfect) do not fit a forward-looking instruction.", "132": "Therefore (B) \u2014 vulnerabilities were discovered, therefore the company decided to replace the system \u2014 expresses logical consequence. Unfortunately expresses regret without implying cause and effect.", "133": "During (B) \u2014 stop by any time during the day \u2014 is the correct preposition for a span of time within which an action can occur. At requires a specific time point.", "134": "Option (A) \u2014 The move from keys to keyless entry should make the facility more secure \u2014 explains the benefit of the upgrade and justifies the temporary inconvenience to staff.", "135": "Actively (C) \u2014 is actively seeking \u2014 is an adverb modifying the verb seeking. Active (adjective), actived (non-existent), and activated (past participle used differently) are all incorrect here.", "136": "Option (B) \u2014 Our commitment to the community is as important as our commitment to our students \u2014 logically follows the mention of operating in the district since 1992, explaining why local hiring matters.", "137": "Contemporary (A) \u2014 well versed in contemporary teaching techniques \u2014 means up-to-date methods, the most relevant qualifier for a music instructor role. Unknown, strange, and boring are inappropriate.", "138": "Applying (C) \u2014 interested in applying for the position \u2014 requires the gerund after interested in. Apply (base), applied (past), and to apply (infinitive) are grammatically incorrect after interested in.", "139": "Offers (A) \u2014 That's what Saldesta offers \u2014 the verb describes what the product provides. Sustains, mitigates, and maintains do not match the meaning of delivering a promised benefit.", "140": "Approved (D) \u2014 it's approved for long-term use \u2014 uses the past participle as an adjective in a passive structure (it is approved). The other forms are not grammatically correct here.", "141": "Option (A) \u2014 So you can feel comfortable taking it night after night \u2014 directly supports the claim that Saldesta is approved for long-term use, turning the fact into a consumer benefit.", "142": "Before (C) \u2014 should be taken right before bed \u2014 indicates the correct timing. After bed is illogical; during and around are imprecise for a safety instruction.", "143": "Plan (B) \u2014 we need to plan our office party \u2014 is the standard business register verb. Make a party is too informal for an HR director's message; conceive and deliver do not fit the context.", "144": "Suggestions (B) \u2014 several suggestions for locations and themes \u2014 is the correct noun for ideas offered to someone. Comments are reactions to existing content; spots are locations, not general proposals.", "145": "Option (A) \u2014 our office is a safe space for all customs and cultures \u2014 is the essential statement that justifies the no-religious-themes rule by emphasizing inclusivity.", "146": "Option (A) \u2014 I look forward to your ideas and enthusiasm \u2014 is the only grammatically correct option. (B) uses I am look (incorrect); (C) is irrelevant; (D) contains a grammar error."};
+  var LABELS = {"131": {"A": "is requesting", "B": "has requested", "C": "have to request", "D": "had to request"}, "132": {"A": "Unfortunately", "B": "Therefore", "C": "Regardless", "D": "Finally"}, "133": {"A": "upon", "B": "during", "C": "before", "D": "at"}, "134": {"A": "The move from keys to keyless entry...", "B": "We will be looking forward...", "C": "The security office is open 24 hours...", "D": "This is for product security."}, "135": {"A": "active", "B": "actived", "C": "actively", "D": "activated"}, "136": {"A": "Our company tries to work with outside communities.", "B": "Our commitment to the community...", "C": "Our company is unique and uses unusual instruments.", "D": "Our company is in a special location..."}, "137": {"A": "contemporary", "B": "unknown", "C": "strange", "D": "boring"}, "138": {"A": "apply", "B": "applied", "C": "applying", "D": "to apply"}, "139": {"A": "offers", "B": "sustains", "C": "mitigates", "D": "maintains"}, "140": {"A": "to approve", "B": "approves", "C": "approving", "D": "approved"}, "141": {"A": "So you can feel comfortable taking it night after night.", "B": "Talk to your doctor today to see if it's right for you.", "C": "This is the only stimulant approved...", "D": "Enter this code for a free sample..."}, "142": {"A": "during", "B": "around", "C": "before", "D": "after"}, "143": {"A": "make", "B": "plan", "C": "conceive", "D": "deliver"}, "144": {"A": "comments", "B": "suggestions", "C": "spots", "D": "suggested"}, "145": {"A": "is a safe space for all customs and cultures", "B": "stays open late on Tuesday", "C": "needs a new janitor", "D": "will move next week"}, "146": {"A": "I look forward to your ideas and enthusiasm.", "B": "I am look forward to your ideas and enthusiasm.", "C": "I look forward to your undivided attention.", "D": "I hope you reply before it is too late."}};
+
+  var btn   = document.getElementById('submit-btn');
+  var qnums = Object.keys(KEYS).map(Number);
+
+  function allAnswered(){
+    return qnums.every(function(n){return document.querySelector('input[name="q'+n+'"]:checked');});
+  }
+
+  document.querySelectorAll('input[type=radio]').forEach(function(r){
+    r.addEventListener('change', function(){
+      var num = r.name.replace('q','');
+      var card = document.getElementById('qc'+num);
+      if(card) card.classList.add('answered');
+      btn.disabled = !allAnswered();
+    });
+  });
+
+  btn.addEventListener('click', function(){
+    if(!allAnswered()) return;
+    var score = 0;
+    var res  = document.getElementById('results');
+    var list = document.getElementById('corr-list');
+    list.innerHTML = '';
+    qnums.forEach(function(n){
+      var sel     = document.querySelector('input[name="q'+n+'"]:checked').value;
+      var correct = KEYS[n];
+      var ok      = sel === correct;
+      if(ok) score++;
+      var labelMap = LABELS[n] || {};
+      var card = document.createElement('div');
+      card.className = 'corr-card ' + (ok ? 'correct' : 'wrong');
+      card.innerHTML =
+        '<div class="c-head"><span class="badge-'+(ok?'ok':'err')+'">'+(ok?'✓':'✗')+'</span> Q.'+n+'</div>' +
+        '<div class="c-ans">' +
+          (ok
+            ? '<span class="good">('+correct+') '+labelMap[correct]+'</span>'
+            : '<span class="bad">('+sel+') '+labelMap[sel]+'</span> → <span class="good">('+correct+') '+labelMap[correct]+'</span>'
+          ) +
+        '</div>' +
+        '<div class="c-expl">'+EXPL[n]+'</div>';
+      list.appendChild(card);
+    });
+    document.getElementById('score-display').textContent = score+'/16';
+    document.getElementById('score-pct').textContent = Math.round(score/16*100)+'% correct';
+    res.style.display = 'block';
+    res.scrollIntoView({behavior:'smooth'});
+  });
+
+</script>
+</body>
+</html>

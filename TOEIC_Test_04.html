@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 6 – Test 04 – Grammar in Context</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+  :root{--navy:#00274C;--blue:#1565C0;--light-blue:#E3F0FF;--accent:#F59E0B;--green:#16A34A;--red:#DC2626;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;--border:#CBD5E1;--passage-bg:#FEFCE8;--passage-border:#FDE68A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  header{background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-brand{font-family:'Merriweather',serif;font-size:.85rem;line-height:1.4;opacity:.9}
+  .hdr-brand span{display:block;font-size:.75rem;opacity:.7}
+  .hdr-title{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;letter-spacing:.04em;text-align:center}
+  #timer{background:var(--accent);color:var(--navy);font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;padding:6px 18px;border-radius:6px;letter-spacing:.08em;min-width:90px;text-align:center;transition:background .3s}
+  #timer.warn{background:#EF4444;color:white;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  .directions{background:var(--white);border:2px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:.92rem}
+  .directions strong{display:block;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+  .section-header{background:var(--navy);color:white;padding:8px 16px;border-radius:6px 6px 0 0;font-family:'Merriweather',serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-top:32px}
+  .passage-label{font-size:.88rem;font-style:italic;color:var(--muted);margin:0 0 8px}
+  .passage-block{background:var(--passage-bg);border:1.5px solid var(--passage-border);border-radius:0 0 8px 8px;padding:18px 20px;margin-bottom:20px;font-family:'Merriweather',serif;font-size:.9rem;line-height:1.75}
+  .passage-block p{margin-bottom:.5em}
+  .blank{border-bottom:2px solid var(--navy);padding:0 8px;font-weight:700;color:var(--blue);font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+  .question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+  .question-card.answered{border-color:var(--blue)}
+  .q-label{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .options label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.4;transition:background .15s}
+  .options label:hover{background:var(--light-blue)}
+  .options input[type=radio]{margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .submit-wrap{text-align:center;margin:32px 0 8px}
+  #submit-btn{background:var(--blue);color:white;border:none;border-radius:8px;padding:14px 40px;font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .2s,transform .15s;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+  #submit-btn:hover:not(:disabled){background:var(--navy);transform:translateY(-1px)}
+  #submit-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none;transform:none}
+  .req-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:6px}
+  #results{display:none;margin-top:36px}
+  .score-banner{background:var(--navy);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+  .score-banner .score-num{font-family:'Merriweather',serif;font-size:3rem;font-weight:700;color:var(--accent)}
+  .score-banner .score-sub{font-size:.9rem;opacity:.8;margin-top:4px}
+  .correction-title{font-family:'Merriweather',serif;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:16px}
+  .corr-card{border-radius:8px;padding:14px 16px;margin-bottom:10px;border-left:5px solid}
+  .corr-card.correct{background:#F0FDF4;border-color:var(--green)}
+  .corr-card.wrong{background:#FEF2F2;border-color:var(--red)}
+  .c-head{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .badge-ok{background:var(--green);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .badge-err{background:var(--red);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .c-ans{font-size:.88rem;margin-bottom:6px}
+  .c-ans .good{color:var(--green);font-weight:700}
+  .c-ans .bad{color:var(--red);text-decoration:line-through}
+  .c-expl{font-size:.87rem;color:#374151;background:rgba(255,255,255,.7);border-radius:6px;padding:8px 10px;border-left:3px solid var(--muted);line-height:1.5}
+  @media(max-width:600px){header{padding:10px 14px;flex-wrap:wrap;gap:6px}.hdr-title{order:-1;width:100%;text-align:center}#timer{font-size:1.2rem}main{padding:16px 12px 48px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-brand">Marc VASSEUR<span>Polytech Lille · Intensif TOEIC</span></div>
+  <div class="hdr-title">TOEIC PART 6 — TEST 04</div>
+  <div id="timer">08:00</div>
+</header>
+<main>
+<div class="directions">
+  <strong>PART 6 – DIRECTIONS</strong>
+  Read the texts below. A word, phrase, or sentence is missing in parts of each text. Four answer choices are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D).
+</div>
+
+<!-- TEXT 1 -->
+<div class="section-header">Questions 131–134 — Notice</div>
+<p class="passage-label" style="margin-top:12px">Questions 131–134 refer to the following notice.</p>
+<div class="passage-block">
+  <p><strong>Urgent! Journeyman Plumber Needed</strong></p>
+  <p>Ace Plumbing is looking for an experienced plumber to join our <span class="blank">131</span> business here in Columbia. We have always been a family-owned-and-run business, but with the <span class="blank">132</span> increase in Columbia's population over the last three years, we have an opportunity to welcome a new journeyman plumber. The candidate should have experience with all <span class="blank">133</span> of plumbing, both commercial and residential. Please send your resume to aceplumbing@gmail.com and we will schedule an interview. <span class="blank">134</span></p>
+</div>
+<!-- TEXT 2 -->
+<div class="section-header">Questions 135–138 — Web Page</div>
+<p class="passage-label" style="margin-top:12px">Questions 135–138 refer to the following web page.</p>
+<div class="passage-block">
+  <p>Learn social media marketing tactics only at Genius Marketing's Power Conference.</p>
+  <p>Are you ready to take your social media marketing to the next level? Then <span class="blank">135</span> Genius Marketing's Power Conference and learn cutting-edge social media marketing tactics. <span class="blank">136</span></p>
+  <p>Genius Marketing will give you real-world tactics to boost your paid and organic social media marketing efforts. <span class="blank">137</span> you buy social media advertising or focus on organic social media engagement, Genius Marketing's Power Conference is the conference you need to attend this year. You'll be inspired by experts, meet others with your challenges, and get actionable tactics to drive traffic, increase sales and <span class="blank">138</span> customer satisfaction.</p>
+</div>
+<!-- TEXT 3 -->
+<div class="section-header">Questions 139–142 — E-mail</div>
+<p class="passage-label" style="margin-top:12px">Questions 139–142 refer to the following e-mail.</p>
+<div class="passage-block">
+  <p>To: Nancy Craft | From: Omar Patel | Date: January 16 | Subject: Pre-shipping Procedures</p>
+  <p>At the manufacturing team meeting, <span class="blank">139</span> was raised that inventory wasn't always being properly stored before being shipped. <span class="blank">140</span> to that concern, the team decided to review the written procedure to determine if additional steps should be added. <span class="blank">141</span> Please try to arrange the schedules of the team in the packaging and storage wing so a majority of the managers can attend this meeting.</p>
+  <p>I am confident that the packaging and storage team management <span class="blank">142</span> that the written procedure leaves no room for any inventory to accidentally be improperly stored.</p>
+</div>
+<!-- TEXT 4 -->
+<div class="section-header">Questions 143–146 — Letter</div>
+<p class="passage-label" style="margin-top:12px">Questions 143–146 refer to the following letter.</p>
+<div class="passage-block">
+  <p>June 3, 2016 | Yui Minakuchi, 143 Dean St. Apt. 3, Brooklyn, NY 10787</p>
+  <p>Dear Ms. Minakuchi,</p>
+  <p>It is my pleasure to inform you that Hannover Design would like <span class="blank">143</span> you to interview for our summer intern program. We are only interviewing fifteen candidates this year for the six positions we have available. You will be pleased to know that you were selected out of a group of over 200 people <span class="blank">144</span> applied for an interview.</p>
+  <p>We will be holding interviews on March 6 and 7 from 1:00 to 6:00 P.M. We would like for you to come on the 6th at 1:30 P.M. if you are able to. If not, we can <span class="blank">145</span> for you to come on the 7th. <span class="blank">146</span> If you have any questions, feel free to call our office (212-347-9919) and the human resources department will be able to assist you.</p>
+  <p>Sincerely, Max Wright, Office Manager, Hannover Design</p>
+</div>
+
+<div class="question-card" id="qc131"><div class="q-label">131.</div><div class="options">
+  <label><input type="radio" name="q131" value="A"> (A)&nbsp;expanding</label>
+  <label><input type="radio" name="q131" value="B"> (B)&nbsp;expecting</label>
+  <label><input type="radio" name="q131" value="C"> (C)&nbsp;contracting</label>
+  <label><input type="radio" name="q131" value="D"> (D)&nbsp;controlling</label>
+</div></div>
+<div class="question-card" id="qc132"><div class="q-label">132.</div><div class="options">
+  <label><input type="radio" name="q132" value="A"> (A)&nbsp;monstrous</label>
+  <label><input type="radio" name="q132" value="B"> (B)&nbsp;dramatic</label>
+  <label><input type="radio" name="q132" value="C"> (C)&nbsp;impossible</label>
+  <label><input type="radio" name="q132" value="D"> (D)&nbsp;insane</label>
+</div></div>
+<div class="question-card" id="qc133"><div class="q-label">133.</div><div class="options">
+  <label><input type="radio" name="q133" value="A"> (A)&nbsp;pieces</label>
+  <label><input type="radio" name="q133" value="B"> (B)&nbsp;types</label>
+  <label><input type="radio" name="q133" value="C"> (C)&nbsp;flows</label>
+  <label><input type="radio" name="q133" value="D"> (D)&nbsp;installations</label>
+</div></div>
+<div class="question-card" id="qc134"><div class="q-label">134.</div><div class="options">
+  <label><input type="radio" name="q134" value="A"> (A)&nbsp;Ace Plumbing has been servicing the Columbia area since 1954.</label>
+  <label><input type="radio" name="q134" value="B"> (B)&nbsp;We have little connection to the community.</label>
+  <label><input type="radio" name="q134" value="C"> (C)&nbsp;We have been struggling to pay our bills.</label>
+  <label><input type="radio" name="q134" value="D"> (D)&nbsp;Ace Plumbing is in financial trouble.</label>
+</div></div>
+<div class="question-card" id="qc135"><div class="q-label">135.</div><div class="options">
+  <label><input type="radio" name="q135" value="A"> (A)&nbsp;attend</label>
+  <label><input type="radio" name="q135" value="B"> (B)&nbsp;attended</label>
+  <label><input type="radio" name="q135" value="C"> (C)&nbsp;attends</label>
+  <label><input type="radio" name="q135" value="D"> (D)&nbsp;attending</label>
+</div></div>
+<div class="question-card" id="qc136"><div class="q-label">136.</div><div class="options">
+  <label><input type="radio" name="q136" value="A"> (A)&nbsp;Guide people in the industry to greatness by joining today.</label>
+  <label><input type="radio" name="q136" value="B"> (B)&nbsp;The conference will be in Houston on May 3 and 4.</label>
+  <label><input type="radio" name="q136" value="C"> (C)&nbsp;Registration for this two-week course will be on November 20.</label>
+  <label><input type="radio" name="q136" value="D"> (D)&nbsp;Classes will be held throughout the month of March.</label>
+</div></div>
+<div class="question-card" id="qc137"><div class="q-label">137.</div><div class="options">
+  <label><input type="radio" name="q137" value="A"> (A)&nbsp;Either</label>
+  <label><input type="radio" name="q137" value="B"> (B)&nbsp;Whether</label>
+  <label><input type="radio" name="q137" value="C"> (C)&nbsp;Rather</label>
+  <label><input type="radio" name="q137" value="D"> (D)&nbsp;Not only</label>
+</div></div>
+<div class="question-card" id="qc138"><div class="q-label">138.</div><div class="options">
+  <label><input type="radio" name="q138" value="A"> (A)&nbsp;divide</label>
+  <label><input type="radio" name="q138" value="B"> (B)&nbsp;engage</label>
+  <label><input type="radio" name="q138" value="C"> (C)&nbsp;devalue</label>
+  <label><input type="radio" name="q138" value="D"> (D)&nbsp;endure</label>
+</div></div>
+<div class="question-card" id="qc139"><div class="q-label">139.</div><div class="options">
+  <label><input type="radio" name="q139" value="A"> (A)&nbsp;understanding</label>
+  <label><input type="radio" name="q139" value="B"> (B)&nbsp;concern</label>
+  <label><input type="radio" name="q139" value="C"> (C)&nbsp;challenges</label>
+  <label><input type="radio" name="q139" value="D"> (D)&nbsp;patience</label>
+</div></div>
+<div class="question-card" id="qc140"><div class="q-label">140.</div><div class="options">
+  <label><input type="radio" name="q140" value="A"> (A)&nbsp;So</label>
+  <label><input type="radio" name="q140" value="B"> (B)&nbsp;Due to</label>
+  <label><input type="radio" name="q140" value="C"> (C)&nbsp;In addition</label>
+  <label><input type="radio" name="q140" value="D"> (D)&nbsp;Provided</label>
+</div></div>
+<div class="question-card" id="qc141"><div class="q-label">141.</div><div class="options">
+  <label><input type="radio" name="q141" value="A"> (A)&nbsp;All employees should be asked to review the procedure before starting work on Tuesday, January 23.</label>
+  <label><input type="radio" name="q141" value="B"> (B)&nbsp;We hope that you will strongly consider joining us.</label>
+  <label><input type="radio" name="q141" value="C"> (C)&nbsp;The meeting will investigate the possibility of redundancies in the packaging process.</label>
+  <label><input type="radio" name="q141" value="D"> (D)&nbsp;Additional training sessions plan to be added sometime at the end of December.</label>
+</div></div>
+<div class="question-card" id="qc142"><div class="q-label">142.</div><div class="options">
+  <label><input type="radio" name="q142" value="A"> (A)&nbsp;is discovering</label>
+  <label><input type="radio" name="q142" value="B"> (B)&nbsp;have been discovering</label>
+  <label><input type="radio" name="q142" value="C"> (C)&nbsp;will discover</label>
+  <label><input type="radio" name="q142" value="D"> (D)&nbsp;has discovered</label>
+</div></div>
+<div class="question-card" id="qc143"><div class="q-label">143.</div><div class="options">
+  <label><input type="radio" name="q143" value="A"> (A)&nbsp;to invite</label>
+  <label><input type="radio" name="q143" value="B"> (B)&nbsp;will invite</label>
+  <label><input type="radio" name="q143" value="C"> (C)&nbsp;has invited</label>
+  <label><input type="radio" name="q143" value="D"> (D)&nbsp;will be inviting</label>
+</div></div>
+<div class="question-card" id="qc144"><div class="q-label">144.</div><div class="options">
+  <label><input type="radio" name="q144" value="A"> (A)&nbsp;whom</label>
+  <label><input type="radio" name="q144" value="B"> (B)&nbsp;that</label>
+  <label><input type="radio" name="q144" value="C"> (C)&nbsp;whose</label>
+  <label><input type="radio" name="q144" value="D"> (D)&nbsp;which</label>
+</div></div>
+<div class="question-card" id="qc145"><div class="q-label">145.</div><div class="options">
+  <label><input type="radio" name="q145" value="A"> (A)&nbsp;order</label>
+  <label><input type="radio" name="q145" value="B"> (B)&nbsp;oblige</label>
+  <label><input type="radio" name="q145" value="C"> (C)&nbsp;arrange</label>
+  <label><input type="radio" name="q145" value="D"> (D)&nbsp;attend</label>
+</div></div>
+<div class="question-card" id="qc146"><div class="q-label">146.</div><div class="options">
+  <label><input type="radio" name="q146" value="A"> (A)&nbsp;You will need to bring a completed application and some type of identification card.</label>
+  <label><input type="radio" name="q146" value="B"> (B)&nbsp;Please let us know as soon as possible if you will be able to attend.</label>
+  <label><input type="radio" name="q146" value="C"> (C)&nbsp;We wish we were able to accept your offer, but we must decline it.</label>
+  <label><input type="radio" name="q146" value="D"> (D)&nbsp;Please RSVP and indicate if you plan on bringing a guest.</label>
+</div></div>
+
+
+<div class="submit-wrap">
+  <button id="submit-btn" disabled>Voir la correction</button>
+  <p class="req-note">Toutes les questions doivent être répondues avant d'afficher la correction.</p>
+</div>
+
+<div id="results">
+  <div class="score-banner">
+    <div class="score-num" id="score-display">—</div>
+    <div class="score-sub" id="score-pct"></div>
+  </div>
+  <p class="correction-title">Correction détaillée</p>
+  <div id="corr-list"></div>
+</div>
+</main>
+<script>
+
+  var TOTAL = 480;
+  var remaining = TOTAL;
+  var timerEl = document.getElementById('timer');
+  function fmt(s){var m=Math.floor(s/60);return String(m).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+  timerEl.textContent = fmt(remaining);
+  var iv = setInterval(function(){
+    remaining--;
+    timerEl.textContent = fmt(remaining);
+    if(remaining<=120) timerEl.classList.add('warn');
+    if(remaining<=0){clearInterval(iv);timerEl.textContent='00:00';}
+  }, 1000);
+
+  var KEYS   = {"131": "A", "132": "A", "133": "B", "134": "A", "135": "A", "136": "B", "137": "B", "138": "B", "139": "B", "140": "B", "141": "A", "142": "C", "143": "A", "144": "A", "145": "C", "146": "B"};
+  var EXPL   = {"131": "Expanding (A) is the correct adjective to modify business \u2014 it indicates the company is growing, consistent with the population increase described.", "132": "Monstrous (A) means extremely large or impressive, fitting to describe a dramatic population increase that has created new business opportunity.", "133": "Types (B) is the correct noun: experience with all types of plumbing. Pieces, flows, and installations do not collocate naturally with all ___ of plumbing.", "134": "Option (A) \u2014 Ace Plumbing has been servicing the Columbia area since 1954 \u2014 provides relevant historical background, reinforcing the company's credibility to a job applicant.", "135": "Attend (A) is the base form used after Then in an imperative/suggestion structure. Attended, attends, and attending are grammatically incorrect here.", "136": "Option (B) \u2014 The conference will be in Houston on May 3 and 4 \u2014 provides essential logistical information following the general promotional introduction.", "137": "Whether (B) correctly introduces two alternatives: whether you buy... or focus on... It expresses that both types of users can benefit. Either would require different placement.", "138": "Engage (B) is the correct verb: tactics to drive traffic, increase sales and engage customer satisfaction. It fits the marketing register and parallels the preceding verbs.", "139": "Concern (B) is the appropriate noun: concern was raised that inventory was not stored properly. A concern was raised is a standard business expression.", "140": "Due to (B) introduces a causal link: the team decided to review the procedure due to that concern. So is a conjunction and cannot follow a noun phrase here.", "141": "Option (A) \u2014 telling employees to attend the meeting on Tuesday, January 23 \u2014 is the only sentence that logically precedes the instruction to arrange schedules so managers can attend.", "142": "Will discover (C) fits: the writer expresses confidence that the team will discover the written procedure is adequate \u2014 a future-oriented statement of confidence.", "143": "To invite (A) \u2014 Hannover Design would like to invite you \u2014 is the correct infinitive after would like. Will invite and other forms do not follow would like correctly.", "144": "Whom (A) \u2014 people whom applied \u2014 is the formal/TOEIC-preferred relative pronoun when referring to people. That (B) is also acceptable but whom is tested in formal TOEIC contexts.", "145": "Arrange (C) \u2014 we can arrange for you to come on the 7th \u2014 is the correct collocation. Order and oblige carry different meanings; attend does not fit grammatically.", "146": "Option (B) \u2014 Please let us know as soon as possible if you will be able to attend \u2014 is the logical closing for an interview invitation, requesting confirmation."};
+  var LABELS = {"131": {"A": "expanding", "B": "expecting", "C": "contracting", "D": "controlling"}, "132": {"A": "monstrous", "B": "dramatic", "C": "impossible", "D": "insane"}, "133": {"A": "pieces", "B": "types", "C": "flows", "D": "installations"}, "134": {"A": "Ace Plumbing has been servicing...", "B": "We have little connection...", "C": "We have been struggling...", "D": "Ace Plumbing is in financial trouble."}, "135": {"A": "attend", "B": "attended", "C": "attends", "D": "attending"}, "136": {"A": "Guide people in the industry...", "B": "The conference will be in Houston...", "C": "Registration for this two-week course...", "D": "Classes will be held throughout..."}, "137": {"A": "Either", "B": "Whether", "C": "Rather", "D": "Not only"}, "138": {"A": "divide", "B": "engage", "C": "devalue", "D": "endure"}, "139": {"A": "understanding", "B": "concern", "C": "challenges", "D": "patience"}, "140": {"A": "So", "B": "Due to", "C": "In addition", "D": "Provided"}, "141": {"A": "All employees should be asked...", "B": "We hope that you will strongly consider...", "C": "The meeting will investigate...", "D": "Additional training sessions..."}, "142": {"A": "is discovering", "B": "have been discovering", "C": "will discover", "D": "has discovered"}, "143": {"A": "to invite", "B": "will invite", "C": "has invited", "D": "will be inviting"}, "144": {"A": "whom", "B": "that", "C": "whose", "D": "which"}, "145": {"A": "order", "B": "oblige", "C": "arrange", "D": "attend"}, "146": {"A": "You will need to bring...", "B": "Please let us know...", "C": "We wish we were able to accept...", "D": "Please RSVP..."}};
+
+  var btn   = document.getElementById('submit-btn');
+  var qnums = Object.keys(KEYS).map(Number);
+
+  function allAnswered(){
+    return qnums.every(function(n){return document.querySelector('input[name="q'+n+'"]:checked');});
+  }
+
+  document.querySelectorAll('input[type=radio]').forEach(function(r){
+    r.addEventListener('change', function(){
+      var num = r.name.replace('q','');
+      var card = document.getElementById('qc'+num);
+      if(card) card.classList.add('answered');
+      btn.disabled = !allAnswered();
+    });
+  });
+
+  btn.addEventListener('click', function(){
+    if(!allAnswered()) return;
+    var score = 0;
+    var res  = document.getElementById('results');
+    var list = document.getElementById('corr-list');
+    list.innerHTML = '';
+    qnums.forEach(function(n){
+      var sel     = document.querySelector('input[name="q'+n+'"]:checked').value;
+      var correct = KEYS[n];
+      var ok      = sel === correct;
+      if(ok) score++;
+      var labelMap = LABELS[n] || {};
+      var card = document.createElement('div');
+      card.className = 'corr-card ' + (ok ? 'correct' : 'wrong');
+      card.innerHTML =
+        '<div class="c-head"><span class="badge-'+(ok?'ok':'err')+'">'+(ok?'✓':'✗')+'</span> Q.'+n+'</div>' +
+        '<div class="c-ans">' +
+          (ok
+            ? '<span class="good">('+correct+') '+labelMap[correct]+'</span>'
+            : '<span class="bad">('+sel+') '+labelMap[sel]+'</span> → <span class="good">('+correct+') '+labelMap[correct]+'</span>'
+          ) +
+        '</div>' +
+        '<div class="c-expl">'+EXPL[n]+'</div>';
+      list.appendChild(card);
+    });
+    document.getElementById('score-display').textContent = score+'/16';
+    document.getElementById('score-pct').textContent = Math.round(score/16*100)+'% correct';
+    res.style.display = 'block';
+    res.scrollIntoView({behavior:'smooth'});
+  });
+
+</script>
+</body>
+</html>
