@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 6 - Test 12 - Grammar in Context</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+  :root{--navy:#00274C;--blue:#1565C0;--light-blue:#E3F0FF;--accent:#F59E0B;--green:#16A34A;--red:#DC2626;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;--border:#CBD5E1;--passage-bg:#FEFCE8;--passage-border:#FDE68A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  header{background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-brand{font-family:'Merriweather',serif;font-size:.85rem;line-height:1.4;opacity:.9}
+  .hdr-brand span{display:block;font-size:.75rem;opacity:.7}
+  .hdr-title{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;letter-spacing:.04em;text-align:center}
+  #timer{background:var(--accent);color:var(--navy);font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;padding:6px 18px;border-radius:6px;letter-spacing:.08em;min-width:90px;text-align:center;transition:background .3s}
+  #timer.warn{background:#EF4444;color:white;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  .directions{background:var(--white);border:2px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:.92rem}
+  .directions strong{display:block;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+  .section-header{background:var(--navy);color:white;padding:8px 16px;border-radius:6px 6px 0 0;font-family:'Merriweather',serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-top:32px}
+  .passage-label{font-size:.88rem;font-style:italic;color:var(--muted);margin:0 0 8px}
+  .passage-block{background:var(--passage-bg);border:1.5px solid var(--passage-border);border-radius:0 0 8px 8px;padding:18px 20px;margin-bottom:20px;font-family:'Merriweather',serif;font-size:.9rem;line-height:1.75}
+  .passage-block p{margin-bottom:.5em}
+  .blank{border-bottom:2px solid var(--navy);padding:0 8px;font-weight:700;color:var(--blue);font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+  .question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+  .question-card.answered{border-color:var(--blue)}
+  .q-label{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .options label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.4;transition:background .15s}
+  .options label:hover{background:var(--light-blue)}
+  .options input[type=radio]{margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .submit-wrap{text-align:center;margin:32px 0 8px}
+  #submit-btn{background:var(--blue);color:white;border:none;border-radius:8px;padding:14px 40px;font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .2s,transform .15s;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+  #submit-btn:hover:not(:disabled){background:var(--navy);transform:translateY(-1px)}
+  #submit-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none;transform:none}
+  .req-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:6px}
+  #results{display:none;margin-top:36px}
+  .score-banner{background:var(--navy);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+  .score-banner .score-num{font-family:'Merriweather',serif;font-size:3rem;font-weight:700;color:var(--accent)}
+  .score-banner .score-sub{font-size:.9rem;opacity:.8;margin-top:4px}
+  .correction-title{font-family:'Merriweather',serif;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:16px}
+  .corr-card{border-radius:8px;padding:14px 16px;margin-bottom:10px;border-left:5px solid}
+  .corr-card.correct{background:#F0FDF4;border-color:var(--green)}
+  .corr-card.wrong{background:#FEF2F2;border-color:var(--red)}
+  .c-head{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .badge-ok{background:var(--green);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .badge-err{background:var(--red);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .c-ans{font-size:.88rem;margin-bottom:6px}
+  .c-ans .good{color:var(--green);font-weight:700}
+  .c-ans .bad{color:var(--red);text-decoration:line-through}
+  .c-expl{font-size:.87rem;color:#374151;background:rgba(255,255,255,.7);border-radius:6px;padding:8px 10px;border-left:3px solid var(--muted);line-height:1.55}
+  @media(max-width:600px){header{padding:10px 14px;flex-wrap:wrap;gap:6px}.hdr-title{order:-1;width:100%;text-align:center}#timer{font-size:1.2rem}main{padding:16px 12px 48px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-brand">Marc VASSEUR<span>Polytech Lille · Intensif TOEIC</span></div>
+  <div class="hdr-title">TOEIC PART 6 — TEST 12</div>
+  <div id="timer">08:00</div>
+</header>
+<main>
+<div class="directions">
+  <strong>PART 6 – DIRECTIONS</strong>
+  Read the texts below. A word, phrase, or sentence is missing in parts of each text. Four answer choices are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D).
+</div>
+
+<!-- TEXT 1 -->
+<div class="section-header">Questions 141–144 — E-mail</div>
+<p class="passage-label" style="margin-top:12px">Questions 141–144 refer to the following e-mail.</p>
+<div class="passage-block">
+  <p><strong>From:</strong> Sandra Choi &lt;s.choi@prismevents.com&gt;<br>
+  <strong>To:</strong> All Department Heads<br>
+  <strong>Subject:</strong> Annual Strategy Day — Venue Confirmation<br>
+  <strong>Date:</strong> October 5</p>
+  <p>Dear Colleagues,</p>
+  <p>I am pleased to confirm that the Annual Strategy Day has been <span class="blank">141</span> for Friday, November 15, at the Lakeside Conference Centre. The event will run from 9:00 A.M. to 5:00 P.M., with lunch provided on-site.</p>
+  <p>Each department head is requested to prepare a 20-minute presentation <span class="blank">142</span> their team's performance highlights and objectives for the coming year. Slides should be submitted to my office no later than November 8 so that the technical team can review them in advance.</p>
+  <p>A shuttle service will operate from the main office building to the venue, departing at 8:15 A.M. and returning at approximately 5:45 P.M. <span class="blank">143</span></p>
+  <p>Please confirm your <span class="blank">144</span> by replying to this e-mail before October 18. I look forward to a productive and engaging day.</p>
+  <p>Warm regards,<br>Sandra Choi<br>Events Coordinator</p>
+</div>
+
+<div class="question-card" id="qc141">
+  <div class="q-label">141.</div>
+  <div class="options">
+    <label><input type="radio" name="q141" value="A"> (A)&nbsp;scheduled</label>
+    <label><input type="radio" name="q141" value="B"> (B)&nbsp;scheduling</label>
+    <label><input type="radio" name="q141" value="C"> (C)&nbsp;schedule</label>
+    <label><input type="radio" name="q141" value="D"> (D)&nbsp;schedules</label>
+  </div>
+</div>
+<div class="question-card" id="qc142">
+  <div class="q-label">142.</div>
+  <div class="options">
+    <label><input type="radio" name="q142" value="A"> (A)&nbsp;outlining</label>
+    <label><input type="radio" name="q142" value="B"> (B)&nbsp;to outline</label>
+    <label><input type="radio" name="q142" value="C"> (C)&nbsp;outlined</label>
+    <label><input type="radio" name="q142" value="D"> (D)&nbsp;outline</label>
+  </div>
+</div>
+<div class="question-card" id="qc143">
+  <div class="q-label">143.</div>
+  <div class="options">
+    <label><input type="radio" name="q143" value="A"> (A)&nbsp;The venue is located forty minutes from the city centre by car.</label>
+    <label><input type="radio" name="q143" value="B"> (B)&nbsp;Please note that parking spaces are limited at the Lakeside Conference Centre.</label>
+    <label><input type="radio" name="q143" value="C"> (C)&nbsp;The shuttle service was cancelled due to low demand last year.</label>
+    <label><input type="radio" name="q143" value="D"> (D)&nbsp;All presentations will be recorded and distributed afterward.</label>
+  </div>
+</div>
+<div class="question-card" id="qc144">
+  <div class="q-label">144.</div>
+  <div class="options">
+    <label><input type="radio" name="q144" value="A"> (A)&nbsp;participation</label>
+    <label><input type="radio" name="q144" value="B"> (B)&nbsp;attendance</label>
+    <label><input type="radio" name="q144" value="C"> (C)&nbsp;registration</label>
+    <label><input type="radio" name="q144" value="D"> (D)&nbsp;application</label>
+  </div>
+</div>
+
+<!-- TEXT 2 -->
+<div class="section-header">Questions 145–148 — Notice</div>
+<p class="passage-label" style="margin-top:12px">Questions 145–148 refer to the following notice.</p>
+<div class="passage-block">
+  <p><strong>IMPORTANT NOTICE — CHANGES TO EXPENSE REIMBURSEMENT POLICY</strong></p>
+  <p>Effective January 1, the company's expense reimbursement policy will be <span class="blank">145</span> in several key areas. All employees are required to review the updated guidelines, which are available on the HR portal.</p>
+  <p>The most significant change concerns meal allowances during business travel. The daily cap will be <span class="blank">146</span> from $65 to $80 to reflect current market rates. Receipts for all expenses exceeding $25 must be submitted with the reimbursement claim form.</p>
+  <p>Claims must be submitted within 30 days of the expense being <span class="blank">147</span>. Any claims received after this period will not be processed unless a written exception is approved by the Finance Director.</p>
+  <p><span class="blank">148</span> Employees with questions about the updated policy should contact HR at hr@greenfield-corp.com.</p>
+</div>
+
+<div class="question-card" id="qc145">
+  <div class="q-label">145.</div>
+  <div class="options">
+    <label><input type="radio" name="q145" value="A"> (A)&nbsp;revised</label>
+    <label><input type="radio" name="q145" value="B"> (B)&nbsp;revising</label>
+    <label><input type="radio" name="q145" value="C"> (C)&nbsp;revision</label>
+    <label><input type="radio" name="q145" value="D"> (D)&nbsp;revise</label>
+  </div>
+</div>
+<div class="question-card" id="qc146">
+  <div class="q-label">146.</div>
+  <div class="options">
+    <label><input type="radio" name="q146" value="A"> (A)&nbsp;raised</label>
+    <label><input type="radio" name="q146" value="B"> (B)&nbsp;risen</label>
+    <label><input type="radio" name="q146" value="C"> (C)&nbsp;raising</label>
+    <label><input type="radio" name="q146" value="D"> (D)&nbsp;rise</label>
+  </div>
+</div>
+<div class="question-card" id="qc147">
+  <div class="q-label">147.</div>
+  <div class="options">
+    <label><input type="radio" name="q147" value="A"> (A)&nbsp;incurring</label>
+    <label><input type="radio" name="q147" value="B"> (B)&nbsp;incurred</label>
+    <label><input type="radio" name="q147" value="C"> (C)&nbsp;incurs</label>
+    <label><input type="radio" name="q147" value="D"> (D)&nbsp;to incur</label>
+  </div>
+</div>
+<div class="question-card" id="qc148">
+  <div class="q-label">148.</div>
+  <div class="options">
+    <label><input type="radio" name="q148" value="A"> (A)&nbsp;The Finance Director will hold a briefing session next Tuesday at noon.</label>
+    <label><input type="radio" name="q148" value="B"> (B)&nbsp;All travel bookings must be approved two weeks in advance.</label>
+    <label><input type="radio" name="q148" value="C"> (C)&nbsp;A complete summary of all policy changes is attached to this notice.</label>
+    <label><input type="radio" name="q148" value="D"> (D)&nbsp;Reimbursements are processed on the last business day of each month.</label>
+  </div>
+</div>
+
+<!-- TEXT 3 -->
+<div class="section-header">Questions 149–152 — Article</div>
+<p class="passage-label" style="margin-top:12px">Questions 149–152 refer to the following article.</p>
+<div class="passage-block">
+  <p><strong>REGIONAL AIRPORT ANNOUNCES MAJOR CAPACITY EXPANSION</strong></p>
+  <p>Westfield Regional Airport announced on Tuesday that it will undergo a significant expansion over the next three years, <span class="blank">149</span> its passenger capacity from 2.5 million to 4.1 million annually. The project, estimated at $340 million, will be jointly funded by the regional government and a private infrastructure consortium.</p>
+  <p>The expansion plan includes the construction of a new international terminal, an extended runway, and additional cargo facilities. Officials stated that the new terminal is <span class="blank">150</span> to open by the end of next year, with the runway extension following in the second phase.</p>
+  <p>Airport CEO Margaret Forsythe expressed confidence in the project's long-term impact. "This investment will <span class="blank">151</span> our ability to serve both leisure and business travellers, and will be a significant driver of economic growth for the entire region," she said.</p>
+  <p>Critics have raised concerns about the environmental impact of the runway extension, <span class="blank">152</span> airport management has committed to commissioning a full environmental impact assessment before construction begins.</p>
+</div>
+
+<div class="question-card" id="qc149">
+  <div class="q-label">149.</div>
+  <div class="options">
+    <label><input type="radio" name="q149" value="A"> (A)&nbsp;increasing</label>
+    <label><input type="radio" name="q149" value="B"> (B)&nbsp;increased</label>
+    <label><input type="radio" name="q149" value="C"> (C)&nbsp;to increase</label>
+    <label><input type="radio" name="q149" value="D"> (D)&nbsp;increase</label>
+  </div>
+</div>
+<div class="question-card" id="qc150">
+  <div class="q-label">150.</div>
+  <div class="options">
+    <label><input type="radio" name="q150" value="A"> (A)&nbsp;scheduled</label>
+    <label><input type="radio" name="q150" value="B"> (B)&nbsp;planning</label>
+    <label><input type="radio" name="q150" value="C"> (C)&nbsp;intending</label>
+    <label><input type="radio" name="q150" value="D"> (D)&nbsp;supposed</label>
+  </div>
+</div>
+<div class="question-card" id="qc151">
+  <div class="q-label">151.</div>
+  <div class="options">
+    <label><input type="radio" name="q151" value="A"> (A)&nbsp;enhance</label>
+    <label><input type="radio" name="q151" value="B"> (B)&nbsp;reduce</label>
+    <label><input type="radio" name="q151" value="C"> (C)&nbsp;restrict</label>
+    <label><input type="radio" name="q151" value="D"> (D)&nbsp;maintain</label>
+  </div>
+</div>
+<div class="question-card" id="qc152">
+  <div class="q-label">152.</div>
+  <div class="options">
+    <label><input type="radio" name="q152" value="A"> (A)&nbsp;however</label>
+    <label><input type="radio" name="q152" value="B"> (B)&nbsp;therefore</label>
+    <label><input type="radio" name="q152" value="C"> (C)&nbsp;but</label>
+    <label><input type="radio" name="q152" value="D"> (D)&nbsp;so</label>
+  </div>
+</div>
+
+<!-- TEXT 4 -->
+<div class="section-header">Questions 153–156 — Letter</div>
+<p class="passage-label" style="margin-top:12px">Questions 153–156 refer to the following letter.</p>
+<div class="passage-block">
+  <p>November 3</p>
+  <p>Mr. Oliver Nash<br>Nash & Partners Consulting<br>14 Kingsway, London, EC2A 3BT</p>
+  <p>Dear Mr. Nash,</p>
+  <p>I am writing on behalf of Vantage Systems Ltd to express our <span class="blank">153</span> in your firm's data migration services. Following a recommendation from one of your existing clients, we believe your expertise may be well suited to a project we are currently planning.</p>
+  <p>We are in the process of migrating a large volume of legacy data from our on-premise infrastructure to a cloud-based platform. The migration must be completed with minimal disruption to our operations and in full <span class="blank">154</span> with our data protection obligations under applicable regulations.</p>
+  <p>We would welcome the opportunity to arrange an initial consultation at your <span class="blank">155</span>. If you could provide an outline of your typical project approach and any relevant case studies, we would find that very useful prior to our meeting.</p>
+  <p><span class="blank">156</span> We look forward to hearing from you.</p>
+  <p>Yours sincerely,<br>Claire Drummond<br>Head of IT Infrastructure</p>
+</div>
+
+<div class="question-card" id="qc153">
+  <div class="q-label">153.</div>
+  <div class="options">
+    <label><input type="radio" name="q153" value="A"> (A)&nbsp;interest</label>
+    <label><input type="radio" name="q153" value="B"> (B)&nbsp;interested</label>
+    <label><input type="radio" name="q153" value="C"> (C)&nbsp;interesting</label>
+    <label><input type="radio" name="q153" value="D"> (D)&nbsp;interestingly</label>
+  </div>
+</div>
+<div class="question-card" id="qc154">
+  <div class="q-label">154.</div>
+  <div class="options">
+    <label><input type="radio" name="q154" value="A"> (A)&nbsp;compliance</label>
+    <label><input type="radio" name="q154" value="B"> (B)&nbsp;agreement</label>
+    <label><input type="radio" name="q154" value="C"> (C)&nbsp;accordance</label>
+    <label><input type="radio" name="q154" value="D"> (D)&nbsp;conformity</label>
+  </div>
+</div>
+<div class="question-card" id="qc155">
+  <div class="q-label">155.</div>
+  <div class="options">
+    <label><input type="radio" name="q155" value="A"> (A)&nbsp;earliest convenience</label>
+    <label><input type="radio" name="q155" value="B"> (B)&nbsp;first availability</label>
+    <label><input type="radio" name="q155" value="C"> (C)&nbsp;best possibility</label>
+    <label><input type="radio" name="q155" value="D"> (D)&nbsp;nearest opportunity</label>
+  </div>
+</div>
+<div class="question-card" id="qc156">
+  <div class="q-label">156.</div>
+  <div class="options">
+    <label><input type="radio" name="q156" value="A"> (A)&nbsp;Our current IT budget has been approved for the next fiscal year.</label>
+    <label><input type="radio" name="q156" value="B"> (B)&nbsp;Please do not hesitate to contact me directly should you require any further information.</label>
+    <label><input type="radio" name="q156" value="C"> (C)&nbsp;The migration project has already been assigned to an internal team.</label>
+    <label><input type="radio" name="q156" value="D"> (D)&nbsp;Data protection regulations vary significantly across jurisdictions.</label>
+  </div>
+</div>
+
+<div class="submit-wrap">
+  <button id="submit-btn" disabled>Voir la correction</button>
+  <p class="req-note">Toutes les questions doivent être répondues avant d'afficher la correction.</p>
+</div>
+<div id="results">
+  <div class="score-banner">
+    <div class="score-num" id="score-display">—</div>
+    <div class="score-sub" id="score-pct"></div>
+  </div>
+  <p class="correction-title">Correction détaillée</p>
+  <div id="corr-list"></div>
+</div>
+</main>
+<script>
+var KEYS={"141":"A","142":"A","143":"B","144":"B","145":"A","146":"A","147":"B","148":"C","149":"A","150":"A","151":"A","152":"C","153":"A","154":"A","155":"A","156":"B"};
+var EXPL={
+  "141":"<b>(A) scheduled</b> — La structure passive <em>has been scheduled</em> (a été planifié) est requise ici. Le participe passé <em>scheduled</em> suit l'auxiliaire <em>been</em>. <em>Scheduling</em> (B) est un gérondif. <em>Schedule</em> (C) et <em>schedules</em> (D) sont des formes verbales actives.",
+  "142":"<b>(A) outlining</b> — Le participe présent <em>outlining</em> introduit un groupe participial de but qui modifie <em>presentation</em> : <em>a presentation outlining...</em>. <em>To outline</em> (B) exprimerait un but infinitif, moins naturel ici. <em>Outlined</em> (C) serait passif. <em>Outline</em> (D) est la forme de base.",
+  "143":"<b>(B) Please note that parking spaces are limited at the Lakeside Conference Centre.</b> — Cette phrase s'enchaîne logiquement après l'annonce du service de navette en expliquant pourquoi celui-ci est recommandé. (A) donne une information de distance redondante. (C) est négatif et contradictoire. (D) parle des présentations, hors contexte.",
+  "144":"<b>(B) attendance</b> — <em>Confirm your attendance</em> = confirmer sa présence (collocation figée). <em>Participation</em> (A) est proche mais moins idiomatique dans ce contexte de confirmation. <em>Registration</em> (C) implique une inscription formelle payante. <em>Application</em> (D) désigne une candidature.",
+  "145":"<b>(A) revised</b> — Passif : <em>will be revised</em> = sera révisée. <em>Revising</em> (B) est gérondif. <em>Revision</em> (C) est un nom. <em>Revise</em> (D) est un infinitif actif incompatible avec <em>will be</em>.",
+  "146":"<b>(A) raised</b> — <em>Raise</em> est un verbe transitif (augmenter quelque chose). La structure passive est <em>will be raised</em>. <em>Rise</em> (B, D) est intransitif et ne peut former un passif. <em>Raising</em> (C) est gérondif.",
+  "147":"<b>(B) incurred</b> — Passif : <em>the expense being incurred</em> = la dépense ayant été engagée. <em>Incurring</em> (A) serait actif. <em>Incurs</em> (C) est présent simple. <em>To incur</em> (D) est infinitif.",
+  "148":"<b>(C) A complete summary of all policy changes is attached to this notice.</b> — Phrase de transition cohérente avant le renvoi vers HR. (A) annonce une réunion non mentionnée ailleurs. (B) aborde les réservations de voyage hors contexte immédiat. (D) parle du calendrier de remboursement, déjà traité.",
+  "149":"<b>(A) increasing</b> — Participe présent en apposition résultative : <em>will undergo an expansion, increasing its capacity</em>. Il décrit la conséquence directe. <em>Increased</em> (B) serait passif. <em>To increase</em> (C) exprimerait un but. <em>Increase</em> (D) est la forme de base.",
+  "150":"<b>(A) scheduled</b> — <em>Is scheduled to open</em> = est prévu pour ouvrir. Collocation passive standard dans les textes journalistiques. <em>Planning</em> (B) exigerait un sujet humain. <em>Intending</em> (C) idem. <em>Supposed</em> (D) est possible mais moins précis dans un contexte de planification officielle.",
+  "151":"<b>(A) enhance</b> — <em>Enhance our ability</em> = renforcer / améliorer notre capacité. <em>Reduce</em> (B) et <em>restrict</em> (C) sont sémantiquement opposés. <em>Maintain</em> (D) n'implique aucune amélioration, ce qui contredit le contexte d'un investissement majeur.",
+  "152":"<b>(C) but</b> — Conjonction de coordination qui introduit une concession entre une préoccupation (critics) et la réponse de la direction. <em>However</em> (A) est un adverbe de liaison, non une conjonction de coordination reliant deux propositions dans une même phrase. <em>Therefore</em> (B) exprime une conséquence. <em>So</em> (D) aussi.",
+  "153":"<b>(A) interest</b> — <em>Express our interest in</em> = exprimer notre intérêt pour. Nom requis après le déterminant possessif <em>our</em>. <em>Interested</em> (B) est adjectif. <em>Interesting</em> (C) est adjectif. <em>Interestingly</em> (D) est adverbe.",
+  "154":"<b>(A) compliance</b> — <em>In full compliance with</em> = en pleine conformité avec (locution prépositionnelle figée). <em>Agreement</em> (B) et <em>conformity</em> (D) ne s'utilisent pas avec la préposition <em>with</em> dans ce contexte réglementaire. <em>Accordance</em> (C) s'emploie dans <em>in accordance with</em> mais sans <em>full</em> de façon aussi naturelle.",
+  "155":"<b>(A) earliest convenience</b> — <em>At your earliest convenience</em> est la formule épistolaire figée anglaise pour 'dès que possible'. Les options (B), (C), (D) ne correspondent pas à des expressions idiomatiques reconnues en anglais professionnel.",
+  "156":"<b>(B) Please do not hesitate to contact me directly should you require any further information.</b> — Formule de clôture professionnelle standard avant <em>We look forward to hearing from you</em>. (A) parle du budget IT, hors sujet. (C) contredit la demande de consultation. (D) introduit une généralité sans lien avec la clôture."
+};
+var LABELS={
+  "141":{"A":"scheduled","B":"scheduling","C":"schedule","D":"schedules"},
+  "142":{"A":"outlining","B":"to outline","C":"outlined","D":"outline"},
+  "143":{"A":"The venue is located forty minutes from the city centre by car.","B":"Please note that parking spaces are limited at the Lakeside Conference Centre.","C":"The shuttle service was cancelled due to low demand last year.","D":"All presentations will be recorded and distributed afterward."},
+  "144":{"A":"participation","B":"attendance","C":"registration","D":"application"},
+  "145":{"A":"revised","B":"revising","C":"revision","D":"revise"},
+  "146":{"A":"raised","B":"risen","C":"raising","D":"rise"},
+  "147":{"A":"incurring","B":"incurred","C":"incurs","D":"to incur"},
+  "148":{"A":"The Finance Director will hold a briefing session next Tuesday at noon.","B":"All travel bookings must be approved two weeks in advance.","C":"A complete summary of all policy changes is attached to this notice.","D":"Reimbursements are processed on the last business day of each month."},
+  "149":{"A":"increasing","B":"increased","C":"to increase","D":"increase"},
+  "150":{"A":"scheduled","B":"planning","C":"intending","D":"supposed"},
+  "151":{"A":"enhance","B":"reduce","C":"restrict","D":"maintain"},
+  "152":{"A":"however","B":"therefore","C":"but","D":"so"},
+  "153":{"A":"interest","B":"interested","C":"interesting","D":"interestingly"},
+  "154":{"A":"compliance","B":"agreement","C":"accordance","D":"conformity"},
+  "155":{"A":"earliest convenience","B":"first availability","C":"best possibility","D":"nearest opportunity"},
+  "156":{"A":"Our current IT budget has been approved for the next fiscal year.","B":"Please do not hesitate to contact me directly should you require any further information.","C":"The migration project has already been assigned to an internal team.","D":"Data protection regulations vary significantly across jurisdictions."}
+};
+var TOTAL_Q=16;
+var remaining=480;
+var timerEl=document.getElementById('timer');
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+timerEl.textContent=fmt(remaining);
+var iv=setInterval(function(){remaining--;timerEl.textContent=fmt(remaining);if(remaining<=120)timerEl.classList.add('warn');if(remaining<=0){clearInterval(iv);timerEl.textContent='00:00';}},1000);
+var btn=document.getElementById('submit-btn');
+var qnums=Object.keys(KEYS).map(Number);
+function allAnswered(){return qnums.every(function(n){return document.querySelector('input[name="q'+n+'"]:checked');});}
+document.querySelectorAll('input[type=radio]').forEach(function(r){r.addEventListener('change',function(){var num=r.name.replace('q','');var card=document.getElementById('qc'+num);if(card)card.classList.add('answered');btn.disabled=!allAnswered();});});
+btn.addEventListener('click',function(){if(!allAnswered())return;var score=0;var list=document.getElementById('corr-list');list.innerHTML='';qnums.forEach(function(n){var sel=document.querySelector('input[name="q'+n+'"]:checked').value;var correct=KEYS[n];var ok=sel===correct;if(ok)score++;var labelMap=LABELS[n]||{};var card=document.createElement('div');card.className='corr-card '+(ok?'correct':'wrong');card.innerHTML='<div class="c-head"><span class="badge-'+(ok?'ok':'err')+'">'+(ok?'&#10003;':'&#10007;')+'</span> Q.'+n+'</div>'+'<div class="c-ans">'+(ok?'<span class="good">('+correct+') '+labelMap[correct]+'</span>':'<span class="bad">('+sel+') '+labelMap[sel]+'</span> &rarr; <span class="good">('+correct+') '+labelMap[correct]+'</span>')+'</div>'+'<div class="c-expl">'+EXPL[n]+'</div>';list.appendChild(card);});document.getElementById('score-display').textContent=score+'/'+TOTAL_Q;document.getElementById('score-pct').textContent=Math.round(score/TOTAL_Q*100)+'% correct';var res=document.getElementById('results');res.style.display='block';res.scrollIntoView({behavior:'smooth'});});
+</script>
+</body>
+</html>

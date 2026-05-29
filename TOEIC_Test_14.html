@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 6 - Test 14 - Grammar in Context</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+  :root{--navy:#00274C;--blue:#1565C0;--light-blue:#E3F0FF;--accent:#F59E0B;--green:#16A34A;--red:#DC2626;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;--border:#CBD5E1;--passage-bg:#FEFCE8;--passage-border:#FDE68A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  header{background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-brand{font-family:'Merriweather',serif;font-size:.85rem;line-height:1.4;opacity:.9}.hdr-brand span{display:block;font-size:.75rem;opacity:.7}
+  .hdr-title{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;letter-spacing:.04em;text-align:center}
+  #timer{background:var(--accent);color:var(--navy);font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;padding:6px 18px;border-radius:6px;letter-spacing:.08em;min-width:90px;text-align:center;transition:background .3s}
+  #timer.warn{background:#EF4444;color:white;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  .directions{background:var(--white);border:2px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:.92rem}
+  .directions strong{display:block;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+  .section-header{background:var(--navy);color:white;padding:8px 16px;border-radius:6px 6px 0 0;font-family:'Merriweather',serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-top:32px}
+  .passage-label{font-size:.88rem;font-style:italic;color:var(--muted);margin:0 0 8px}
+  .passage-block{background:var(--passage-bg);border:1.5px solid var(--passage-border);border-radius:0 0 8px 8px;padding:18px 20px;margin-bottom:20px;font-family:'Merriweather',serif;font-size:.9rem;line-height:1.75}
+  .passage-block p{margin-bottom:.5em}
+  .blank{border-bottom:2px solid var(--navy);padding:0 8px;font-weight:700;color:var(--blue);font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+  .question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+  .question-card.answered{border-color:var(--blue)}
+  .q-label{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .options label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.4;transition:background .15s}
+  .options label:hover{background:var(--light-blue)}
+  .options input[type=radio]{margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .submit-wrap{text-align:center;margin:32px 0 8px}
+  #submit-btn{background:var(--blue);color:white;border:none;border-radius:8px;padding:14px 40px;font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .2s,transform .15s;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+  #submit-btn:hover:not(:disabled){background:var(--navy);transform:translateY(-1px)}
+  #submit-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none;transform:none}
+  .req-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:6px}
+  #results{display:none;margin-top:36px}
+  .score-banner{background:var(--navy);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+  .score-banner .score-num{font-family:'Merriweather',serif;font-size:3rem;font-weight:700;color:var(--accent)}
+  .score-banner .score-sub{font-size:.9rem;opacity:.8;margin-top:4px}
+  .correction-title{font-family:'Merriweather',serif;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:16px}
+  .corr-card{border-radius:8px;padding:14px 16px;margin-bottom:10px;border-left:5px solid}
+  .corr-card.correct{background:#F0FDF4;border-color:var(--green)}.corr-card.wrong{background:#FEF2F2;border-color:var(--red)}
+  .c-head{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .badge-ok{background:var(--green);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .badge-err{background:var(--red);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .c-ans{font-size:.88rem;margin-bottom:6px}.c-ans .good{color:var(--green);font-weight:700}.c-ans .bad{color:var(--red);text-decoration:line-through}
+  .c-expl{font-size:.87rem;color:#374151;background:rgba(255,255,255,.7);border-radius:6px;padding:8px 10px;border-left:3px solid var(--muted);line-height:1.55}
+  @media(max-width:600px){header{padding:10px 14px;flex-wrap:wrap;gap:6px}.hdr-title{order:-1;width:100%;text-align:center}#timer{font-size:1.2rem}main{padding:16px 12px 48px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-brand">Marc VASSEUR<span>Polytech Lille · Intensif TOEIC</span></div>
+  <div class="hdr-title">TOEIC PART 6 — TEST 14</div>
+  <div id="timer">08:00</div>
+</header>
+<main>
+<div class="directions">
+  <strong>PART 6 – DIRECTIONS</strong>
+  Read the texts below. A word, phrase, or sentence is missing in parts of each text. Four answer choices are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D).
+</div>
+
+<div class="section-header">Questions 141–144 — Notice</div>
+<p class="passage-label" style="margin-top:12px">Questions 141–144 refer to the following notice.</p>
+<div class="passage-block">
+<p><strong>NOTICE — UPDATED SECURITY BADGE PROCEDURES</strong></p>
+<p>Effective immediately, all employees are required to display their security badge <span class="blank">141</span> at all times while on company premises. Badges must be worn visibly on the upper body and must not be covered by clothing or accessories.</p>
+<p>Any employee who has lost or damaged their badge should report to the Security Office on the ground floor to <span class="blank">142</span> a replacement. A fee of $15 will be charged for each replacement badge issued.</p>
+<p>Visitors and contractors must check in at the main reception desk, where they will be <span class="blank">143</span> a temporary visitor pass. Visitor passes are valid for one business day only and must be returned upon departure.</p>
+<p><span class="blank">144</span> Non-compliance may result in disciplinary action.</p>
+</div>
+
+<div class="question-card" id="qc141">
+  <div class="q-label">141.</div>
+  <div class="options">
+    <label><input type="radio" name="q141" value="A"> (A)&nbsp;visibly</label>
+    <label><input type="radio" name="q141" value="B"> (B)&nbsp;visible</label>
+    <label><input type="radio" name="q141" value="C"> (C)&nbsp;visibility</label>
+    <label><input type="radio" name="q141" value="D"> (D)&nbsp;vision</label>
+  </div>
+</div>
+<div class="question-card" id="qc142">
+  <div class="q-label">142.</div>
+  <div class="options">
+    <label><input type="radio" name="q142" value="A"> (A)&nbsp;request</label>
+    <label><input type="radio" name="q142" value="B"> (B)&nbsp;claim</label>
+    <label><input type="radio" name="q142" value="C"> (C)&nbsp;obtain</label>
+    <label><input type="radio" name="q142" value="D"> (D)&nbsp;demand</label>
+  </div>
+</div>
+<div class="question-card" id="qc143">
+  <div class="q-label">143.</div>
+  <div class="options">
+    <label><input type="radio" name="q143" value="A"> (A)&nbsp;given</label>
+    <label><input type="radio" name="q143" value="B"> (B)&nbsp;giving</label>
+    <label><input type="radio" name="q143" value="C"> (C)&nbsp;give</label>
+    <label><input type="radio" name="q143" value="D"> (D)&nbsp;gives</label>
+  </div>
+</div>
+<div class="question-card" id="qc144">
+  <div class="q-label">144.</div>
+  <div class="options">
+    <label><input type="radio" name="q144" value="A"> (A)&nbsp;Failure to comply with this policy will be reported to Human Resources.</label>
+    <label><input type="radio" name="q144" value="B"> (B)&nbsp;All employees are encouraged to familiarise themselves with the updated procedures.</label>
+    <label><input type="radio" name="q144" value="C"> (C)&nbsp;The Security Office is open from 8:00 A.M. to 6:00 P.M. on weekdays.</label>
+    <label><input type="radio" name="q144" value="D"> (D)&nbsp;Badges issued prior to 2020 will remain valid until further notice.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 145–148 — E-mail</div>
+<p class="passage-label" style="margin-top:12px">Questions 145–148 refer to the following e-mail.</p>
+<div class="passage-block">
+<p><strong>From:</strong> David Osei &lt;d.osei@quantumlogistics.com&gt;<br>
+<strong>To:</strong> All Warehouse Supervisors<br>
+<strong>Subject:</strong> New Inventory Tracking Software — Training Schedule<br>
+<strong>Date:</strong> March 21</p>
+<p>Dear Team,</p>
+<p>As previously announced, we will be <span class="blank">145</span> to our new inventory tracking platform, QuantumTrack Pro, on April 14. To ensure a smooth transition, all warehouse supervisors are required to attend a training session prior to the launch date.</p>
+<p>Training will be delivered in three groups of twelve, with sessions scheduled on April 7, 8, and 9. You will receive a separate notification confirming which session you have been <span class="blank">146</span> to.</p>
+<p>The training will cover all core functions of the new system, including real-time stock monitoring, automated reorder alerts, and supplier <span class="blank">147</span> management. Participants are asked to bring a laptop or tablet to the session.</p>
+<p><span class="blank">148</span> Please feel free to contact me if you have any questions in the meantime.</p>
+<p>Best regards,<br>David Osei<br>Systems Implementation Manager</p>
+</div>
+
+<div class="question-card" id="qc145">
+  <div class="q-label">145.</div>
+  <div class="options">
+    <label><input type="radio" name="q145" value="A"> (A)&nbsp;switching</label>
+    <label><input type="radio" name="q145" value="B"> (B)&nbsp;switched</label>
+    <label><input type="radio" name="q145" value="C"> (C)&nbsp;switch</label>
+    <label><input type="radio" name="q145" value="D"> (D)&nbsp;to switch</label>
+  </div>
+</div>
+<div class="question-card" id="qc146">
+  <div class="q-label">146.</div>
+  <div class="options">
+    <label><input type="radio" name="q146" value="A"> (A)&nbsp;allocated</label>
+    <label><input type="radio" name="q146" value="B"> (B)&nbsp;allocating</label>
+    <label><input type="radio" name="q146" value="C"> (C)&nbsp;allocate</label>
+    <label><input type="radio" name="q146" value="D"> (D)&nbsp;allocation</label>
+  </div>
+</div>
+<div class="question-card" id="qc147">
+  <div class="q-label">147.</div>
+  <div class="options">
+    <label><input type="radio" name="q147" value="A"> (A)&nbsp;relationship</label>
+    <label><input type="radio" name="q147" value="B"> (B)&nbsp;interfacing</label>
+    <label><input type="radio" name="q147" value="C"> (C)&nbsp;integration</label>
+    <label><input type="radio" name="q147" value="D"> (D)&nbsp;portal</label>
+  </div>
+</div>
+<div class="question-card" id="qc148">
+  <div class="q-label">148.</div>
+  <div class="options">
+    <label><input type="radio" name="q148" value="A"> (A)&nbsp;The new platform will replace the existing system entirely as of April 14.</label>
+    <label><input type="radio" name="q148" value="B"> (B)&nbsp;QuantumTrack Pro was selected following a six-month evaluation process.</label>
+    <label><input type="radio" name="q148" value="C"> (C)&nbsp;A user guide will be distributed to all participants at the end of each session.</label>
+    <label><input type="radio" name="q148" value="D"> (D)&nbsp;Supervisors who miss their allocated session will need to self-study online.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 149–152 — Article</div>
+<p class="passage-label" style="margin-top:12px">Questions 149–152 refer to the following article.</p>
+<div class="passage-block">
+<p><strong>CITY COUNCIL APPROVES NEW CYCLING INFRASTRUCTURE PLAN</strong></p>
+<p>The city council voted on Thursday to approve a $28 million plan to expand cycling infrastructure across the metropolitan area. The project, which is expected to begin <span class="blank">149</span> in the autumn, will add 85 kilometres of protected cycle lanes and upgrade 40 existing crossings.</p>
+<p>Mayor Linda Forde called the decision "a historic step forward for sustainable urban mobility." The plan has been under <span class="blank">150</span> for nearly two years and was developed in consultation with local cycling advocacy groups, urban planners, and transport engineers.</p>
+<p>The initiative is part of a broader effort to reduce the city's carbon emissions by 35% <span class="blank">151</span> 2030. Officials noted that similar projects in comparable cities have led to a measurable increase in cycling uptake and a reduction in peak-hour congestion.</p>
+<p>Construction work will be <span class="blank">152</span> in phases to minimise disruption to traffic and local businesses. A public information campaign will be launched ahead of each construction phase.</p>
+</div>
+
+<div class="question-card" id="qc149">
+  <div class="q-label">149.</div>
+  <div class="options">
+    <label><input type="radio" name="q149" value="A"> (A)&nbsp;construction</label>
+    <label><input type="radio" name="q149" value="B"> (B)&nbsp;constructing</label>
+    <label><input type="radio" name="q149" value="C"> (C)&nbsp;constructive</label>
+    <label><input type="radio" name="q149" value="D"> (D)&nbsp;to construct</label>
+  </div>
+</div>
+<div class="question-card" id="qc150">
+  <div class="q-label">150.</div>
+  <div class="options">
+    <label><input type="radio" name="q150" value="A"> (A)&nbsp;development</label>
+    <label><input type="radio" name="q150" value="B"> (B)&nbsp;discussion</label>
+    <label><input type="radio" name="q150" value="C"> (C)&nbsp;review</label>
+    <label><input type="radio" name="q150" value="D"> (D)&nbsp;construction</label>
+  </div>
+</div>
+<div class="question-card" id="qc151">
+  <div class="q-label">151.</div>
+  <div class="options">
+    <label><input type="radio" name="q151" value="A"> (A)&nbsp;by</label>
+    <label><input type="radio" name="q151" value="B"> (B)&nbsp;until</label>
+    <label><input type="radio" name="q151" value="C"> (C)&nbsp;since</label>
+    <label><input type="radio" name="q151" value="D"> (D)&nbsp;from</label>
+  </div>
+</div>
+<div class="question-card" id="qc152">
+  <div class="q-label">152.</div>
+  <div class="options">
+    <label><input type="radio" name="q152" value="A"> (A)&nbsp;carried out</label>
+    <label><input type="radio" name="q152" value="B"> (B)&nbsp;called off</label>
+    <label><input type="radio" name="q152" value="C"> (C)&nbsp;drawn up</label>
+    <label><input type="radio" name="q152" value="D"> (D)&nbsp;put off</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 153–156 — Letter</div>
+<p class="passage-label" style="margin-top:12px">Questions 153–156 refer to the following letter.</p>
+<div class="passage-block">
+<p>April 2</p>
+<p>Ms. Rita Chambers<br>Head of Purchasing<br>Belford Catering Supplies<br>27 Commerce Park, Bristol, BS1 4EQ</p>
+<p>Dear Ms. Chambers,</p>
+<p>I am writing to follow up on my previous correspondence <span class="blank">153</span> our proposal to supply Belford Catering Supplies with our full range of eco-certified packaging products.</p>
+<p>Following your initial expression of interest, I would like to arrange a product demonstration at a time that is <span class="blank">154</span> for your team. Our representative would be able to present the complete range and answer any technical questions regarding material specifications, lead times, and minimum order quantities.</p>
+<p>We are confident that our products meet the sustainability standards that Belford Catering Supplies has publicly committed to. In addition, our pricing is highly competitive, and we offer volume discounts for orders <span class="blank">155</span> 500 units per product line.</p>
+<p><span class="blank">156</span> I look forward to your reply.</p>
+<p>Kind regards,<br>James Tanner<br>National Sales Executive</p>
+</div>
+
+<div class="question-card" id="qc153">
+  <div class="q-label">153.</div>
+  <div class="options">
+    <label><input type="radio" name="q153" value="A"> (A)&nbsp;regarding</label>
+    <label><input type="radio" name="q153" value="B"> (B)&nbsp;regarding to</label>
+    <label><input type="radio" name="q153" value="C"> (C)&nbsp;in regard</label>
+    <label><input type="radio" name="q153" value="D"> (D)&nbsp;with regards</label>
+  </div>
+</div>
+<div class="question-card" id="qc154">
+  <div class="q-label">154.</div>
+  <div class="options">
+    <label><input type="radio" name="q154" value="A"> (A)&nbsp;convenient</label>
+    <label><input type="radio" name="q154" value="B"> (B)&nbsp;convenience</label>
+    <label><input type="radio" name="q154" value="C"> (C)&nbsp;conveniently</label>
+    <label><input type="radio" name="q154" value="D"> (D)&nbsp;convenience's</label>
+  </div>
+</div>
+<div class="question-card" id="qc155">
+  <div class="q-label">155.</div>
+  <div class="options">
+    <label><input type="radio" name="q155" value="A"> (A)&nbsp;exceeding</label>
+    <label><input type="radio" name="q155" value="B"> (B)&nbsp;exceeded</label>
+    <label><input type="radio" name="q155" value="C"> (C)&nbsp;exceed</label>
+    <label><input type="radio" name="q155" value="D"> (D)&nbsp;excess</label>
+  </div>
+</div>
+<div class="question-card" id="qc156">
+  <div class="q-label">156.</div>
+  <div class="options">
+    <label><input type="radio" name="q156" value="A"> (A)&nbsp;We appreciate your consideration and hope to hear from you soon.</label>
+    <label><input type="radio" name="q156" value="B"> (B)&nbsp;Our eco-certified range was launched in 2021 and has since expanded significantly.</label>
+    <label><input type="radio" name="q156" value="C"> (C)&nbsp;A full product catalogue is available to download on our website.</label>
+    <label><input type="radio" name="q156" value="D"> (D)&nbsp;Please note that our minimum order is 100 units per product line.</label>
+  </div>
+</div>
+
+<div class="submit-wrap">
+  <button id="submit-btn" disabled>Voir la correction</button>
+  <p class="req-note">Toutes les questions doivent être répondues avant d'afficher la correction.</p>
+</div>
+<div id="results">
+  <div class="score-banner"><div class="score-num" id="score-display">—</div><div class="score-sub" id="score-pct"></div></div>
+  <p class="correction-title">Correction détaillée</p>
+  <div id="corr-list"></div>
+</div>
+</main>
+<script>
+var KEYS={"141":"A","142":"C","143":"A","144":"B","145":"A","146":"A","147":"C","148":"C","149":"A","150":"A","151":"A","152":"A","153":"A","154":"A","155":"A","156":"C"};
+var EXPL={"141": "<b>(A) visibly</b> — Adverbe modifiant <em>display</em> : <em>display their badge visibly</em> = porter leur badge de façon visible. <em>Visible</em> (B) est adjectif. <em>Visibility</em> (C) est un nom. <em>Vision</em> (D) est hors sens.", "142": "<b>(C) obtain</b> — <em>Obtain a replacement</em> = obtenir un remplacement. Verbe neutre et précis. <em>Request</em> (A) = demander, mais ne s'emploie pas avec <em>a replacement</em> sans complément. <em>Claim</em> (B) implique un droit préexistant. <em>Demand</em> (D) est trop fort dans ce contexte administratif.", "143": "<b>(A) given</b> — Passif : <em>will be given a temporary visitor pass</em> = se verra remettre un laissez-passer. <em>Giving</em> (B) est actif ou participe présent. <em>Give</em> (C) et <em>gives</em> (D) sont des formes actives incompatibles avec <em>will be</em>.", "144": "<b>(B) All employees are encouraged to familiarise themselves with the updated procedures.</b> — Transition naturelle avant l'avertissement de sanction finale. (A) est trop abrupt après avoir déjà énoncé les règles. (C) introduit une information horaire qui n'est pas le point culminant. (D) parle des anciens badges, hors contexte immédiat.", "145": "<b>(A) switching</b> — <em>We will be switching to...</em> : futur progressif = <em>will be + V-ing</em>. <em>Switched</em> (B) est passé simple ou participe. <em>Switch</em> (C) est la base verbale. <em>To switch</em> (D) est un infinitif.", "146": "<b>(A) allocated</b> — Passif : <em>have been allocated to</em> = avoir été affecté à. <em>Allocating</em> (B) serait actif. <em>Allocate</em> (C) est la base. <em>Allocation</em> (D) est un nom.", "147": "<b>(C) integration</b> — <em>Supplier integration management</em> = gestion de l'intégration fournisseurs, terme technique standard dans les systèmes ERP/WMS. Les autres options forment des collocations moins précises ou incohérentes avec le contexte logistique.", "148": "<b>(C) A user guide will be distributed to all participants at the end of each session.</b> — Information pratique qui s'enchaîne logiquement après les détails de la formation. (A) est informatif mais redondant. (B) est anecdotique. (D) introduit un ton négatif peu adapté à ce courriel d'organisation.", "149": "<b>(A) construction</b> — <em>Begin construction</em> = démarrer les travaux. Nom objet du verbe <em>begin</em>. <em>Constructing</em> (B) est gérondif ou participe. <em>Constructive</em> (C) est adjectif. <em>To construct</em> (D) est infinitif.", "150": "<b>(A) development</b> — <em>Under development</em> = en cours de développement / d'élaboration. Locution standard dans les textes officiels. <em>Discussion</em> (B) s'emploie dans <em>under discussion</em> mais désigne un débat, moins précis ici. <em>Review</em> (C) = sous examen. <em>Construction</em> (D) = en construction, trop précoce à ce stade.", "151": "<b>(A) by</b> — <em>By 2030</em> = d'ici 2030 (limite temporelle). <em>Until</em> (B) exprime une durée continue jusqu'à un point. <em>Since</em> (C) exprime un point de départ dans le passé. <em>From</em> (D) exprime un point de départ mais pas une limite.", "152": "<b>(A) carried out</b> — <em>Work will be carried out in phases</em> = les travaux seront réalisés par phases. Phrasal verb standard. <em>Called off</em> (B) = annulé. <em>Drawn up</em> (C) = rédigé (plans, documents). <em>Put off</em> (D) = reporté.", "153": "<b>(A) regarding</b> — Préposition simple signifiant 'concernant / au sujet de'. <em>Regarding to</em> (B) est incorrect en anglais. <em>In regard</em> (C) doit être suivi de <em>to</em>. <em>With regards</em> (D) est une formule de salutation, pas une préposition de sujet.", "154": "<b>(A) convenient</b> — Adjectif attribut dans <em>at a time that is convenient for your team</em>. <em>Convenience</em> (B) est un nom. <em>Conveniently</em> (C) est un adverbe. <em>Convenience's</em> (D) est un possessif incorrect ici.", "155": "<b>(A) exceeding</b> — Participe présent modifiant <em>orders</em> : <em>orders exceeding 500 units</em> = les commandes dépassant 500 unités. <em>Exceeded</em> (B) serait passé ou passif. <em>Exceed</em> (C) est la base verbale. <em>Excess</em> (D) est un nom ou adjectif.", "156": "<b>(C) A full product catalogue is available to download on our website.</b> — S'enchaîne naturellement comme ressource complémentaire avant la formule de clôture. (A) est redondant avec la phrase de clôture déjà présente. (B) est anecdotique. (D) contredit les informations sur les quantités déjà mentionnées dans le corps de la lettre."};
+var LABELS={"141": {"A": "visibly", "B": "visible", "C": "visibility", "D": "vision"}, "142": {"A": "request", "B": "claim", "C": "obtain", "D": "demand"}, "143": {"A": "given", "B": "giving", "C": "give", "D": "gives"}, "144": {"A": "Failure to comply with this policy will be reported to Human Resources.", "B": "All employees are encouraged to familiarise themselves with the updated procedures.", "C": "The Security Office is open from 8:00 A.M. to 6:00 P.M. on weekdays.", "D": "Badges issued prior to 2020 will remain valid until further notice."}, "145": {"A": "switching", "B": "switched", "C": "switch", "D": "to switch"}, "146": {"A": "allocated", "B": "allocating", "C": "allocate", "D": "allocation"}, "147": {"A": "relationship", "B": "interfacing", "C": "integration", "D": "portal"}, "148": {"A": "The new platform will replace the existing system entirely as of April 14.", "B": "QuantumTrack Pro was selected following a six-month evaluation process.", "C": "A user guide will be distributed to all participants at the end of each session.", "D": "Supervisors who miss their allocated session will need to self-study online."}, "149": {"A": "construction", "B": "constructing", "C": "constructive", "D": "to construct"}, "150": {"A": "development", "B": "discussion", "C": "review", "D": "construction"}, "151": {"A": "by", "B": "until", "C": "since", "D": "from"}, "152": {"A": "carried out", "B": "called off", "C": "drawn up", "D": "put off"}, "153": {"A": "regarding", "B": "regarding to", "C": "in regard", "D": "with regards"}, "154": {"A": "convenient", "B": "convenience", "C": "conveniently", "D": "convenience's"}, "155": {"A": "exceeding", "B": "exceeded", "C": "exceed", "D": "excess"}, "156": {"A": "We appreciate your consideration and hope to hear from you soon.", "B": "Our eco-certified range was launched in 2021 and has since expanded significantly.", "C": "A full product catalogue is available to download on our website.", "D": "Please note that our minimum order is 100 units per product line."}};
+var TOTAL_Q=16;var remaining=480;var timerEl=document.getElementById('timer');
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+timerEl.textContent=fmt(remaining);
+var iv=setInterval(function(){remaining--;timerEl.textContent=fmt(remaining);if(remaining<=120)timerEl.classList.add('warn');if(remaining<=0){clearInterval(iv);timerEl.textContent='00:00';}},1000);
+var btn=document.getElementById('submit-btn');var qnums=Object.keys(KEYS).map(Number);
+function allAnswered(){return qnums.every(function(n){return document.querySelector('input[name="q'+n+'"]:checked');});}
+document.querySelectorAll('input[type=radio]').forEach(function(r){r.addEventListener('change',function(){var num=r.name.replace('q','');var card=document.getElementById('qc'+num);if(card)card.classList.add('answered');btn.disabled=!allAnswered();});});
+btn.addEventListener('click',function(){if(!allAnswered())return;var score=0;var list=document.getElementById('corr-list');list.innerHTML='';qnums.forEach(function(n){var sel=document.querySelector('input[name="q'+n+'"]:checked').value;var correct=KEYS[n];var ok=sel===correct;if(ok)score++;var labelMap=LABELS[n]||{};var card=document.createElement('div');card.className='corr-card '+(ok?'correct':'wrong');card.innerHTML='<div class="c-head"><span class="badge-'+(ok?'ok':'err')+'">'+(ok?'&#10003;':'&#10007;')+'</span> Q.'+n+'</div>'+'<div class="c-ans">'+(ok?'<span class="good">('+correct+') '+labelMap[correct]+'</span>':'<span class="bad">('+sel+') '+labelMap[sel]+'</span> &rarr; <span class="good">('+correct+') '+labelMap[correct]+'</span>')+'</div>'+'<div class="c-expl">'+EXPL[n]+'</div>';list.appendChild(card);});document.getElementById('score-display').textContent=score+'/'+TOTAL_Q;document.getElementById('score-pct').textContent=Math.round(score/TOTAL_Q*100)+'% correct';var res=document.getElementById('results');res.style.display='block';res.scrollIntoView({behavior:'smooth'});});
+</script>
+</body>
+</html>

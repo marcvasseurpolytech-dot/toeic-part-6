@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 6 - Test 20 - Grammar in Context</title>
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+  :root{--navy:#00274C;--blue:#1565C0;--light-blue:#E3F0FF;--accent:#F59E0B;--green:#16A34A;--red:#DC2626;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;--border:#CBD5E1;--passage-bg:#FEFCE8;--passage-border:#FDE68A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  header{background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-brand{font-family:'Merriweather',serif;font-size:.85rem;line-height:1.4;opacity:.9}
+  .hdr-brand span{display:block;font-size:.75rem;opacity:.7}
+  .hdr-title{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;letter-spacing:.04em;text-align:center}
+  #timer{background:var(--accent);color:var(--navy);font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;padding:6px 18px;border-radius:6px;letter-spacing:.08em;min-width:90px;text-align:center;transition:background .3s}
+  #timer.warn{background:#EF4444;color:white;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  .directions{background:var(--white);border:2px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:.92rem}
+  .directions strong{display:block;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+  .section-header{background:var(--navy);color:white;padding:8px 16px;border-radius:6px 6px 0 0;font-family:'Merriweather',serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-top:32px}
+  .passage-label{font-size:.88rem;font-style:italic;color:var(--muted);margin:0 0 8px}
+  .passage-block{background:var(--passage-bg);border:1.5px solid var(--passage-border);border-radius:0 0 8px 8px;padding:18px 20px;margin-bottom:20px;font-family:'Merriweather',serif;font-size:.9rem;line-height:1.75}
+  .passage-block p{margin-bottom:.5em}
+  .blank{border-bottom:2px solid var(--navy);padding:0 8px;font-weight:700;color:var(--blue);font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+  .question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+  .question-card.answered{border-color:var(--blue)}
+  .q-label{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .options label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.4;transition:background .15s}
+  .options label:hover{background:var(--light-blue)}
+  .options input[type=radio]{margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .submit-wrap{text-align:center;margin:32px 0 8px}
+  #submit-btn{background:var(--blue);color:white;border:none;border-radius:8px;padding:14px 40px;font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .2s,transform .15s;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+  #submit-btn:hover:not(:disabled){background:var(--navy);transform:translateY(-1px)}
+  #submit-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none;transform:none}
+  .req-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:6px}
+  #results{display:none;margin-top:36px}
+  .score-banner{background:var(--navy);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+  .score-banner .score-num{font-family:'Merriweather',serif;font-size:3rem;font-weight:700;color:var(--accent)}
+  .score-banner .score-sub{font-size:.9rem;opacity:.8;margin-top:4px}
+  .correction-title{font-family:'Merriweather',serif;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:16px}
+  .corr-card{border-radius:8px;padding:14px 16px;margin-bottom:10px;border-left:5px solid}
+  .corr-card.correct{background:#F0FDF4;border-color:var(--green)}
+  .corr-card.wrong{background:#FEF2F2;border-color:var(--red)}
+  .c-head{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .badge-ok{background:var(--green);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .badge-err{background:var(--red);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .c-ans{font-size:.88rem;margin-bottom:6px}
+  .c-ans .good{color:var(--green);font-weight:700}
+  .c-ans .bad{color:var(--red);text-decoration:line-through}
+  .c-expl{font-size:.87rem;color:#374151;background:rgba(255,255,255,.7);border-radius:6px;padding:8px 10px;border-left:3px solid var(--muted);line-height:1.55}
+  @media(max-width:600px){header{padding:10px 14px;flex-wrap:wrap;gap:6px}.hdr-title{order:-1;width:100%;text-align:center}#timer{font-size:1.2rem}main{padding:16px 12px 48px}}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-brand">Marc VASSEUR<span>Polytech Lille · Intensif TOEIC</span></div>
+  <div class="hdr-title">TOEIC PART 6 — TEST 20</div>
+  <div id="timer">08:00</div>
+</header>
+<main>
+<div class="directions">
+  <strong>PART 6 – DIRECTIONS</strong>
+  Read the texts below. A word, phrase, or sentence is missing in parts of each text. Four answer choices are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D).
+</div>
+
+<div class="section-header">Questions 141-144 — Advertisement</div>
+<p class="passage-label" style="margin-top:12px">Questions 141-144 refer to the following advertisement.</p>
+<div class="passage-block">
+<p><strong>NORDEX CLOUD SOLUTIONS — SCALABLE INFRASTRUCTURE FOR GROWING BUSINESSES</strong></p>
+<p>As your business evolves, your IT infrastructure must keep pace. Nordex Cloud Solutions provides scalable, secure, and <span class="blank">141</span> cloud services tailored to the needs of small and medium-sized enterprises.</p>
+<p>Our platform allows you to scale your storage, computing power, and software licences up or down <span class="blank">142</span>, responding to seasonal peaks and business growth without costly hardware investments. All services are backed by a 99.9% uptime guarantee and round-the-clock technical support.</p>
+<p>We take data security <span class="blank">143</span>. Our infrastructure is ISO 27001 certified and compliant with GDPR and all applicable data protection regulations.</p>
+<p><span class="blank">144</span> Contact our sales team at sales@nordexcloud.com or call 0800 266 4400 for a free 30-day trial.</p>
+</div>
+
+<div class="question-card" id="qc141">
+  <div class="q-label">141.</div>
+  <div class="options">
+    <label><input type="radio" name="q141" value="A"> (A)&nbsp;cost-effective</label>
+    <label><input type="radio" name="q141" value="B"> (B)&nbsp;cost-efficiently</label>
+    <label><input type="radio" name="q141" value="C"> (C)&nbsp;costly</label>
+    <label><input type="radio" name="q141" value="D"> (D)&nbsp;costing</label>
+  </div>
+</div>
+<div class="question-card" id="qc142">
+  <div class="q-label">142.</div>
+  <div class="options">
+    <label><input type="radio" name="q142" value="A"> (A)&nbsp;on demand</label>
+    <label><input type="radio" name="q142" value="B"> (B)&nbsp;by demand</label>
+    <label><input type="radio" name="q142" value="C"> (C)&nbsp;with demand</label>
+    <label><input type="radio" name="q142" value="D"> (D)&nbsp;at demand</label>
+  </div>
+</div>
+<div class="question-card" id="qc143">
+  <div class="q-label">143.</div>
+  <div class="options">
+    <label><input type="radio" name="q143" value="A"> (A)&nbsp;seriously</label>
+    <label><input type="radio" name="q143" value="B"> (B)&nbsp;serious</label>
+    <label><input type="radio" name="q143" value="C"> (C)&nbsp;seriousness</label>
+    <label><input type="radio" name="q143" value="D"> (D)&nbsp;in seriousness</label>
+  </div>
+</div>
+<div class="question-card" id="qc144">
+  <div class="q-label">144.</div>
+  <div class="options">
+    <label><input type="radio" name="q144" value="A"> (A)&nbsp;Migration to Nordex Cloud Solutions is supported by a dedicated onboarding team at no extra charge.</label>
+    <label><input type="radio" name="q144" value="B"> (B)&nbsp;Our data centres are located in Germany, Ireland, and Singapore.</label>
+    <label><input type="radio" name="q144" value="C"> (C)&nbsp;Nordex was founded in 2014 by former enterprise software engineers.</label>
+    <label><input type="radio" name="q144" value="D"> (D)&nbsp;We currently serve clients in over 40 countries across five continents.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 145-148 — E-mail</div>
+<p class="passage-label" style="margin-top:12px">Questions 145-148 refer to the following e-mail.</p>
+<div class="passage-block">
+<p><strong>From:</strong> Karen Slade &lt;k.slade@pennington-law.com&gt;<br>
+<strong>To:</strong> Sebastian Marsh &lt;s.marsh@pennington-law.com&gt;<br>
+<strong>Subject:</strong> Client File — Thornton Estate Matter | <strong>Date:</strong> October 9</p>
+<p>Dear Sebastian,</p>
+<p>I wanted to flag a <span class="blank">145</span> issue on the Thornton estate file. I received a call this morning from the client's daughter, Victoria Thornton, who mentioned she had not yet received confirmation of the October 3 court filing.</p>
+<p>I have checked our records, and the filing was <span class="blank">146</span> submitted on that date. However, I am not sure whether the court's acknowledgement was forwarded to the client. Could you verify this and, if necessary, send Victoria a copy of the filing confirmation with a short explanatory note?</p>
+<p>She is <span class="blank">147</span> anxious about the timeline, and I would like to ensure she is kept fully informed at every stage.</p>
+<p><span class="blank">148</span> Please let me know once this has been resolved.</p>
+<p>Kind regards,<br>Karen</p>
+</div>
+
+<div class="question-card" id="qc145">
+  <div class="q-label">145.</div>
+  <div class="options">
+    <label><input type="radio" name="q145" value="A"> (A)&nbsp;procedural</label>
+    <label><input type="radio" name="q145" value="B"> (B)&nbsp;procedure</label>
+    <label><input type="radio" name="q145" value="C"> (C)&nbsp;proceeding</label>
+    <label><input type="radio" name="q145" value="D"> (D)&nbsp;procedurally</label>
+  </div>
+</div>
+<div class="question-card" id="qc146">
+  <div class="q-label">146.</div>
+  <div class="options">
+    <label><input type="radio" name="q146" value="A"> (A)&nbsp;indeed</label>
+    <label><input type="radio" name="q146" value="B"> (B)&nbsp;already</label>
+    <label><input type="radio" name="q146" value="C"> (C)&nbsp;duly</label>
+    <label><input type="radio" name="q146" value="D"> (D)&nbsp;just</label>
+  </div>
+</div>
+<div class="question-card" id="qc147">
+  <div class="q-label">147.</div>
+  <div class="options">
+    <label><input type="radio" name="q147" value="A"> (A)&nbsp;quite</label>
+    <label><input type="radio" name="q147" value="B"> (B)&nbsp;rather</label>
+    <label><input type="radio" name="q147" value="C"> (C)&nbsp;fairly</label>
+    <label><input type="radio" name="q147" value="D"> (D)&nbsp;understandably</label>
+  </div>
+</div>
+<div class="question-card" id="qc148">
+  <div class="q-label">148.</div>
+  <div class="options">
+    <label><input type="radio" name="q148" value="A"> (A)&nbsp;I will also schedule a brief call with Victoria next week to provide a general update.</label>
+    <label><input type="radio" name="q148" value="B"> (B)&nbsp;The Thornton estate was first brought to our firm in 2022.</label>
+    <label><input type="radio" name="q148" value="C"> (C)&nbsp;Court filing fees for this type of matter typically range from £150 to £300.</label>
+    <label><input type="radio" name="q148" value="D"> (D)&nbsp;Our case management system was updated last month.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 149-152 — Article</div>
+<p class="passage-label" style="margin-top:12px">Questions 149-152 refer to the following article.</p>
+<div class="passage-block">
+<p><strong>LOCAL BREWERY EXPANDS INTO EUROPEAN MARKET</strong></p>
+<p>Copper Kettle Brewing Co., an independent craft brewery based in Edinburgh, has announced that it will begin exporting its range of ales and lagers to five European countries <span class="blank">149</span> the first quarter of next year. The company has seen <span class="blank">150</span> growth in domestic sales over the past three years.</p>
+<p>The export deal was made possible through a partnership with EuroDrinks Distribution, a specialist beverage logistics company with warehousing facilities in Germany, France, the Netherlands, Belgium, and Spain. <span class="blank">151</span></p>
+<p>Founder Ross Mclean said the move represented a "natural next step" for the business. "We have always believed that our flavour profiles have broad international <span class="blank">152</span>. We are excited to see how European consumers respond," he said.</p>
+</div>
+
+<div class="question-card" id="qc149">
+  <div class="q-label">149.</div>
+  <div class="options">
+    <label><input type="radio" name="q149" value="A"> (A)&nbsp;from</label>
+    <label><input type="radio" name="q149" value="B"> (B)&nbsp;during</label>
+    <label><input type="radio" name="q149" value="C"> (C)&nbsp;throughout</label>
+    <label><input type="radio" name="q149" value="D"> (D)&nbsp;within</label>
+  </div>
+</div>
+<div class="question-card" id="qc150">
+  <div class="q-label">150.</div>
+  <div class="options">
+    <label><input type="radio" name="q150" value="A"> (A)&nbsp;sustained</label>
+    <label><input type="radio" name="q150" value="B"> (B)&nbsp;sustaining</label>
+    <label><input type="radio" name="q150" value="C"> (C)&nbsp;sustainable</label>
+    <label><input type="radio" name="q150" value="D"> (D)&nbsp;sustain</label>
+  </div>
+</div>
+<div class="question-card" id="qc151">
+  <div class="q-label">151.</div>
+  <div class="options">
+    <label><input type="radio" name="q151" value="A"> (A)&nbsp;Each of the five markets was selected based on strong projected demand for premium craft beer.</label>
+    <label><input type="radio" name="q151" value="B"> (B)&nbsp;Copper Kettle currently employs 34 staff at its Edinburgh facility.</label>
+    <label><input type="radio" name="q151" value="C"> (C)&nbsp;EuroDrinks Distribution was established in 2008 and operates in 12 countries.</label>
+    <label><input type="radio" name="q151" value="D"> (D)&nbsp;The Mclean siblings previously worked in food and beverage retail.</label>
+  </div>
+</div>
+<div class="question-card" id="qc152">
+  <div class="q-label">152.</div>
+  <div class="options">
+    <label><input type="radio" name="q152" value="A"> (A)&nbsp;appeal</label>
+    <label><input type="radio" name="q152" value="B"> (B)&nbsp;reach</label>
+    <label><input type="radio" name="q152" value="C"> (C)&nbsp;attraction</label>
+    <label><input type="radio" name="q152" value="D"> (D)&nbsp;demand</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 153-156 — Letter</div>
+<p class="passage-label" style="margin-top:12px">Questions 153-156 refer to the following letter.</p>
+<div class="passage-block">
+<p>July 22</p><p>Ms. Caroline Draper, Director of Operations, Maplewood Community Foundation</p>
+<p>Dear Ms. Draper,</p>
+<p>I am writing to formally apply for a community development grant under Maplewood Foundation's annual Social Enterprise Award programme.</p>
+<p>Our organisation, Sheffield Community Kitchens, provides free cooking classes and nutritional education to low-income families. Since our founding in 2019, we have <span class="blank">153</span> more than 1,200 individuals and partnered with six local schools to deliver after-school nutrition workshops.</p>
+<p>We are seeking a grant of £15,000 to fund the <span class="blank">154</span> of a dedicated training facility at our new premises. This space would allow us to triple our weekly class capacity and serve an <span class="blank">155</span> 400 additional participants per year.</p>
+<p><span class="blank">156</span> I would welcome the opportunity to discuss this application in person at your convenience.</p>
+<p>Yours sincerely,<br>Daniel Okafor<br>Co-Founder, Sheffield Community Kitchens</p>
+</div>
+
+<div class="question-card" id="qc153">
+  <div class="q-label">153.</div>
+  <div class="options">
+    <label><input type="radio" name="q153" value="A"> (A)&nbsp;reached</label>
+    <label><input type="radio" name="q153" value="B"> (B)&nbsp;supported</label>
+    <label><input type="radio" name="q153" value="C"> (C)&nbsp;assisted</label>
+    <label><input type="radio" name="q153" value="D"> (D)&nbsp;benefited</label>
+  </div>
+</div>
+<div class="question-card" id="qc154">
+  <div class="q-label">154.</div>
+  <div class="options">
+    <label><input type="radio" name="q154" value="A"> (A)&nbsp;refurbishment</label>
+    <label><input type="radio" name="q154" value="B"> (B)&nbsp;construction</label>
+    <label><input type="radio" name="q154" value="C"> (C)&nbsp;installation</label>
+    <label><input type="radio" name="q154" value="D"> (D)&nbsp;establishment</label>
+  </div>
+</div>
+<div class="question-card" id="qc155">
+  <div class="q-label">155.</div>
+  <div class="options">
+    <label><input type="radio" name="q155" value="A"> (A)&nbsp;estimated</label>
+    <label><input type="radio" name="q155" value="B"> (B)&nbsp;estimating</label>
+    <label><input type="radio" name="q155" value="C"> (C)&nbsp;estimate</label>
+    <label><input type="radio" name="q155" value="D"> (D)&nbsp;estimation</label>
+  </div>
+</div>
+<div class="question-card" id="qc156">
+  <div class="q-label">156.</div>
+  <div class="options">
+    <label><input type="radio" name="q156" value="A"> (A)&nbsp;A full project proposal and budget breakdown are enclosed with this letter.</label>
+    <label><input type="radio" name="q156" value="B"> (B)&nbsp;Sheffield Community Kitchens operates on an entirely voluntary basis.</label>
+    <label><input type="radio" name="q156" value="C"> (C)&nbsp;We are also applying for funding from the local council this year.</label>
+    <label><input type="radio" name="q156" value="D"> (D)&nbsp;Our classes take place every Tuesday and Thursday evening.</label>
+  </div>
+</div>
+
+<div class="submit-wrap">
+  <button id="submit-btn" disabled>Voir la correction</button>
+  <p class="req-note">Toutes les questions doivent être répondues avant d'afficher la correction.</p>
+</div>
+<div id="results">
+  <div class="score-banner"><div class="score-num" id="score-display">—</div><div class="score-sub" id="score-pct"></div></div>
+  <p class="correction-title">Correction détaillée</p>
+  <div id="corr-list"></div>
+</div>
+</main>
+<script>
+var KEYS={"141":"A","142":"A","143":"A","144":"A","145":"A","146":"C","147":"D","148":"A","149":"A","150":"A","151":"A","152":"A","153":"B","154":"A","155":"A","156":"A"};
+var EXPL={"141":"<b>(A) cost-effective</b> — Adjectif composé dans une liste d'épithètes : <em>scalable, secure, and cost-effective cloud services</em>. <em>Cost-efficiently</em> (B) est adverbe. <em>Costly</em> (C) = coûteux, sens contraire. <em>Costing</em> (D) est participe ou gérondif.","142":"<b>(A) on demand</b> — Locution adverbiale figée : <em>scale up or down on demand</em> = à la demande. <em>By demand</em> (B), <em>with demand</em> (C), <em>at demand</em> (D) ne sont pas idiomatiques en anglais.","143":"<b>(A) seriously</b> — <em>Take data security seriously</em> = prendre la sécurité des données au sérieux. Collocation idiomatique figée. <em>Serious</em> (B) est adjectif. <em>Seriousness</em> (C) est un nom. <em>In seriousness</em> (D) n'existe pas.","144":"<b>(A) Migration to Nordex Cloud Solutions is supported by a dedicated onboarding team at no extra charge.</b> — Lève la barrière clé à l'adoption (la migration), placé avant le CTA. (B) est pratique mais moins incitatif. (C) et (D) sont anecdotiques.","145":"<b>(A) procedural</b> — Adjectif épithète : <em>a procedural issue</em> = un problème de procédure. <em>Procedure</em> (B) est un nom. <em>Proceeding</em> (C) est gérondif ou participe. <em>Procedurally</em> (D) est adverbe.","146":"<b>(C) duly</b> — <em>Was duly submitted</em> = a bien été déposé / soumis conformément. Adverbe formel confirmant l'accomplissement correct d'une démarche. <em>Indeed</em> (A) = en effet. <em>Already</em> (B) = déjà, moins formel. <em>Just</em> (D) = seulement.","147":"<b>(D) understandably</b> — <em>She is understandably anxious</em> = elle est compréhensiblement anxieuse. Adverbe qui justifie l'état émotionnel dans un contexte professionnel. <em>Quite</em> (A), <em>rather</em> (B) et <em>fairly</em> (C) sont des modérateurs qui n'apportent pas cette justification.","148":"<b>(A) I will also schedule a brief call with Victoria next week to provide a general update.</b> — Action proactive complémentaire, logique avant la demande de confirmation. (B), (C), (D) sont anecdotiques ou hors propos.","149":"<b>(A) from</b> — <em>From the first quarter</em> = à partir du premier trimestre. Préposition standard pour un point de départ temporel futur. <em>During</em> (B) = pendant (durée). <em>Throughout</em> (C) = tout au long de. <em>Within</em> (D) = dans (délai), moins idiomatique ici.","150":"<b>(A) sustained</b> — <em>Sustained growth</em> = une croissance soutenue / régulière. Adjectif participial standard dans les textes économiques. <em>Sustaining</em> (B) est actif. <em>Sustainable</em> (C) = durable au sens environnemental. <em>Sustain</em> (D) est un verbe.","151":"<b>(A) Each of the five markets was selected based on strong projected demand for premium craft beer.</b> — Explication directe du choix des marchés, enchaînement logique après la liste des pays. (B), (C), (D) sont des informations de contexte moins bien positionnées ici.","152":"<b>(A) appeal</b> — <em>International appeal</em> = attrait international. Collocation standard dans le discours commercial pour le potentiel d'un produit. <em>Reach</em> (B) désigne la portée géographique. <em>Attraction</em> (C) est moins idiomatique. <em>Demand</em> (D) = demande, point de vue extérieur.","153":"<b>(B) supported</b> — <em>We have supported more than 1,200 individuals</em> = nous avons soutenu plus de 1 200 personnes. Verbe standard dans un contexte associatif. <em>Reached</em> (A) est possible mais moins précis. <em>Assisted</em> (C) implique une aide ponctuelle. <em>Benefited</em> (D) est généralement intransitif.","154":"<b>(A) refurbishment</b> — <em>Fund the refurbishment of a dedicated training facility at our new premises</em>. Le mot <em>new premises</em> implique que le bâtiment existe déjà. <em>Construction</em> (B) = bâtiment neuf. <em>Installation</em> (C) = équipements. <em>Establishment</em> (D) = création d'entité.","155":"<b>(A) estimated</b> — <em>An estimated 400 additional participants</em> = environ 400 participants supplémentaires. Adjectif participial figé dans cette construction. <em>Estimating</em> (B) est actif. <em>Estimate</em> (C) est la base. <em>Estimation</em> (D) est un nom.","156":"<b>(A) A full project proposal and budget breakdown are enclosed with this letter.</b> — Phrase de transition standard dans une demande de subvention avant la formule d'ouverture. (B) est utile mais anecdotique. (C) mentionne une autre demande pouvant nuire à la candidature. (D) est un détail opérationnel hors contexte."};
+var LABELS={"141":{"A":"cost-effective","B":"cost-efficiently","C":"costly","D":"costing"},"142":{"A":"on demand","B":"by demand","C":"with demand","D":"at demand"},"143":{"A":"seriously","B":"serious","C":"seriousness","D":"in seriousness"},"144":{"A":"Migration to Nordex Cloud Solutions is supported by a dedicated onboarding team at no extra charge.","B":"Our data centres are located in Germany, Ireland, and Singapore.","C":"Nordex was founded in 2014 by former enterprise software engineers.","D":"We currently serve clients in over 40 countries across five continents."},"145":{"A":"procedural","B":"procedure","C":"proceeding","D":"procedurally"},"146":{"A":"indeed","B":"already","C":"duly","D":"just"},"147":{"A":"quite","B":"rather","C":"fairly","D":"understandably"},"148":{"A":"I will also schedule a brief call with Victoria next week to provide a general update.","B":"The Thornton estate was first brought to our firm in 2022.","C":"Court filing fees for this type of matter typically range from £150 to £300.","D":"Our case management system was updated last month."},"149":{"A":"from","B":"during","C":"throughout","D":"within"},"150":{"A":"sustained","B":"sustaining","C":"sustainable","D":"sustain"},"151":{"A":"Each of the five markets was selected based on strong projected demand for premium craft beer.","B":"Copper Kettle currently employs 34 staff at its Edinburgh facility.","C":"EuroDrinks Distribution was established in 2008 and operates in 12 countries.","D":"The Mclean siblings previously worked in food and beverage retail."},"152":{"A":"appeal","B":"reach","C":"attraction","D":"demand"},"153":{"A":"reached","B":"supported","C":"assisted","D":"benefited"},"154":{"A":"refurbishment","B":"construction","C":"installation","D":"establishment"},"155":{"A":"estimated","B":"estimating","C":"estimate","D":"estimation"},"156":{"A":"A full project proposal and budget breakdown are enclosed with this letter.","B":"Sheffield Community Kitchens operates on an entirely voluntary basis.","C":"We are also applying for funding from the local council this year.","D":"Our classes take place every Tuesday and Thursday evening."}};
+
+var KEYS = {"141":"A","142":"C","143":"A","144":"B","145":"A","146":"A","147":"A","148":"A","149":"A","150":"C","151":"A","152":"B","153":"A","154":"B","155":"C","156":"C"};
+var EXPL = {
+  "141": "<b>(A) expected</b> — La structure passive <em>be expected to</em> (être prévu pour / être censé) est la collocation standard dans ce contexte formel. <em>Expecting</em> (B) serait actif et ne peut s'appliquer à un sujet inanimé. <em>Expectation</em> (C) est un nom. <em>Expects</em> (D) est actif et incompatible avec <em>be</em>.",
+  "142": "<b>(C) working</b> — Après <em>currently</em>, le participe présent <em>working</em> forme un groupe participial postposé modifiant <em>employees</em> : <em>employees currently working on the third floor</em>. <em>To work</em> (A) exigerait un verbe principal. <em>Worked</em> (B) serait passé simple. <em>Works</em> (D) est un verbe conjugué qui briserait la structure nominale.",
+  "143": "<b>(A) inconvenience</b> — La formule <em>any inconvenience this may cause</em> est une expression figée de politesse professionnelle dans les mémos. <em>Renovation</em> (B) est déjà le sujet du mémo. <em>Satisfaction</em> (C) est sémantiquement absurde dans ce contexte de gêne annoncée. <em>Confusion</em> (D) est moins idiomatique que <em>inconvenience</em>.",
+  "144": "<b>(B) Thank you for your cooperation and patience during this time.</b> — Cette phrase de clôture conclut le mémo sur une note courtoise avant l'adresse email. Les options (A), (C) et (D) introduisent des informations nouvelles et non contextualisées qui rompraient la cohérence du paragraphe final.",
+  "145": "<b>(A) qualified</b> — Adjectif épithète antéposé modifiant <em>candidates</em>. La structure <em>qualified candidates</em> est une collocation fixe du vocabulaire RH. <em>Qualifying</em> (B) aurait un sens actif (candidats qui qualifient quelque chose). <em>Qualification</em> (C) est un nom. <em>Qualify</em> (D) est un verbe.",
+  "146": "<b>(A) comprehensive</b> — Adjectif épithète devant <em>approach</em>. <em>A comprehensive approach</em> = une approche globale / intégrée. <em>Comprehension</em> (B) est un nom. <em>Comprehensively</em> (C) est un adverbe qui ne peut précéder un nom. <em>Comprehend</em> (D) est un verbe.",
+  "147": "<b>(A) satisfaction</b> — <em>Report high levels of satisfaction</em> est une collocation standard dans le discours commercial. <em>Application</em> (B) et <em>reservation</em> (D) sont sémantiquement incompatibles. <em>Regulation</em> (C) est hors contexte.",
+  "148": "<b>(A) worldwide</b> — Adverbe modifiant <em>available</em> : <em>services are available worldwide</em>. <em>World</em> (B) est un nom et ne peut modifier un adjectif seul. <em>Globally</em> (C) est synonyme mais moins naturel dans ce type de texte publicitaire. <em>International</em> (D) est adjectif et ne peut modifier <em>available</em> directement.",
+  "149": "<b>(A) regarding</b> — Préposition de sujet épistolaire : <em>I am writing regarding...</em> = je vous écris au sujet de. <em>Despite</em> (B) exprime une concession. <em>Instead of</em> (C) une substitution. <em>Due to</em> (D) une cause, incompatible avec le contexte d'un objet de courriel.",
+  "150": "<b>(C) lies</b> — La construction <em>where the gap lies</em> (où se trouve / se situe l'écart) est idiomatique et précise. <em>Originates</em> (A) serait possible mais moins naturel. <em>Occurred</em> (B) est au passé simple, incompatible avec <em>where</em> interrogatif indirect présent. <em>Appears</em> (D) affaiblit le sens.",
+  "151": "<b>(A) earliest</b> — La locution <em>at your earliest convenience</em> = dès que possible (formule épistolaire figée). <em>Early</em> (B) est adverbe ou adjectif simple. <em>Earlier</em> (C) est comparatif. <em>Most early</em> (D) est une forme incorrecte du superlatif.",
+  "152": "<b>(B) Please let me know if you need any additional information to proceed.</b> — Cette phrase de transition précède la formule de clôture et maintient la cohérence logique de la demande. (A) parle des embauches récentes, hors sujet. (C) évoque les revenus, non mentionnés. (D) introduit une information logistique sans lien.",
+  "153": "<b>(A) mandatory</b> — <em>Mandatory</em> = obligatoire, ce qui est cohérent avec le contexte d'un exercice d'évacuation officiel. <em>Optional</em> (B) et <em>voluntary</em> (C) sont sémantiquement opposés au sens attendu. <em>Recommended</em> (D) affaiblit le caractère obligatoire implicite d'un exercice de sécurité.",
+  "154": "<b>(B) during</b> — <em>During an evacuation</em> = pendant une évacuation. <em>During</em> est suivi d'un nom. <em>While</em> (A) et <em>when</em> (C) introduisent des propositions avec sujet et verbe. <em>Since</em> (D) exprime une durée depuis un point de départ.",
+  "155": "<b>(C) whether</b> — <em>To evaluate whether</em> = évaluer si (condition binaire : succès ou échec). <em>That</em> (A) introduirait une complétive affirmative, pas une condition. <em>What</em> (B) appellerait un complément d'objet. <em>How</em> (D) interrogerait sur la manière, pas sur la réussite de l'évacuation.",
+  "156": "<b>(C) Your observations and suggestions are welcome and will be reviewed.</b> — Cette phrase introduit naturellement le formulaire de retour mentionné dans la phrase suivante. (A) crée une tonalité négative peu adaptée. (B) parle des contacts d'urgence, déjà traité implicitement. (D) est une information pratique déjà couverte par le texte."
+};
+var LABELS = {
+  "141":{"A":"expected","B":"expecting","C":"expectation","D":"expects"},
+  "142":{"A":"to work","B":"worked","C":"working","D":"works"},
+  "143":{"A":"inconvenience","B":"renovation","C":"satisfaction","D":"confusion"},
+  "144":{"A":"The renovation budget has not yet been finalized.","B":"Thank you for your cooperation and patience during this time.","C":"All employees must submit a leave request by Friday.","D":"Construction materials will be delivered to the loading dock."},
+  "145":{"A":"qualified","B":"qualifying","C":"qualification","D":"qualify"},
+  "146":{"A":"comprehensive","B":"comprehension","C":"comprehensively","D":"comprehend"},
+  "147":{"A":"satisfaction","B":"application","C":"regulation","D":"reservation"},
+  "148":{"A":"worldwide","B":"world","C":"globally","D":"international"},
+  "149":{"A":"regarding","B":"despite","C":"instead of","D":"due to"},
+  "150":{"A":"originates","B":"occurred","C":"lies","D":"appears"},
+  "151":{"A":"earliest","B":"early","C":"earlier","D":"most early"},
+  "152":{"A":"The warehouse has recently hired three new staff members.","B":"Please let me know if you need any additional information to proceed.","C":"Our Q3 revenue figures exceeded the annual forecast.","D":"The shipment was rerouted through the Northgate distribution center."},
+  "153":{"A":"mandatory","B":"optional","C":"voluntary","D":"recommended"},
+  "154":{"A":"while","B":"during","C":"when","D":"since"},
+  "155":{"A":"that","B":"what","C":"whether","D":"how"},
+  "156":{"A":"Results of the previous drill were below the national average.","B":"All employees are reminded to update their emergency contact details.","C":"Your observations and suggestions are welcome and will be reviewed.","D":"Fire extinguishers are located at the end of each corridor."}
+};
+var TOTAL_Q = 16;
+var TOTAL_SEC = 480;
+var remaining = TOTAL_SEC;
+var timerEl = document.getElementById('timer');
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+timerEl.textContent = fmt(remaining);
+var iv = setInterval(function(){remaining--;timerEl.textContent=fmt(remaining);if(remaining<=120)timerEl.classList.add('warn');if(remaining<=0){clearInterval(iv);timerEl.textContent='00:00';}},1000);
+var btn = document.getElementById('submit-btn');
+var qnums = Object.keys(KEYS).map(Number);
+function allAnswered(){return qnums.every(function(n){return document.querySelector('input[name="q'+n+'"]:checked');});}
+document.querySelectorAll('input[type=radio]').forEach(function(r){
+  r.addEventListener('change',function(){
+    var num=r.name.replace('q','');
+    var card=document.getElementById('qc'+num);
+    if(card)card.classList.add('answered');
+    btn.disabled=!allAnswered();
+  });
+});
+btn.addEventListener('click',function(){
+  if(!allAnswered())return;
+  var score=0;
+  var list=document.getElementById('corr-list');
+  list.innerHTML='';
+  qnums.forEach(function(n){
+    var sel=document.querySelector('input[name="q'+n+'"]:checked').value;
+    var correct=KEYS[n];
+    var ok=sel===correct;
+    if(ok)score++;
+    var labelMap=LABELS[n]||{};
+    var card=document.createElement('div');
+    card.className='corr-card '+(ok?'correct':'wrong');
+    card.innerHTML='<div class="c-head"><span class="badge-'+(ok?'ok':'err')+'">'+(ok?'&#10003;':'&#10007;')+'</span> Q.'+n+'</div>'+
+      '<div class="c-ans">'+(ok?'<span class="good">('+correct+') '+labelMap[correct]+'</span>':'<span class="bad">('+sel+') '+labelMap[sel]+'</span> &rarr; <span class="good">('+correct+') '+labelMap[correct]+'</span>')+'</div>'+
+      '<div class="c-expl">'+EXPL[n]+'</div>';
+    list.appendChild(card);
+  });
+  document.getElementById('score-display').textContent=score+'/'+TOTAL_Q;
+  document.getElementById('score-pct').textContent=Math.round(score/TOTAL_Q*100)+'% correct';
+  var res=document.getElementById('results');
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth'});
+});
+
+</script>
+</body>
+</html>

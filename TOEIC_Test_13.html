@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 6 - Test 13 - Grammar in Context</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+  :root{--navy:#00274C;--blue:#1565C0;--light-blue:#E3F0FF;--accent:#F59E0B;--green:#16A34A;--red:#DC2626;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;--border:#CBD5E1;--passage-bg:#FEFCE8;--passage-border:#FDE68A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  header{background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-brand{font-family:'Merriweather',serif;font-size:.85rem;line-height:1.4;opacity:.9}
+  .hdr-brand span{display:block;font-size:.75rem;opacity:.7}
+  .hdr-title{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;letter-spacing:.04em;text-align:center}
+  #timer{background:var(--accent);color:var(--navy);font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;padding:6px 18px;border-radius:6px;letter-spacing:.08em;min-width:90px;text-align:center;transition:background .3s}
+  #timer.warn{background:#EF4444;color:white;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  .directions{background:var(--white);border:2px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:.92rem}
+  .directions strong{display:block;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+  .section-header{background:var(--navy);color:white;padding:8px 16px;border-radius:6px 6px 0 0;font-family:'Merriweather',serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-top:32px}
+  .passage-label{font-size:.88rem;font-style:italic;color:var(--muted);margin:0 0 8px}
+  .passage-block{background:var(--passage-bg);border:1.5px solid var(--passage-border);border-radius:0 0 8px 8px;padding:18px 20px;margin-bottom:20px;font-family:'Merriweather',serif;font-size:.9rem;line-height:1.75}
+  .passage-block p{margin-bottom:.5em}
+  .blank{border-bottom:2px solid var(--navy);padding:0 8px;font-weight:700;color:var(--blue);font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+  .question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+  .question-card.answered{border-color:var(--blue)}
+  .q-label{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .options label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.4;transition:background .15s}
+  .options label:hover{background:var(--light-blue)}
+  .options input[type=radio]{margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .submit-wrap{text-align:center;margin:32px 0 8px}
+  #submit-btn{background:var(--blue);color:white;border:none;border-radius:8px;padding:14px 40px;font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .2s,transform .15s;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+  #submit-btn:hover:not(:disabled){background:var(--navy);transform:translateY(-1px)}
+  #submit-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none;transform:none}
+  .req-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:6px}
+  #results{display:none;margin-top:36px}
+  .score-banner{background:var(--navy);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+  .score-banner .score-num{font-family:'Merriweather',serif;font-size:3rem;font-weight:700;color:var(--accent)}
+  .score-banner .score-sub{font-size:.9rem;opacity:.8;margin-top:4px}
+  .correction-title{font-family:'Merriweather',serif;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:16px}
+  .corr-card{border-radius:8px;padding:14px 16px;margin-bottom:10px;border-left:5px solid}
+  .corr-card.correct{background:#F0FDF4;border-color:var(--green)}
+  .corr-card.wrong{background:#FEF2F2;border-color:var(--red)}
+  .c-head{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .badge-ok{background:var(--green);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .badge-err{background:var(--red);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .c-ans{font-size:.88rem;margin-bottom:6px}
+  .c-ans .good{color:var(--green);font-weight:700}
+  .c-ans .bad{color:var(--red);text-decoration:line-through}
+  .c-expl{font-size:.87rem;color:#374151;background:rgba(255,255,255,.7);border-radius:6px;padding:8px 10px;border-left:3px solid var(--muted);line-height:1.55}
+  @media(max-width:600px){header{padding:10px 14px;flex-wrap:wrap;gap:6px}.hdr-title{order:-1;width:100%;text-align:center}#timer{font-size:1.2rem}main{padding:16px 12px 48px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-brand">Marc VASSEUR<span>Polytech Lille · Intensif TOEIC</span></div>
+  <div class="hdr-title">TOEIC PART 6 — TEST 13</div>
+  <div id="timer">08:00</div>
+</header>
+<main>
+<div class="directions">
+  <strong>PART 6 – DIRECTIONS</strong>
+  Read the texts below. A word, phrase, or sentence is missing in parts of each text. Four answer choices are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D).
+</div>
+
+<div class="section-header">Questions 141–144 — Advertisement</div>
+<p class="passage-label" style="margin-top:12px">Questions 141–144 refer to the following advertisement.</p>
+<div class="passage-block">
+  <p><strong>SILVERLINE PROFESSIONAL TRAINING — ACCELERATE YOUR CAREER</strong></p>
+  <p>Whether you are looking to develop new technical skills or advance into a management role, Silverline Professional Training has a programme <span class="blank">141</span> for you. We offer over 200 accredited courses in engineering, project management, IT, and business communication.</p>
+  <p>All of our courses are delivered by industry professionals with a minimum of ten years' hands-on experience. Our instructors are <span class="blank">142</span> selected for their ability to translate complex concepts into practical, immediately applicable knowledge.</p>
+  <p>Enrolment for our Spring cohort is now open. Courses are available in full-time, part-time, and online formats, giving participants the <span class="blank">143</span> to study around their existing professional commitments.</p>
+  <p><span class="blank">144</span> Visit silverlinetraining.com or call 0800 477 2200 to speak with one of our course advisors.</p>
+</div>
+
+<div class="question-card" id="qc141">
+  <div class="q-label">141.</div>
+  <div class="options">
+    <label><input type="radio" name="q141" value="A"> (A)&nbsp;designed</label>
+    <label><input type="radio" name="q141" value="B"> (B)&nbsp;designing</label>
+    <label><input type="radio" name="q141" value="C"> (C)&nbsp;design</label>
+    <label><input type="radio" name="q141" value="D"> (D)&nbsp;to design</label>
+  </div>
+</div>
+<div class="question-card" id="qc142">
+  <div class="q-label">142.</div>
+  <div class="options">
+    <label><input type="radio" name="q142" value="A"> (A)&nbsp;carefully</label>
+    <label><input type="radio" name="q142" value="B"> (B)&nbsp;careful</label>
+    <label><input type="radio" name="q142" value="C"> (C)&nbsp;care</label>
+    <label><input type="radio" name="q142" value="D"> (D)&nbsp;caring</label>
+  </div>
+</div>
+<div class="question-card" id="qc143">
+  <div class="q-label">143.</div>
+  <div class="options">
+    <label><input type="radio" name="q143" value="A"> (A)&nbsp;flexibility</label>
+    <label><input type="radio" name="q143" value="B"> (B)&nbsp;flexible</label>
+    <label><input type="radio" name="q143" value="C"> (C)&nbsp;flexibly</label>
+    <label><input type="radio" name="q143" value="D"> (D)&nbsp;flexibilities</label>
+  </div>
+</div>
+<div class="question-card" id="qc144">
+  <div class="q-label">144.</div>
+  <div class="options">
+    <label><input type="radio" name="q144" value="A"> (A)&nbsp;Group discounts are available for companies enrolling five or more participants.</label>
+    <label><input type="radio" name="q144" value="B"> (B)&nbsp;Our courses were first introduced in 1998 in response to industry demand.</label>
+    <label><input type="radio" name="q144" value="C"> (C)&nbsp;All instructors are required to hold a postgraduate teaching qualification.</label>
+    <label><input type="radio" name="q144" value="D"> (D)&nbsp;The Spring cohort begins on the first Monday of April.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 145–148 — Memo</div>
+<p class="passage-label" style="margin-top:12px">Questions 145–148 refer to the following memo.</p>
+<div class="passage-block">
+  <p><strong>TO:</strong> Sales Department &nbsp;|&nbsp; <strong>FROM:</strong> Regional Director &nbsp;|&nbsp; <strong>SUBJECT:</strong> Q4 Performance Review</p>
+  <p>I am pleased to report that the Sales Department has <span class="blank">145</span> its Q4 targets by a margin of 12%, representing the strongest quarterly performance in the company's history. This result reflects the dedication and professionalism of everyone on the team.</p>
+  <p>In recognition of this achievement, management has approved a one-time performance bonus <span class="blank">146</span> to all permanent sales staff. Details regarding the bonus amount and payment date will be communicated by the HR department within the next two weeks.</p>
+  <p>Looking ahead, I encourage all team members to <span class="blank">147</span> the momentum we have built. Our Q1 targets have been set at a level that will require continued effort and focus. A kick-off meeting to discuss our Q1 strategy will be held on January 8.</p>
+  <p><span class="blank">148</span> Thank you again for your outstanding contributions this quarter.</p>
+</div>
+
+<div class="question-card" id="qc145">
+  <div class="q-label">145.</div>
+  <div class="options">
+    <label><input type="radio" name="q145" value="A"> (A)&nbsp;exceeded</label>
+    <label><input type="radio" name="q145" value="B"> (B)&nbsp;fallen short of</label>
+    <label><input type="radio" name="q145" value="C"> (C)&nbsp;approached</label>
+    <label><input type="radio" name="q145" value="D"> (D)&nbsp;revised</label>
+  </div>
+</div>
+<div class="question-card" id="qc146">
+  <div class="q-label">146.</div>
+  <div class="options">
+    <label><input type="radio" name="q146" value="A"> (A)&nbsp;payable</label>
+    <label><input type="radio" name="q146" value="B"> (B)&nbsp;paying</label>
+    <label><input type="radio" name="q146" value="C"> (C)&nbsp;paid</label>
+    <label><input type="radio" name="q146" value="D"> (D)&nbsp;payment</label>
+  </div>
+</div>
+<div class="question-card" id="qc147">
+  <div class="q-label">147.</div>
+  <div class="options">
+    <label><input type="radio" name="q147" value="A"> (A)&nbsp;maintain</label>
+    <label><input type="radio" name="q147" value="B"> (B)&nbsp;lose</label>
+    <label><input type="radio" name="q147" value="C"> (C)&nbsp;reconsider</label>
+    <label><input type="radio" name="q147" value="D"> (D)&nbsp;delay</label>
+  </div>
+</div>
+<div class="question-card" id="qc148">
+  <div class="q-label">148.</div>
+  <div class="options">
+    <label><input type="radio" name="q148" value="A"> (A)&nbsp;Please submit your Q4 expense reports before December 31.</label>
+    <label><input type="radio" name="q148" value="B"> (B)&nbsp;A full written report of the Q4 results will be circulated by end of week.</label>
+    <label><input type="radio" name="q148" value="C"> (C)&nbsp;The Sales Department was established in its current form in 2015.</label>
+    <label><input type="radio" name="q148" value="D"> (D)&nbsp;Attendance at the January 8 meeting is optional for part-time staff.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 149–152 — Web posting</div>
+<p class="passage-label" style="margin-top:12px">Questions 149–152 refer to the following web posting.</p>
+<div class="passage-block">
+  <p><strong>CUSTOMER REVIEW — HARBOR VIEW HOTEL &amp; SPA</strong></p>
+  <p>I recently stayed at the Harbor View Hotel for a three-night business trip and was thoroughly <span class="blank">149</span> with every aspect of my stay. From the moment I arrived, the front desk staff were attentive, professional, and genuinely welcoming.</p>
+  <p>The room was spacious and immaculately clean. I was particularly impressed by the quality of the soundproofing — despite being located on the second floor above the main street, I experienced no <span class="blank">150</span> whatsoever from traffic noise during the night.</p>
+  <p>The on-site restaurant deserves special mention. The breakfast buffet offered an exceptional variety, and the evening menu featured locally <span class="blank">151</span> ingredients prepared with evident skill. Prices were reasonable given the quality of the food.</p>
+  <p>I would <span class="blank">152</span> recommend this hotel to anyone visiting the area for business or leisure. I have already booked my next stay.</p>
+</div>
+
+<div class="question-card" id="qc149">
+  <div class="q-label">149.</div>
+  <div class="options">
+    <label><input type="radio" name="q149" value="A"> (A)&nbsp;impressed</label>
+    <label><input type="radio" name="q149" value="B"> (B)&nbsp;disappointing</label>
+    <label><input type="radio" name="q149" value="C"> (C)&nbsp;impress</label>
+    <label><input type="radio" name="q149" value="D"> (D)&nbsp;impressive</label>
+  </div>
+</div>
+<div class="question-card" id="qc150">
+  <div class="q-label">150.</div>
+  <div class="options">
+    <label><input type="radio" name="q150" value="A"> (A)&nbsp;disturbance</label>
+    <label><input type="radio" name="q150" value="B"> (B)&nbsp;disturbances</label>
+    <label><input type="radio" name="q150" value="C"> (C)&nbsp;disturbing</label>
+    <label><input type="radio" name="q150" value="D"> (D)&nbsp;disturbed</label>
+  </div>
+</div>
+<div class="question-card" id="qc151">
+  <div class="q-label">151.</div>
+  <div class="options">
+    <label><input type="radio" name="q151" value="A"> (A)&nbsp;sourced</label>
+    <label><input type="radio" name="q151" value="B"> (B)&nbsp;sourcing</label>
+    <label><input type="radio" name="q151" value="C"> (C)&nbsp;source</label>
+    <label><input type="radio" name="q151" value="D"> (D)&nbsp;to source</label>
+  </div>
+</div>
+<div class="question-card" id="qc152">
+  <div class="q-label">152.</div>
+  <div class="options">
+    <label><input type="radio" name="q152" value="A"> (A)&nbsp;highly</label>
+    <label><input type="radio" name="q152" value="B"> (B)&nbsp;high</label>
+    <label><input type="radio" name="q152" value="C"> (C)&nbsp;highest</label>
+    <label><input type="radio" name="q152" value="D"> (D)&nbsp;height</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 153–156 — Letter</div>
+<p class="passage-label" style="margin-top:12px">Questions 153–156 refer to the following letter.</p>
+<div class="passage-block">
+  <p>December 12</p>
+  <p>Ms. Donna Ferris<br>Procurement Manager<br>Castlewood Industries<br>88 Millbank Road, Sheffield, S6 3LT</p>
+  <p>Dear Ms. Ferris,</p>
+  <p>Thank you for your enquiry regarding our industrial filtration systems. I am pleased to enclose our latest product catalogue and a <span class="blank">153</span> schedule for the models you specified in your request.</p>
+  <p>The FX-400 and FX-600 series are both <span class="blank">154</span> from our main warehouse and can typically be despatched within five working days of order confirmation. Should you require installation support, our certified engineers are available throughout the UK at competitive daily rates.</p>
+  <p>We are currently offering a 10% discount on orders placed before December 31, which I believe may be of interest given your stated timeline. <span class="blank">155</span></p>
+  <p>Please do not <span class="blank">156</span> to contact me should you have any further questions. I look forward to the possibility of working with Castlewood Industries.</p>
+  <p>Yours faithfully,<br>Robert Higgins<br>Regional Sales Manager</p>
+</div>
+
+<div class="question-card" id="qc153">
+  <div class="q-label">153.</div>
+  <div class="options">
+    <label><input type="radio" name="q153" value="A"> (A)&nbsp;pricing</label>
+    <label><input type="radio" name="q153" value="B"> (B)&nbsp;price</label>
+    <label><input type="radio" name="q153" value="C"> (C)&nbsp;priced</label>
+    <label><input type="radio" name="q153" value="D"> (D)&nbsp;priceless</label>
+  </div>
+</div>
+<div class="question-card" id="qc154">
+  <div class="q-label">154.</div>
+  <div class="options">
+    <label><input type="radio" name="q154" value="A"> (A)&nbsp;in stock</label>
+    <label><input type="radio" name="q154" value="B"> (B)&nbsp;out of order</label>
+    <label><input type="radio" name="q154" value="C"> (C)&nbsp;on hold</label>
+    <label><input type="radio" name="q154" value="D"> (D)&nbsp;out of date</label>
+  </div>
+</div>
+<div class="question-card" id="qc155">
+  <div class="q-label">155.</div>
+  <div class="options">
+    <label><input type="radio" name="q155" value="A"> (A)&nbsp;This offer applies to both new and existing clients.</label>
+    <label><input type="radio" name="q155" value="B"> (B)&nbsp;The December 31 deadline was introduced last year.</label>
+    <label><input type="radio" name="q155" value="C"> (C)&nbsp;Installation fees are separate from the product price.</label>
+    <label><input type="radio" name="q155" value="D"> (D)&nbsp;Our FX range has been discontinued as of this quarter.</label>
+  </div>
+</div>
+<div class="question-card" id="qc156">
+  <div class="q-label">156.</div>
+  <div class="options">
+    <label><input type="radio" name="q156" value="A"> (A)&nbsp;hesitate</label>
+    <label><input type="radio" name="q156" value="B"> (B)&nbsp;hesitation</label>
+    <label><input type="radio" name="q156" value="C"> (C)&nbsp;hesitating</label>
+    <label><input type="radio" name="q156" value="D"> (D)&nbsp;hesitated</label>
+  </div>
+</div>
+
+<div class="submit-wrap">
+  <button id="submit-btn" disabled>Voir la correction</button>
+  <p class="req-note">Toutes les questions doivent être répondues avant d'afficher la correction.</p>
+</div>
+<div id="results">
+  <div class="score-banner">
+    <div class="score-num" id="score-display">—</div>
+    <div class="score-sub" id="score-pct"></div>
+  </div>
+  <p class="correction-title">Correction détaillée</p>
+  <div id="corr-list"></div>
+</div>
+</main>
+<script>
+var KEYS={"141":"A","142":"A","143":"A","144":"A","145":"A","146":"A","147":"A","148":"B","149":"A","150":"A","151":"A","152":"A","153":"A","154":"A","155":"A","156":"A"};
+var EXPL={
+  "141":"<b>(A) designed</b> — Participe passé en apposition : <em>a programme designed for you</em> = un programme conçu pour vous. <em>Designing</em> (B) serait actif. <em>Design</em> (C) est un nom ou verbe de base. <em>To design</em> (D) exprimerait un but.",
+  "142":"<b>(A) carefully</b> — Adverbe modifiant le verbe passif <em>are selected</em>. <em>Careful</em> (B) est un adjectif. <em>Care</em> (C) est un nom. <em>Caring</em> (D) est adjectif ou gérondif.",
+  "143":"<b>(A) flexibility</b> — Nom requis après le déterminant <em>the</em> : <em>giving participants the flexibility to study...</em>. <em>Flexible</em> (B) est adjectif. <em>Flexibly</em> (C) est adverbe. <em>Flexibilities</em> (D) est un pluriel qui ne s'emploie pas ici.",
+  "144":"<b>(A) Group discounts are available for companies enrolling five or more participants.</b> — Information commerciale directement utile à un lecteur professionnel consultant cette publicité. (B) est anecdotique. (C) parle des qualifications des instructeurs, déjà couvert. (D) répète une information sur les dates déjà implicite.",
+  "145":"<b>(A) exceeded</b> — <em>Exceeded its targets by 12%</em> = dépassé ses objectifs de 12%. Le contexte positif (strongest quarterly performance) impose ce sens. <em>Fallen short of</em> (B) signifie ne pas avoir atteint. <em>Approached</em> (C) ne convient pas au contexte de dépassement. <em>Revised</em> (D) = révisé, hors sens.",
+  "146":"<b>(A) payable</b> — <em>A bonus payable to all permanent staff</em> = une prime versée à tout le personnel permanent. Adjectif postposé formant une collocation courante. <em>Paying</em> (B) est actif. <em>Paid</b> (C) formerait un participe redondant avec <em>bonus</em>. <em>Payment</em> (D) est un nom.",
+  "147":"<b>(A) maintain</b> — <em>Maintain the momentum</em> = maintenir l'élan. Seul verbe cohérent avec l'encouragement positif du mémo. <em>Lose</em> (B), <em>reconsider</em> (C) et <em>delay</em> (D) sont sémantiquement inadaptés à un contexte de félicitations.",
+  "148":"<b>(B) A full written report of the Q4 results will be circulated by end of week.</b> — S'enchaîne naturellement avant la phrase de remerciement finale. (A) parle des notes de frais, hors sujet. (C) est un historique sans rapport. (D) modifie rétroactivement le caractère obligatoire de la réunion.",
+  "149":"<b>(A) impressed</b> — <em>Was thoroughly impressed with</em> = a été vraiment impressionné par. Adjectif issu d'un verbe passif. <em>Disappointing</em> (B) est sémantiquement contraire. <em>Impress</em> (C) est verbe de base. <em>Impressive</em> (D) est adjectif actif (qui impressionne), pas passif.",
+  "150":"<b>(A) disturbance</b> — <em>No disturbance</em> = aucune perturbation. Nom singulier après <em>no</em>. <em>Disturbances</em> (B) est possible mais moins idiomatique après <em>no</em> dans ce contexte. <em>Disturbing</em> (C) est adjectif. <em>Disturbed</em> (D) est adjectif ou participe passé.",
+  "151":"<b>(A) sourced</b> — <em>Locally sourced ingredients</em> = ingrédients d'origine locale (collocation fréquente dans le domaine de la restauration). <em>Sourcing</em> (B) est gérondif ou participe présent actif. <em>Source</em> (C) est verbe ou nom. <em>To source</em> (D) est infinitif.",
+  "152":"<b>(A) highly</b> — <em>Would highly recommend</em> = recommanderait vivement. Adverbe figé dans cette collocation. <em>High</em> (B) est adjectif. <em>Highest</em> (C) est superlatif inapproprié ici. <em>Height</em> (D) est un nom.",
+  "153":"<b>(A) pricing</b> — <em>A pricing schedule</em> = un barème de prix / une grille tarifaire. Nom composé commercial standard. <em>Price</em> (B) est moins idiomatique dans cette collocation. <em>Priced</em> (C) est adjectif. <em>Priceless</em> (D) = inestimable, sémantiquement absurde.",
+  "154":"<b>(A) in stock</b> — <em>Both are in stock</em> = les deux sont disponibles en stock. Locution idiomatique standard dans le commerce. <em>Out of order</em> (B) = en panne. <em>On hold</em> (C) = en attente. <em>Out of date</em> (D) = périmé.",
+  "155":"<b>(A) This offer applies to both new and existing clients.</b> — Précise le champ d'application de la remise mentionnée juste avant, ce qui est naturel dans une lettre commerciale. (B) est anecdotique. (C) introduit une information sur les frais d'installation déjà mentionnés ailleurs. (D) contredit le reste de la lettre.",
+  "156":"<b>(A) hesitate</b> — <em>Do not hesitate to contact me</em> est une formule épistolaire figée (n'hésitez pas à me contacter). Verbe à l'infinitif après <em>do not</em>. <em>Hesitation</em> (B) est un nom. <em>Hesitating</em> (C) est un gérondif. <em>Hesitated</em> (D) est le passé simple."
+};
+var LABELS={
+  "141":{"A":"designed","B":"designing","C":"design","D":"to design"},
+  "142":{"A":"carefully","B":"careful","C":"care","D":"caring"},
+  "143":{"A":"flexibility","B":"flexible","C":"flexibly","D":"flexibilities"},
+  "144":{"A":"Group discounts are available for companies enrolling five or more participants.","B":"Our courses were first introduced in 1998 in response to industry demand.","C":"All instructors are required to hold a postgraduate teaching qualification.","D":"The Spring cohort begins on the first Monday of April."},
+  "145":{"A":"exceeded","B":"fallen short of","C":"approached","D":"revised"},
+  "146":{"A":"payable","B":"paying","C":"paid","D":"payment"},
+  "147":{"A":"maintain","B":"lose","C":"reconsider","D":"delay"},
+  "148":{"A":"Please submit your Q4 expense reports before December 31.","B":"A full written report of the Q4 results will be circulated by end of week.","C":"The Sales Department was established in its current form in 2015.","D":"Attendance at the January 8 meeting is optional for part-time staff."},
+  "149":{"A":"impressed","B":"disappointing","C":"impress","D":"impressive"},
+  "150":{"A":"disturbance","B":"disturbances","C":"disturbing","D":"disturbed"},
+  "151":{"A":"sourced","B":"sourcing","C":"source","D":"to source"},
+  "152":{"A":"highly","B":"high","C":"highest","D":"height"},
+  "153":{"A":"pricing","B":"price","C":"priced","D":"priceless"},
+  "154":{"A":"in stock","B":"out of order","C":"on hold","D":"out of date"},
+  "155":{"A":"This offer applies to both new and existing clients.","B":"The December 31 deadline was introduced last year.","C":"Installation fees are separate from the product price.","D":"Our FX range has been discontinued as of this quarter."},
+  "156":{"A":"hesitate","B":"hesitation","C":"hesitating","D":"hesitated"}
+};
+var TOTAL_Q=16;var remaining=480;var timerEl=document.getElementById('timer');
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+timerEl.textContent=fmt(remaining);
+var iv=setInterval(function(){remaining--;timerEl.textContent=fmt(remaining);if(remaining<=120)timerEl.classList.add('warn');if(remaining<=0){clearInterval(iv);timerEl.textContent='00:00';}},1000);
+var btn=document.getElementById('submit-btn');var qnums=Object.keys(KEYS).map(Number);
+function allAnswered(){return qnums.every(function(n){return document.querySelector('input[name="q'+n+'"]:checked');});}
+document.querySelectorAll('input[type=radio]').forEach(function(r){r.addEventListener('change',function(){var num=r.name.replace('q','');var card=document.getElementById('qc'+num);if(card)card.classList.add('answered');btn.disabled=!allAnswered();});});
+btn.addEventListener('click',function(){if(!allAnswered())return;var score=0;var list=document.getElementById('corr-list');list.innerHTML='';qnums.forEach(function(n){var sel=document.querySelector('input[name="q'+n+'"]:checked').value;var correct=KEYS[n];var ok=sel===correct;if(ok)score++;var labelMap=LABELS[n]||{};var card=document.createElement('div');card.className='corr-card '+(ok?'correct':'wrong');card.innerHTML='<div class="c-head"><span class="badge-'+(ok?'ok':'err')+'">'+(ok?'&#10003;':'&#10007;')+'</span> Q.'+n+'</div>'+'<div class="c-ans">'+(ok?'<span class="good">('+correct+') '+labelMap[correct]+'</span>':'<span class="bad">('+sel+') '+labelMap[sel]+'</span> &rarr; <span class="good">('+correct+') '+labelMap[correct]+'</span>')+'</div>'+'<div class="c-expl">'+EXPL[n]+'</div>';list.appendChild(card);});document.getElementById('score-display').textContent=score+'/'+TOTAL_Q;document.getElementById('score-pct').textContent=Math.round(score/TOTAL_Q*100)+'% correct';var res=document.getElementById('results');res.style.display='block';res.scrollIntoView({behavior:'smooth'});});
+</script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 6 - Test 17 - Grammar in Context</title>
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+  :root{--navy:#00274C;--blue:#1565C0;--light-blue:#E3F0FF;--accent:#F59E0B;--green:#16A34A;--red:#DC2626;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;--border:#CBD5E1;--passage-bg:#FEFCE8;--passage-border:#FDE68A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  header{background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-brand{font-family:'Merriweather',serif;font-size:.85rem;line-height:1.4;opacity:.9}
+  .hdr-brand span{display:block;font-size:.75rem;opacity:.7}
+  .hdr-title{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;letter-spacing:.04em;text-align:center}
+  #timer{background:var(--accent);color:var(--navy);font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;padding:6px 18px;border-radius:6px;letter-spacing:.08em;min-width:90px;text-align:center;transition:background .3s}
+  #timer.warn{background:#EF4444;color:white;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  .directions{background:var(--white);border:2px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:.92rem}
+  .directions strong{display:block;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+  .section-header{background:var(--navy);color:white;padding:8px 16px;border-radius:6px 6px 0 0;font-family:'Merriweather',serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-top:32px}
+  .passage-label{font-size:.88rem;font-style:italic;color:var(--muted);margin:0 0 8px}
+  .passage-block{background:var(--passage-bg);border:1.5px solid var(--passage-border);border-radius:0 0 8px 8px;padding:18px 20px;margin-bottom:20px;font-family:'Merriweather',serif;font-size:.9rem;line-height:1.75}
+  .passage-block p{margin-bottom:.5em}
+  .blank{border-bottom:2px solid var(--navy);padding:0 8px;font-weight:700;color:var(--blue);font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+  .question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+  .question-card.answered{border-color:var(--blue)}
+  .q-label{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .options label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.4;transition:background .15s}
+  .options label:hover{background:var(--light-blue)}
+  .options input[type=radio]{margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .submit-wrap{text-align:center;margin:32px 0 8px}
+  #submit-btn{background:var(--blue);color:white;border:none;border-radius:8px;padding:14px 40px;font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .2s,transform .15s;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+  #submit-btn:hover:not(:disabled){background:var(--navy);transform:translateY(-1px)}
+  #submit-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none;transform:none}
+  .req-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:6px}
+  #results{display:none;margin-top:36px}
+  .score-banner{background:var(--navy);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+  .score-banner .score-num{font-family:'Merriweather',serif;font-size:3rem;font-weight:700;color:var(--accent)}
+  .score-banner .score-sub{font-size:.9rem;opacity:.8;margin-top:4px}
+  .correction-title{font-family:'Merriweather',serif;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:16px}
+  .corr-card{border-radius:8px;padding:14px 16px;margin-bottom:10px;border-left:5px solid}
+  .corr-card.correct{background:#F0FDF4;border-color:var(--green)}
+  .corr-card.wrong{background:#FEF2F2;border-color:var(--red)}
+  .c-head{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .badge-ok{background:var(--green);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .badge-err{background:var(--red);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .c-ans{font-size:.88rem;margin-bottom:6px}
+  .c-ans .good{color:var(--green);font-weight:700}
+  .c-ans .bad{color:var(--red);text-decoration:line-through}
+  .c-expl{font-size:.87rem;color:#374151;background:rgba(255,255,255,.7);border-radius:6px;padding:8px 10px;border-left:3px solid var(--muted);line-height:1.55}
+  @media(max-width:600px){header{padding:10px 14px;flex-wrap:wrap;gap:6px}.hdr-title{order:-1;width:100%;text-align:center}#timer{font-size:1.2rem}main{padding:16px 12px 48px}}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-brand">Marc VASSEUR<span>Polytech Lille · Intensif TOEIC</span></div>
+  <div class="hdr-title">TOEIC PART 6 — TEST 17</div>
+  <div id="timer">08:00</div>
+</header>
+<main>
+<div class="directions">
+  <strong>PART 6 – DIRECTIONS</strong>
+  Read the texts below. A word, phrase, or sentence is missing in parts of each text. Four answer choices are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D).
+</div>
+
+<div class="section-header">Questions 141-144 — Memo</div>
+<p class="passage-label" style="margin-top:12px">Questions 141-144 refer to the following memo.</p>
+<div class="passage-block">
+<p><strong>TO:</strong> Finance Team | <strong>FROM:</strong> Caroline Webb, CFO | <strong>SUBJECT:</strong> Year-End Audit Preparation</p>
+<p>As the financial year draws to a close, I want to remind all members of the Finance Team of the steps required to ensure a smooth external audit. The audit firm will be on-site from January 20 to 31.</p>
+<p>All outstanding invoices and payment records must be <span class="blank">141</span> and filed in the appropriate folders on the shared drive by January 10. Any discrepancies should be flagged to your line manager <span class="blank">142</span>.</p>
+<p>I strongly encourage everyone to review their individual task checklists, which have been <span class="blank">143</span> to the shared drive. If you are unsure about any procedure, please consult the Audit Preparation Guide before contacting me directly.</p>
+<p><span class="blank">144</span> Thank you in advance for your diligence during this important period.</p>
+</div>
+
+<div class="question-card" id="qc141">
+  <div class="q-label">141.</div>
+  <div class="options">
+    <label><input type="radio" name="q141" value="A"> (A)&nbsp;reconciled</label>
+    <label><input type="radio" name="q141" value="B"> (B)&nbsp;reconciling</label>
+    <label><input type="radio" name="q141" value="C"> (C)&nbsp;reconcile</label>
+    <label><input type="radio" name="q141" value="D"> (D)&nbsp;reconciliation</label>
+  </div>
+</div>
+<div class="question-card" id="qc142">
+  <div class="q-label">142.</div>
+  <div class="options">
+    <label><input type="radio" name="q142" value="A"> (A)&nbsp;immediately</label>
+    <label><input type="radio" name="q142" value="B"> (B)&nbsp;immediate</label>
+    <label><input type="radio" name="q142" value="C"> (C)&nbsp;immediateness</label>
+    <label><input type="radio" name="q142" value="D"> (D)&nbsp;with immediacy</label>
+  </div>
+</div>
+<div class="question-card" id="qc143">
+  <div class="q-label">143.</div>
+  <div class="options">
+    <label><input type="radio" name="q143" value="A"> (A)&nbsp;uploaded</label>
+    <label><input type="radio" name="q143" value="B"> (B)&nbsp;uploading</label>
+    <label><input type="radio" name="q143" value="C"> (C)&nbsp;upload</label>
+    <label><input type="radio" name="q143" value="D"> (D)&nbsp;uploader</label>
+  </div>
+</div>
+<div class="question-card" id="qc144">
+  <div class="q-label">144.</div>
+  <div class="options">
+    <label><input type="radio" name="q144" value="A"> (A)&nbsp;A preliminary meeting with the auditors will be held on January 18.</label>
+    <label><input type="radio" name="q144" value="B"> (B)&nbsp;The external audit is conducted every three years.</label>
+    <label><input type="radio" name="q144" value="C"> (C)&nbsp;All new Finance Team members must complete the induction programme.</label>
+    <label><input type="radio" name="q144" value="D"> (D)&nbsp;Last year's audit resulted in a clean bill of financial health.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 145-148 — Advertisement</div>
+<p class="passage-label" style="margin-top:12px">Questions 145-148 refer to the following advertisement.</p>
+<div class="passage-block">
+<p><strong>GREENFIELD OFFICE SOLUTIONS — FURNISHING THE FUTURE OF WORK</strong></p>
+<p>At Greenfield Office Solutions, we design, supply, and install <span class="blank">145</span> office furniture for businesses of every size — from single-desk start-ups to multinational headquarters.</p>
+<p>Our design consultants will visit your premises to assess your space and understand your team's <span class="blank">146</span>. We then create a personalised layout proposal, complete with 3D renderings, at no additional cost.</p>
+<p>All Greenfield furniture is manufactured from sustainably sourced materials. Every item comes with a five-year warranty <span class="blank">147</span> all manufacturing defects.</p>
+<p><span class="blank">148</span> Visit greenfieldsolutions.com or call 0800 466 900 to book your free consultation today.</p>
+</div>
+
+<div class="question-card" id="qc145">
+  <div class="q-label">145.</div>
+  <div class="options">
+    <label><input type="radio" name="q145" value="A"> (A)&nbsp;bespoke</label>
+    <label><input type="radio" name="q145" value="B"> (B)&nbsp;standard</label>
+    <label><input type="radio" name="q145" value="C"> (C)&nbsp;generic</label>
+    <label><input type="radio" name="q145" value="D"> (D)&nbsp;uniform</label>
+  </div>
+</div>
+<div class="question-card" id="qc146">
+  <div class="q-label">146.</div>
+  <div class="options">
+    <label><input type="radio" name="q146" value="A"> (A)&nbsp;requirements</label>
+    <label><input type="radio" name="q146" value="B"> (B)&nbsp;requests</label>
+    <label><input type="radio" name="q146" value="C"> (C)&nbsp;demands</label>
+    <label><input type="radio" name="q146" value="D"> (D)&nbsp;wishes</label>
+  </div>
+</div>
+<div class="question-card" id="qc147">
+  <div class="q-label">147.</div>
+  <div class="options">
+    <label><input type="radio" name="q147" value="A"> (A)&nbsp;covering</label>
+    <label><input type="radio" name="q147" value="B"> (B)&nbsp;covered</label>
+    <label><input type="radio" name="q147" value="C"> (C)&nbsp;cover</label>
+    <label><input type="radio" name="q147" value="D"> (D)&nbsp;coverage</label>
+  </div>
+</div>
+<div class="question-card" id="qc148">
+  <div class="q-label">148.</div>
+  <div class="options">
+    <label><input type="radio" name="q148" value="A"> (A)&nbsp;We also offer a full office clearance and recycling service.</label>
+    <label><input type="radio" name="q148" value="B"> (B)&nbsp;Greenfield Office Solutions was founded in 2004.</label>
+    <label><input type="radio" name="q148" value="C"> (C)&nbsp;Our prices are updated quarterly to reflect material costs.</label>
+    <label><input type="radio" name="q148" value="D"> (D)&nbsp;Our showroom is open six days a week, including Saturdays.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 149-152 — E-mail</div>
+<p class="passage-label" style="margin-top:12px">Questions 149-152 refer to the following e-mail.</p>
+<div class="passage-block">
+<p><strong>From:</strong> Tomoko Hayashi &lt;t.hayashi@fujimoto-trading.jp&gt;<br>
+<strong>To:</strong> Grant Ellison &lt;g.ellison@meridianexports.co.uk&gt;<br>
+<strong>Subject:</strong> Re: Shipping Terms — Order #FT-2281<br><strong>Date:</strong> August 7</p>
+<p>Dear Mr. Ellison,</p>
+<p>Thank you for your prompt response. I am writing to confirm that we are in agreement with the revised shipping terms you <span class="blank">149</span> in your previous e-mail, with one minor clarification.</p>
+<p>We would like to confirm that the quoted CIF price <span class="blank">150</span> marine insurance for the full declared value of the consignment, as per our original purchase order.</p>
+<p>Provided this is the case, we are ready to <span class="blank">151</span> the order and would appreciate confirmation of the estimated shipment date at your earliest convenience.</p>
+<p><span class="blank">152</span> We look forward to a continued successful partnership.</p>
+<p>Kind regards,<br>Tomoko Hayashi<br>Purchasing Manager</p>
+</div>
+
+<div class="question-card" id="qc149">
+  <div class="q-label">149.</div>
+  <div class="options">
+    <label><input type="radio" name="q149" value="A"> (A)&nbsp;outlined</label>
+    <label><input type="radio" name="q149" value="B"> (B)&nbsp;outlining</label>
+    <label><input type="radio" name="q149" value="C"> (C)&nbsp;outline</label>
+    <label><input type="radio" name="q149" value="D"> (D)&nbsp;outlines</label>
+  </div>
+</div>
+<div class="question-card" id="qc150">
+  <div class="q-label">150.</div>
+  <div class="options">
+    <label><input type="radio" name="q150" value="A"> (A)&nbsp;includes</label>
+    <label><input type="radio" name="q150" value="B"> (B)&nbsp;involves</label>
+    <label><input type="radio" name="q150" value="C"> (C)&nbsp;contains</label>
+    <label><input type="radio" name="q150" value="D"> (D)&nbsp;incorporates</label>
+  </div>
+</div>
+<div class="question-card" id="qc151">
+  <div class="q-label">151.</div>
+  <div class="options">
+    <label><input type="radio" name="q151" value="A"> (A)&nbsp;confirm</label>
+    <label><input type="radio" name="q151" value="B"> (B)&nbsp;place</label>
+    <label><input type="radio" name="q151" value="C"> (C)&nbsp;submit</label>
+    <label><input type="radio" name="q151" value="D"> (D)&nbsp;send</label>
+  </div>
+</div>
+<div class="question-card" id="qc152">
+  <div class="q-label">152.</div>
+  <div class="options">
+    <label><input type="radio" name="q152" value="A"> (A)&nbsp;Please also advise on the documentation required for customs clearance at our end.</label>
+    <label><input type="radio" name="q152" value="B"> (B)&nbsp;Our purchasing department operates from 9:00 A.M. to 5:00 P.M. JST.</label>
+    <label><input type="radio" name="q152" value="C"> (C)&nbsp;Fujimoto Trading has been importing goods from the UK since 2009.</label>
+    <label><input type="radio" name="q152" value="D"> (D)&nbsp;The consignment will be shipped by sea freight via Southampton.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 153-156 — Notice</div>
+<p class="passage-label" style="margin-top:12px">Questions 153-156 refer to the following notice.</p>
+<div class="passage-block">
+<p><strong>NOTICE TO TENANTS — ANNUAL BUILDING MAINTENANCE WORKS</strong></p>
+<p>Annual maintenance works will take place between September 8 and September 19. During this period, the following services will be <span class="blank">153</span> on a scheduled basis: elevator servicing, fire suppression system inspection, and HVAC filter replacement.</p>
+<p>Access to individual floors may be <span class="blank">154</span> restricted during specific maintenance windows. The building management team will provide floor-by-floor schedules no later than September 1.</p>
+<p>Tenants are kindly requested to ensure that all common areas on their floors are kept clear of personal belongings and <span class="blank">155</span> equipment during the maintenance period to allow engineers unrestricted access.</p>
+<p><span class="blank">156</span> For enquiries, please contact the building management office at ext. 200.</p>
+</div>
+
+<div class="question-card" id="qc153">
+  <div class="q-label">153.</div>
+  <div class="options">
+    <label><input type="radio" name="q153" value="A"> (A)&nbsp;conducted</label>
+    <label><input type="radio" name="q153" value="B"> (B)&nbsp;performing</label>
+    <label><input type="radio" name="q153" value="C"> (C)&nbsp;executing</label>
+    <label><input type="radio" name="q153" value="D"> (D)&nbsp;doing</label>
+  </div>
+</div>
+<div class="question-card" id="qc154">
+  <div class="q-label">154.</div>
+  <div class="options">
+    <label><input type="radio" name="q154" value="A"> (A)&nbsp;temporarily</label>
+    <label><input type="radio" name="q154" value="B"> (B)&nbsp;temporary</label>
+    <label><input type="radio" name="q154" value="C"> (C)&nbsp;temporal</label>
+    <label><input type="radio" name="q154" value="D"> (D)&nbsp;temporally</label>
+  </div>
+</div>
+<div class="question-card" id="qc155">
+  <div class="q-label">155.</div>
+  <div class="options">
+    <label><input type="radio" name="q155" value="A"> (A)&nbsp;portable</label>
+    <label><input type="radio" name="q155" value="B"> (B)&nbsp;movable</label>
+    <label><input type="radio" name="q155" value="C"> (C)&nbsp;mobile</label>
+    <label><input type="radio" name="q155" value="D"> (D)&nbsp;loose</label>
+  </div>
+</div>
+<div class="question-card" id="qc156">
+  <div class="q-label">156.</div>
+  <div class="options">
+    <label><input type="radio" name="q156" value="A"> (A)&nbsp;A notice will be posted on each floor 48 hours before maintenance works begin on that level.</label>
+    <label><input type="radio" name="q156" value="B"> (B)&nbsp;The building's last full maintenance cycle was completed in 2021.</label>
+    <label><input type="radio" name="q156" value="C"> (C)&nbsp;Tenants who wish to contest the schedule may do so in writing.</label>
+    <label><input type="radio" name="q156" value="D"> (D)&nbsp;The building management team thanks all tenants for their cooperation.</label>
+  </div>
+</div>
+
+<div class="submit-wrap">
+  <button id="submit-btn" disabled>Voir la correction</button>
+  <p class="req-note">Toutes les questions doivent être répondues avant d'afficher la correction.</p>
+</div>
+<div id="results">
+  <div class="score-banner"><div class="score-num" id="score-display">—</div><div class="score-sub" id="score-pct"></div></div>
+  <p class="correction-title">Correction détaillée</p>
+  <div id="corr-list"></div>
+</div>
+</main>
+<script>
+var KEYS={"141":"A","142":"A","143":"A","144":"A","145":"A","146":"A","147":"A","148":"A","149":"A","150":"A","151":"B","152":"A","153":"A","154":"A","155":"A","156":"A"};
+var EXPL={"141":"<b>(A) reconciled</b> — Passif : <em>must be reconciled and filed</em>. Participe passé requis après <em>must be</em>. <em>Reconciling</em> (B) est actif. <em>Reconcile</em> (C) est la base verbale. <em>Reconciliation</em> (D) est un nom.","142":"<b>(A) immediately</b> — Adverbe modifiant <em>should be flagged</em> : <em>flagged immediately</em> = signalé immédiatement. <em>Immediate</em> (B) est adjectif. <em>Immediateness</em> (C) n'est pas usuel. <em>With immediacy</em> (D) est lourd.","143":"<b>(A) uploaded</b> — Passif : <em>have been uploaded to the shared drive</em>. <em>Uploading</em> (B) est actif. <em>Upload</em> (C) est la base. <em>Uploader</em> (D) est un nom d'agent.","144":"<b>(A) A preliminary meeting with the auditors will be held on January 18.</b> — Information pratique et logique avant la clôture du mémo. (B) et (D) sont anecdotiques. (C) est hors sujet immédiat.","145":"<b>(A) bespoke</b> — <em>Bespoke office furniture</em> = mobilier sur mesure. Terme haut de gamme précis. <em>Standard</em> (B) est l'opposé du sur-mesure. <em>Generic</em> (C) et <em>uniform</em> (D) n'impliquent pas de personnalisation.","146":"<b>(A) requirements</b> — <em>Understand your team's requirements</em> = comprendre les besoins de votre équipe. Terme professionnel standard. <em>Requests</em> (B) = demandes spécifiques. <em>Demands</em> (C) a une connotation d'exigence forte. <em>Wishes</em> (D) est trop informel.","147":"<b>(A) covering</b> — Participe présent postposé : <em>a warranty covering all manufacturing defects</em>. <em>Covered</em> (B) est ambigu. <em>Cover</em> (C) est la base. <em>Coverage</em> (D) est un nom.","148":"<b>(A) We also offer a full office clearance and recycling service.</b> — Service complémentaire naturel avant le CTA, ajoutant de la valeur à la publicité. (B) est anecdotique. (C) introduit une note négative. (D) est utile mais trop spécifique.","149":"<b>(A) outlined</b> — Passé simple ou participe passé dans une proposition relative : <em>the terms you outlined</em>. <em>Outlining</em> (B) est participe présent. <em>Outline</em> (C) est la base. <em>Outlines</em> (D) est présent simple.","150":"<b>(A) includes</b> — <em>The price includes marine insurance</em> = le prix comprend l'assurance maritime. Collocation standard dans les contrats commerciaux. <em>Involves</em> (B) = implique. <em>Contains</em> (C) s'utilise pour des contenants physiques. <em>Incorporates</em> (D) est correct mais plus rare.","151":"<b>(B) place</b> — <em>Place the order</em> = passer la commande. Collocation commerciale figée incontournable. <em>Confirm</em> (A) = confirmer (une commande déjà passée). <em>Submit</em> (C) = soumettre. <em>Send</em> (D) = envoyer.","152":"<b>(A) Please also advise on the documentation required for customs clearance at our end.</b> — Demande pratique et logique liée au commerce international avant la clôture. (B), (C) sont hors propos. (D) anticipe une décision non encore prise.","153":"<b>(A) conducted</b> — Passif : <em>services will be conducted</em>. Terme formel standard dans les avis de maintenance. <em>Performing</em> (B), <em>executing</em> (C), <em>doing</em> (D) sont actifs et incompatibles avec <em>will be</em>.","154":"<b>(A) temporarily</b> — Adverbe modifiant <em>restricted</em>. <em>Temporary</em> (B) est adjectif. <em>Temporal</em> (C) = temporel (philosophique). <em>Temporally</em> (D) n'est pas usuel dans ce contexte.","155":"<b>(A) portable</b> — <em>Portable equipment</em> = équipement transportable. Terme le plus précis pour désigner le matériel déplaçable en milieu professionnel. <em>Movable</em> (B) est plus général. <em>Mobile</em> (C) désigne la mobilité structurelle. <em>Loose</em> (D) = non fixé, informel.","156":"<b>(A) A notice will be posted on each floor 48 hours before maintenance works begin on that level.</b> — Information pratique directement liée à la planification annoncée, avant le contact. (B) est anecdotique. (C) introduit un processus de contestation. (D) est une clôture de remerciement moins informative."};
+var LABELS={"141":{"A":"reconciled","B":"reconciling","C":"reconcile","D":"reconciliation"},"142":{"A":"immediately","B":"immediate","C":"immediateness","D":"with immediacy"},"143":{"A":"uploaded","B":"uploading","C":"upload","D":"uploader"},"144":{"A":"A preliminary meeting with the auditors will be held on January 18.","B":"The external audit is conducted every three years.","C":"All new Finance Team members must complete the induction programme.","D":"Last year's audit resulted in a clean bill of financial health."},"145":{"A":"bespoke","B":"standard","C":"generic","D":"uniform"},"146":{"A":"requirements","B":"requests","C":"demands","D":"wishes"},"147":{"A":"covering","B":"covered","C":"cover","D":"coverage"},"148":{"A":"We also offer a full office clearance and recycling service.","B":"Greenfield Office Solutions was founded in 2004.","C":"Our prices are updated quarterly to reflect material costs.","D":"Our showroom is open six days a week, including Saturdays."},"149":{"A":"outlined","B":"outlining","C":"outline","D":"outlines"},"150":{"A":"includes","B":"involves","C":"contains","D":"incorporates"},"151":{"A":"confirm","B":"place","C":"submit","D":"send"},"152":{"A":"Please also advise on the documentation required for customs clearance at our end.","B":"Our purchasing department operates from 9:00 A.M. to 5:00 P.M. JST.","C":"Fujimoto Trading has been importing goods from the UK since 2009.","D":"The consignment will be shipped by sea freight via Southampton."},"153":{"A":"conducted","B":"performing","C":"executing","D":"doing"},"154":{"A":"temporarily","B":"temporary","C":"temporal","D":"temporally"},"155":{"A":"portable","B":"movable","C":"mobile","D":"loose"},"156":{"A":"A notice will be posted on each floor 48 hours before maintenance works begin on that level.","B":"The building's last full maintenance cycle was completed in 2021.","C":"Tenants who wish to contest the schedule may do so in writing.","D":"The building management team thanks all tenants for their cooperation."}};
+
+var KEYS = {"141":"A","142":"C","143":"A","144":"B","145":"A","146":"A","147":"A","148":"A","149":"A","150":"C","151":"A","152":"B","153":"A","154":"B","155":"C","156":"C"};
+var EXPL = {
+  "141": "<b>(A) expected</b> — La structure passive <em>be expected to</em> (être prévu pour / être censé) est la collocation standard dans ce contexte formel. <em>Expecting</em> (B) serait actif et ne peut s'appliquer à un sujet inanimé. <em>Expectation</em> (C) est un nom. <em>Expects</em> (D) est actif et incompatible avec <em>be</em>.",
+  "142": "<b>(C) working</b> — Après <em>currently</em>, le participe présent <em>working</em> forme un groupe participial postposé modifiant <em>employees</em> : <em>employees currently working on the third floor</em>. <em>To work</em> (A) exigerait un verbe principal. <em>Worked</em> (B) serait passé simple. <em>Works</em> (D) est un verbe conjugué qui briserait la structure nominale.",
+  "143": "<b>(A) inconvenience</b> — La formule <em>any inconvenience this may cause</em> est une expression figée de politesse professionnelle dans les mémos. <em>Renovation</em> (B) est déjà le sujet du mémo. <em>Satisfaction</em> (C) est sémantiquement absurde dans ce contexte de gêne annoncée. <em>Confusion</em> (D) est moins idiomatique que <em>inconvenience</em>.",
+  "144": "<b>(B) Thank you for your cooperation and patience during this time.</b> — Cette phrase de clôture conclut le mémo sur une note courtoise avant l'adresse email. Les options (A), (C) et (D) introduisent des informations nouvelles et non contextualisées qui rompraient la cohérence du paragraphe final.",
+  "145": "<b>(A) qualified</b> — Adjectif épithète antéposé modifiant <em>candidates</em>. La structure <em>qualified candidates</em> est une collocation fixe du vocabulaire RH. <em>Qualifying</em> (B) aurait un sens actif (candidats qui qualifient quelque chose). <em>Qualification</em> (C) est un nom. <em>Qualify</em> (D) est un verbe.",
+  "146": "<b>(A) comprehensive</b> — Adjectif épithète devant <em>approach</em>. <em>A comprehensive approach</em> = une approche globale / intégrée. <em>Comprehension</em> (B) est un nom. <em>Comprehensively</em> (C) est un adverbe qui ne peut précéder un nom. <em>Comprehend</em> (D) est un verbe.",
+  "147": "<b>(A) satisfaction</b> — <em>Report high levels of satisfaction</em> est une collocation standard dans le discours commercial. <em>Application</em> (B) et <em>reservation</em> (D) sont sémantiquement incompatibles. <em>Regulation</em> (C) est hors contexte.",
+  "148": "<b>(A) worldwide</b> — Adverbe modifiant <em>available</em> : <em>services are available worldwide</em>. <em>World</em> (B) est un nom et ne peut modifier un adjectif seul. <em>Globally</em> (C) est synonyme mais moins naturel dans ce type de texte publicitaire. <em>International</em> (D) est adjectif et ne peut modifier <em>available</em> directement.",
+  "149": "<b>(A) regarding</b> — Préposition de sujet épistolaire : <em>I am writing regarding...</em> = je vous écris au sujet de. <em>Despite</em> (B) exprime une concession. <em>Instead of</em> (C) une substitution. <em>Due to</em> (D) une cause, incompatible avec le contexte d'un objet de courriel.",
+  "150": "<b>(C) lies</b> — La construction <em>where the gap lies</em> (où se trouve / se situe l'écart) est idiomatique et précise. <em>Originates</em> (A) serait possible mais moins naturel. <em>Occurred</em> (B) est au passé simple, incompatible avec <em>where</em> interrogatif indirect présent. <em>Appears</em> (D) affaiblit le sens.",
+  "151": "<b>(A) earliest</b> — La locution <em>at your earliest convenience</em> = dès que possible (formule épistolaire figée). <em>Early</em> (B) est adverbe ou adjectif simple. <em>Earlier</em> (C) est comparatif. <em>Most early</em> (D) est une forme incorrecte du superlatif.",
+  "152": "<b>(B) Please let me know if you need any additional information to proceed.</b> — Cette phrase de transition précède la formule de clôture et maintient la cohérence logique de la demande. (A) parle des embauches récentes, hors sujet. (C) évoque les revenus, non mentionnés. (D) introduit une information logistique sans lien.",
+  "153": "<b>(A) mandatory</b> — <em>Mandatory</em> = obligatoire, ce qui est cohérent avec le contexte d'un exercice d'évacuation officiel. <em>Optional</em> (B) et <em>voluntary</em> (C) sont sémantiquement opposés au sens attendu. <em>Recommended</em> (D) affaiblit le caractère obligatoire implicite d'un exercice de sécurité.",
+  "154": "<b>(B) during</b> — <em>During an evacuation</em> = pendant une évacuation. <em>During</em> est suivi d'un nom. <em>While</em> (A) et <em>when</em> (C) introduisent des propositions avec sujet et verbe. <em>Since</em> (D) exprime une durée depuis un point de départ.",
+  "155": "<b>(C) whether</b> — <em>To evaluate whether</em> = évaluer si (condition binaire : succès ou échec). <em>That</em> (A) introduirait une complétive affirmative, pas une condition. <em>What</em> (B) appellerait un complément d'objet. <em>How</em> (D) interrogerait sur la manière, pas sur la réussite de l'évacuation.",
+  "156": "<b>(C) Your observations and suggestions are welcome and will be reviewed.</b> — Cette phrase introduit naturellement le formulaire de retour mentionné dans la phrase suivante. (A) crée une tonalité négative peu adaptée. (B) parle des contacts d'urgence, déjà traité implicitement. (D) est une information pratique déjà couverte par le texte."
+};
+var LABELS = {
+  "141":{"A":"expected","B":"expecting","C":"expectation","D":"expects"},
+  "142":{"A":"to work","B":"worked","C":"working","D":"works"},
+  "143":{"A":"inconvenience","B":"renovation","C":"satisfaction","D":"confusion"},
+  "144":{"A":"The renovation budget has not yet been finalized.","B":"Thank you for your cooperation and patience during this time.","C":"All employees must submit a leave request by Friday.","D":"Construction materials will be delivered to the loading dock."},
+  "145":{"A":"qualified","B":"qualifying","C":"qualification","D":"qualify"},
+  "146":{"A":"comprehensive","B":"comprehension","C":"comprehensively","D":"comprehend"},
+  "147":{"A":"satisfaction","B":"application","C":"regulation","D":"reservation"},
+  "148":{"A":"worldwide","B":"world","C":"globally","D":"international"},
+  "149":{"A":"regarding","B":"despite","C":"instead of","D":"due to"},
+  "150":{"A":"originates","B":"occurred","C":"lies","D":"appears"},
+  "151":{"A":"earliest","B":"early","C":"earlier","D":"most early"},
+  "152":{"A":"The warehouse has recently hired three new staff members.","B":"Please let me know if you need any additional information to proceed.","C":"Our Q3 revenue figures exceeded the annual forecast.","D":"The shipment was rerouted through the Northgate distribution center."},
+  "153":{"A":"mandatory","B":"optional","C":"voluntary","D":"recommended"},
+  "154":{"A":"while","B":"during","C":"when","D":"since"},
+  "155":{"A":"that","B":"what","C":"whether","D":"how"},
+  "156":{"A":"Results of the previous drill were below the national average.","B":"All employees are reminded to update their emergency contact details.","C":"Your observations and suggestions are welcome and will be reviewed.","D":"Fire extinguishers are located at the end of each corridor."}
+};
+var TOTAL_Q = 16;
+var TOTAL_SEC = 480;
+var remaining = TOTAL_SEC;
+var timerEl = document.getElementById('timer');
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+timerEl.textContent = fmt(remaining);
+var iv = setInterval(function(){remaining--;timerEl.textContent=fmt(remaining);if(remaining<=120)timerEl.classList.add('warn');if(remaining<=0){clearInterval(iv);timerEl.textContent='00:00';}},1000);
+var btn = document.getElementById('submit-btn');
+var qnums = Object.keys(KEYS).map(Number);
+function allAnswered(){return qnums.every(function(n){return document.querySelector('input[name="q'+n+'"]:checked');});}
+document.querySelectorAll('input[type=radio]').forEach(function(r){
+  r.addEventListener('change',function(){
+    var num=r.name.replace('q','');
+    var card=document.getElementById('qc'+num);
+    if(card)card.classList.add('answered');
+    btn.disabled=!allAnswered();
+  });
+});
+btn.addEventListener('click',function(){
+  if(!allAnswered())return;
+  var score=0;
+  var list=document.getElementById('corr-list');
+  list.innerHTML='';
+  qnums.forEach(function(n){
+    var sel=document.querySelector('input[name="q'+n+'"]:checked').value;
+    var correct=KEYS[n];
+    var ok=sel===correct;
+    if(ok)score++;
+    var labelMap=LABELS[n]||{};
+    var card=document.createElement('div');
+    card.className='corr-card '+(ok?'correct':'wrong');
+    card.innerHTML='<div class="c-head"><span class="badge-'+(ok?'ok':'err')+'">'+(ok?'&#10003;':'&#10007;')+'</span> Q.'+n+'</div>'+
+      '<div class="c-ans">'+(ok?'<span class="good">('+correct+') '+labelMap[correct]+'</span>':'<span class="bad">('+sel+') '+labelMap[sel]+'</span> &rarr; <span class="good">('+correct+') '+labelMap[correct]+'</span>')+'</div>'+
+      '<div class="c-expl">'+EXPL[n]+'</div>';
+    list.appendChild(card);
+  });
+  document.getElementById('score-display').textContent=score+'/'+TOTAL_Q;
+  document.getElementById('score-pct').textContent=Math.round(score/TOTAL_Q*100)+'% correct';
+  var res=document.getElementById('results');
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth'});
+});
+
+</script>
+</body>
+</html>

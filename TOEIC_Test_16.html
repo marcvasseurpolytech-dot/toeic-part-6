@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 6 - Test 16 - Grammar in Context</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+  :root{--navy:#00274C;--blue:#1565C0;--light-blue:#E3F0FF;--accent:#F59E0B;--green:#16A34A;--red:#DC2626;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;--border:#CBD5E1;--passage-bg:#FEFCE8;--passage-border:#FDE68A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  header{background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-brand{font-family:'Merriweather',serif;font-size:.85rem;line-height:1.4;opacity:.9}.hdr-brand span{display:block;font-size:.75rem;opacity:.7}
+  .hdr-title{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;letter-spacing:.04em;text-align:center}
+  #timer{background:var(--accent);color:var(--navy);font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;padding:6px 18px;border-radius:6px;letter-spacing:.08em;min-width:90px;text-align:center;transition:background .3s}
+  #timer.warn{background:#EF4444;color:white;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  .directions{background:var(--white);border:2px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:.92rem}
+  .directions strong{display:block;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+  .section-header{background:var(--navy);color:white;padding:8px 16px;border-radius:6px 6px 0 0;font-family:'Merriweather',serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-top:32px}
+  .passage-label{font-size:.88rem;font-style:italic;color:var(--muted);margin:0 0 8px}
+  .passage-block{background:var(--passage-bg);border:1.5px solid var(--passage-border);border-radius:0 0 8px 8px;padding:18px 20px;margin-bottom:20px;font-family:'Merriweather',serif;font-size:.9rem;line-height:1.75}
+  .passage-block p{margin-bottom:.5em}
+  .blank{border-bottom:2px solid var(--navy);padding:0 8px;font-weight:700;color:var(--blue);font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+  .question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+  .question-card.answered{border-color:var(--blue)}
+  .q-label{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .options label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.4;transition:background .15s}
+  .options label:hover{background:var(--light-blue)}
+  .options input[type=radio]{margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .submit-wrap{text-align:center;margin:32px 0 8px}
+  #submit-btn{background:var(--blue);color:white;border:none;border-radius:8px;padding:14px 40px;font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .2s,transform .15s;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+  #submit-btn:hover:not(:disabled){background:var(--navy);transform:translateY(-1px)}
+  #submit-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none;transform:none}
+  .req-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:6px}
+  #results{display:none;margin-top:36px}
+  .score-banner{background:var(--navy);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+  .score-banner .score-num{font-family:'Merriweather',serif;font-size:3rem;font-weight:700;color:var(--accent)}
+  .score-banner .score-sub{font-size:.9rem;opacity:.8;margin-top:4px}
+  .correction-title{font-family:'Merriweather',serif;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:16px}
+  .corr-card{border-radius:8px;padding:14px 16px;margin-bottom:10px;border-left:5px solid}
+  .corr-card.correct{background:#F0FDF4;border-color:var(--green)}.corr-card.wrong{background:#FEF2F2;border-color:var(--red)}
+  .c-head{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .badge-ok{background:var(--green);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .badge-err{background:var(--red);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .c-ans{font-size:.88rem;margin-bottom:6px}.c-ans .good{color:var(--green);font-weight:700}.c-ans .bad{color:var(--red);text-decoration:line-through}
+  .c-expl{font-size:.87rem;color:#374151;background:rgba(255,255,255,.7);border-radius:6px;padding:8px 10px;border-left:3px solid var(--muted);line-height:1.55}
+  @media(max-width:600px){header{padding:10px 14px;flex-wrap:wrap;gap:6px}.hdr-title{order:-1;width:100%;text-align:center}#timer{font-size:1.2rem}main{padding:16px 12px 48px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-brand">Marc VASSEUR<span>Polytech Lille · Intensif TOEIC</span></div>
+  <div class="hdr-title">TOEIC PART 6 — TEST 16</div>
+  <div id="timer">08:00</div>
+</header>
+<main>
+<div class="directions">
+  <strong>PART 6 – DIRECTIONS</strong>
+  Read the texts below. A word, phrase, or sentence is missing in parts of each text. Four answer choices are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D).
+</div>
+
+<div class="section-header">Questions 141–144 — E-mail</div>
+<p class="passage-label" style="margin-top:12px">Questions 141–144 refer to the following e-mail.</p>
+<div class="passage-block">
+<p><strong>From:</strong> Helena Marsh &lt;h.marsh@novabrand.com&gt;<br>
+<strong>To:</strong> Michael Trent &lt;m.trent@novabrand.com&gt;<br>
+<strong>Subject:</strong> Client Presentation — Final Preparations<br>
+<strong>Date:</strong> Tuesday, May 6</p>
+<p>Hi Michael,</p>
+<p>Just a quick note to confirm that everything is on track for Thursday's client presentation. The revised slides you sent yesterday look great — the data <span class="blank">141</span> is clear and the visual design is much more polished than the previous version.</p>
+<p>I have booked the Maple Suite for 10:00 A.M. and confirmed that catering will be <span class="blank">142</span> at 9:45 A.M. to allow the team time to settle in before the clients arrive.</p>
+<p>One thing I wanted to flag: I noticed that the client brief refers to the Merton account, but slide 14 still shows figures from the Colwell account. Could you <span class="blank">143</span> this before Thursday?</p>
+<p><span class="blank">144</span> Let me know if there is anything else you need from my side.</p>
+<p>Kind regards,<br>Helena</p>
+</div>
+
+<div class="question-card" id="qc141">
+  <div class="q-label">141.</div>
+  <div class="options">
+    <label><input type="radio" name="q141" value="A"> (A)&nbsp;visualisation</label>
+    <label><input type="radio" name="q141" value="B"> (B)&nbsp;visualising</label>
+    <label><input type="radio" name="q141" value="C"> (C)&nbsp;visualise</label>
+    <label><input type="radio" name="q141" value="D"> (D)&nbsp;visual</label>
+  </div>
+</div>
+<div class="question-card" id="qc142">
+  <div class="q-label">142.</div>
+  <div class="options">
+    <label><input type="radio" name="q142" value="A"> (A)&nbsp;delivered</label>
+    <label><input type="radio" name="q142" value="B"> (B)&nbsp;delivering</label>
+    <label><input type="radio" name="q142" value="C"> (C)&nbsp;deliver</label>
+    <label><input type="radio" name="q142" value="D"> (D)&nbsp;delivery</label>
+  </div>
+</div>
+<div class="question-card" id="qc143">
+  <div class="q-label">143.</div>
+  <div class="options">
+    <label><input type="radio" name="q143" value="A"> (A)&nbsp;rectify</label>
+    <label><input type="radio" name="q143" value="B"> (B)&nbsp;verify</label>
+    <label><input type="radio" name="q143" value="C"> (C)&nbsp;magnify</label>
+    <label><input type="radio" name="q143" value="D"> (D)&nbsp;notify</label>
+  </div>
+</div>
+<div class="question-card" id="qc144">
+  <div class="q-label">144.</div>
+  <div class="options">
+    <label><input type="radio" name="q144" value="A"> (A)&nbsp;I will send you the finalised attendee list by end of day tomorrow.</label>
+    <label><input type="radio" name="q144" value="B"> (B)&nbsp;The Merton account contract was signed last March.</label>
+    <label><input type="radio" name="q144" value="C"> (C)&nbsp;Please ensure you bring printed copies of the slides for all attendees.</label>
+    <label><input type="radio" name="q144" value="D"> (D)&nbsp;Thursday's presentation has been added to the company calendar.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 145–148 — Notice</div>
+<p class="passage-label" style="margin-top:12px">Questions 145–148 refer to the following notice.</p>
+<div class="passage-block">
+<p><strong>PUBLIC NOTICE — ROAD CLOSURE: VICTORIA STREET</strong></p>
+<p>Ferndale Borough Council wishes to advise residents and road users that Victoria Street, between the junctions of Oak Avenue and Mill Road, will be <span class="blank">145</span> to through traffic from Monday, July 7, to Friday, July 25.</p>
+<p>The closure is necessary to allow for essential water main repair work to be carried out by the regional utilities provider. <span class="blank">146</span></p>
+<p>Motorists are advised to use the <span class="blank">147</span> diversion route, which has been clearly signposted from the junction of Hadley Road. The diversion will add approximately four minutes to journey times in the affected area.</p>
+<p>Residents requiring <span class="blank">148</span> to properties on Victoria Street during the closure period should contact the Council's Highways team at highways@ferndale.gov.uk.</p>
+</div>
+
+<div class="question-card" id="qc145">
+  <div class="q-label">145.</div>
+  <div class="options">
+    <label><input type="radio" name="q145" value="A"> (A)&nbsp;closed</label>
+    <label><input type="radio" name="q145" value="B"> (B)&nbsp;restricted</label>
+    <label><input type="radio" name="q145" value="C"> (C)&nbsp;reduced</label>
+    <label><input type="radio" name="q145" value="D"> (D)&nbsp;limited</label>
+  </div>
+</div>
+<div class="question-card" id="qc146">
+  <div class="q-label">146.</div>
+  <div class="options">
+    <label><input type="radio" name="q146" value="A"> (A)&nbsp;The council apologises for any inconvenience this may cause to local residents and businesses.</label>
+    <label><input type="radio" name="q146" value="B"> (B)&nbsp;Victoria Street was last resurfaced in 2018.</label>
+    <label><input type="radio" name="q146" value="C"> (C)&nbsp;The water main was originally installed in 1962.</label>
+    <label><input type="radio" name="q146" value="D"> (D)&nbsp;Residents may submit objections to the closure via the council website.</label>
+  </div>
+</div>
+<div class="question-card" id="qc147">
+  <div class="q-label">147.</div>
+  <div class="options">
+    <label><input type="radio" name="q147" value="A"> (A)&nbsp;designated</label>
+    <label><input type="radio" name="q147" value="B"> (B)&nbsp;designed</label>
+    <label><input type="radio" name="q147" value="C"> (C)&nbsp;determined</label>
+    <label><input type="radio" name="q147" value="D"> (D)&nbsp;defined</label>
+  </div>
+</div>
+<div class="question-card" id="qc148">
+  <div class="q-label">148.</div>
+  <div class="options">
+    <label><input type="radio" name="q148" value="A"> (A)&nbsp;access</label>
+    <label><input type="radio" name="q148" value="B"> (B)&nbsp;entry</label>
+    <label><input type="radio" name="q148" value="C"> (C)&nbsp;admission</label>
+    <label><input type="radio" name="q148" value="D"> (D)&nbsp;approach</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 149–152 — Article</div>
+<p class="passage-label" style="margin-top:12px">Questions 149–152 refer to the following article.</p>
+<div class="passage-block">
+<p><strong>TECH START-UP SECURES RECORD FUNDING ROUND</strong></p>
+<p>Optivance Technologies, a software start-up specialising in supply chain optimisation, announced yesterday that it has <span class="blank">149</span> $47 million in Series B funding. The round was led by Arrowhead Capital Partners, with participation from several existing investors.</p>
+<p>Founded just three years ago, Optivance has grown rapidly, expanding its client base from a handful of regional logistics firms to more than 200 companies <span class="blank">150</span>. The company's flagship product, SupplyIQ, uses machine learning to predict supply disruptions and recommend inventory adjustments in real time.</p>
+<p>CEO Priya Menon said the new capital would be used to accelerate product development and <span class="blank">151</span> into the North American market. "This investment confirms that the industry is ready for AI-driven supply chain solutions," she said.</p>
+<p>The announcement comes at a time of <span class="blank">152</span> interest in supply chain technology, following the disruptions caused by global events in recent years. Analysts predict the sector will continue to attract significant investment throughout the decade.</p>
+</div>
+
+<div class="question-card" id="qc149">
+  <div class="q-label">149.</div>
+  <div class="options">
+    <label><input type="radio" name="q149" value="A"> (A)&nbsp;secured</label>
+    <label><input type="radio" name="q149" value="B"> (B)&nbsp;acquiring</label>
+    <label><input type="radio" name="q149" value="C"> (C)&nbsp;gained</label>
+    <label><input type="radio" name="q149" value="D"> (D)&nbsp;achieved</label>
+  </div>
+</div>
+<div class="question-card" id="qc150">
+  <div class="q-label">150.</div>
+  <div class="options">
+    <label><input type="radio" name="q150" value="A"> (A)&nbsp;worldwide</label>
+    <label><input type="radio" name="q150" value="B"> (B)&nbsp;overall</label>
+    <label><input type="radio" name="q150" value="C"> (C)&nbsp;broadly</label>
+    <label><input type="radio" name="q150" value="D"> (D)&nbsp;extensively</label>
+  </div>
+</div>
+<div class="question-card" id="qc151">
+  <div class="q-label">151.</div>
+  <div class="options">
+    <label><input type="radio" name="q151" value="A"> (A)&nbsp;expand</label>
+    <label><input type="radio" name="q151" value="B"> (B)&nbsp;expansion</label>
+    <label><input type="radio" name="q151" value="C"> (C)&nbsp;expanding</label>
+    <label><input type="radio" name="q151" value="D"> (D)&nbsp;expanded</label>
+  </div>
+</div>
+<div class="question-card" id="qc152">
+  <div class="q-label">152.</div>
+  <div class="options">
+    <label><input type="radio" name="q152" value="A"> (A)&nbsp;growing</label>
+    <label><input type="radio" name="q152" value="B"> (B)&nbsp;grow</label>
+    <label><input type="radio" name="q152" value="C"> (C)&nbsp;grown</label>
+    <label><input type="radio" name="q152" value="D"> (D)&nbsp;growth</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 153–156 — Letter</div>
+<p class="passage-label" style="margin-top:12px">Questions 153–156 refer to the following letter.</p>
+<div class="passage-block">
+<p>September 18</p>
+<p>Mr. Philip Grant<br>Chief Executive Officer<br>Harrington Medical Devices Ltd<br>3 Innovation Drive, Cambridge, CB2 1TN</p>
+<p>Dear Mr. Grant,</p>
+<p>I am writing on behalf of the Eastbridge Healthcare Trust to express our strong <span class="blank">153</span> to the proposed development of a medical device manufacturing facility on land adjacent to Eastbridge Community Hospital.</p>
+<p>While we recognise the potential economic benefits of such a development, we are deeply concerned about the likely impact on hospital operations. The proposed facility would generate <span class="blank">154</span> levels of noise and heavy vehicle traffic during its construction phase, which could seriously affect patient recovery environments and staff working conditions.</p>
+<p>We respectfully request that Harrington Medical Devices conduct a full Environmental and Operational Impact Assessment before any planning <span class="blank">155</span> is submitted to the local authority.</p>
+<p><span class="blank">156</span> We remain open to constructive dialogue and would welcome the opportunity to meet at your earliest convenience.</p>
+<p>Yours sincerely,<br>Dr. Karen Howell<br>Chief Executive, Eastbridge Healthcare Trust</p>
+</div>
+
+<div class="question-card" id="qc153">
+  <div class="q-label">153.</div>
+  <div class="options">
+    <label><input type="radio" name="q153" value="A"> (A)&nbsp;opposition</label>
+    <label><input type="radio" name="q153" value="B"> (B)&nbsp;objection</label>
+    <label><input type="radio" name="q153" value="C"> (C)&nbsp;concern</label>
+    <label><input type="radio" name="q153" value="D"> (D)&nbsp;resistance</label>
+  </div>
+</div>
+<div class="question-card" id="qc154">
+  <div class="q-label">154.</div>
+  <div class="options">
+    <label><input type="radio" name="q154" value="A"> (A)&nbsp;significant</label>
+    <label><input type="radio" name="q154" value="B"> (B)&nbsp;signify</label>
+    <label><input type="radio" name="q154" value="C"> (C)&nbsp;significance</label>
+    <label><input type="radio" name="q154" value="D"> (D)&nbsp;significantly</label>
+  </div>
+</div>
+<div class="question-card" id="qc155">
+  <div class="q-label">155.</div>
+  <div class="options">
+    <label><input type="radio" name="q155" value="A"> (A)&nbsp;application</label>
+    <label><input type="radio" name="q155" value="B"> (B)&nbsp;form</label>
+    <label><input type="radio" name="q155" value="C"> (C)&nbsp;request</label>
+    <label><input type="radio" name="q155" value="D"> (D)&nbsp;submission</label>
+  </div>
+</div>
+<div class="question-card" id="qc156">
+  <div class="q-label">156.</div>
+  <div class="options">
+    <label><input type="radio" name="q156" value="A"> (A)&nbsp;A copy of this letter has been forwarded to the local planning authority for their records.</label>
+    <label><input type="radio" name="q156" value="B"> (B)&nbsp;The hospital was founded in 1932 and serves a catchment area of 180,000 residents.</label>
+    <label><input type="radio" name="q156" value="C"> (C)&nbsp;Harrington Medical Devices is currently operating from a temporary facility in Manchester.</label>
+    <label><input type="radio" name="q156" value="D"> (D)&nbsp;We trust that you will give this matter your most careful and prompt attention.</label>
+  </div>
+</div>
+
+<div class="submit-wrap">
+  <button id="submit-btn" disabled>Voir la correction</button>
+  <p class="req-note">Toutes les questions doivent être répondues avant d'afficher la correction.</p>
+</div>
+<div id="results">
+  <div class="score-banner"><div class="score-num" id="score-display">—</div><div class="score-sub" id="score-pct"></div></div>
+  <p class="correction-title">Correction détaillée</p>
+  <div id="corr-list"></div>
+</div>
+</main>
+<script>
+var KEYS={"141":"A","142":"A","143":"A","144":"A","145":"A","146":"A","147":"A","148":"A","149":"A","150":"A","151":"A","152":"A","153":"B","154":"A","155":"A","156":"D"};
+var EXPL={"141": "<b>(A) visualisation</b> — Nom requis dans <em>the data visualisation is clear</em>. <em>Visualising</em> (B) est gérondif. <em>Visualise</em> (C) est verbe. <em>Visual</em> (D) est adjectif.", "142": "<b>(A) delivered</b> — Passif : <em>catering will be delivered at 9:45</em>. <em>Delivering</em> (B) est actif ou participe. <em>Deliver</em> (C) est base verbale. <em>Delivery</em> (D) est un nom.", "143": "<b>(A) rectify</b> — <em>Rectify this</em> = corriger cela. Seul verbe qui répond logiquement à la signalement d'une erreur. <em>Verify</em> (B) = vérifier, pas corriger. <em>Magnify</em> (C) = agrandir. <em>Notify</em> (D) = informer.", "144": "<b>(A) I will send you the finalised attendee list by end of day tomorrow.</b> — Information pratique et attendue dans la coordination d'une réunion client. (B) est anecdotique. (C) serait une bonne option mais est moins directement liée au fil du message. (D) est redondant avec la réservation déjà mentionnée.", "145": "<b>(A) closed</b> — <em>Closed to through traffic</em> = fermée à la circulation de transit. Formule officielle standard dans les avis routiers. <em>Restricted</em> (B) implique une limitation partielle. <em>Reduced</em> (C) = réduite. <em>Limited</em> (D) = limitée, moins précis.", "146": "<b>(A) The council apologises for any inconvenience this may cause to local residents and businesses.</b> — Formule standard après l'annonce de travaux dans un avis public officiel. (B) et (C) sont des informations historiques sans pertinence immédiate. (D) implique un processus de contestation qui n'est pas évoqué ailleurs.", "147": "<b>(A) designated</b> — <em>The designated diversion route</em> = l'itinéraire de déviation désigné / officiel. Terme technique standard dans les avis de fermeture routière. <em>Designed</em> (B) = conçu. <em>Determined</em> (C) = déterminé. <em>Defined</em> (D) = défini.", "148": "<b>(A) access</b> — <em>Requiring access to properties</em> = nécessitant l'accès aux propriétés. Terme juridique et administratif standard. <em>Entry</em> (B) est possible mais moins formel. <em>Admission</em> (C) s'utilise pour les personnes dans des lieux publics. <em>Approach</em> (D) désigne un chemin d'accès, pas l'autorisation d'y entrer.", "149": "<b>(A) secured</b> — <em>Secured funding</em> = obtenu / levé des fonds. Collocation journalistique standard dans le domaine du capital-risque. <em>Acquiring</em> (B) est actif mais grammaticalement incompatible avec <em>has</em> sans <em>been</em>. <em>Gained</em> (C) et <em>achieved</em> (D) sont moins précis dans ce contexte financier.", "150": "<b>(A) worldwide</b> — <em>More than 200 companies worldwide</em> = plus de 200 entreprises dans le monde. Adverbe postposé standard dans ce type de phrase. <em>Overall</em> (B) = dans l'ensemble. <em>Broadly</em> (C) = globalement. <em>Extensively</em> (D) = de façon étendue, modifie un verbe.", "151": "<b>(A) expand</b> — Structure parallèle avec <em>accelerate</em> : <em>to accelerate... and expand into</em>. Infinitif après <em>to</em>. <em>Expansion</em> (B) est un nom. <em>Expanding</em> (C) est gérondif. <em>Expanded</em> (D) est passé ou participe.", "152": "<b>(A) growing</b> — <em>A time of growing interest</em> = une période d'intérêt croissant. Participe présent adjectival modifiant <em>interest</em>. <em>Grow</em> (B) est verbe. <em>Grown</em> (C) est participe passé. <em>Growth</em> (D) est un nom : <em>a time of growth in interest</em> serait possible mais moins idiomatique.", "153": "<b>(B) objection</b> — <em>Express strong objection to</em> = exprimer une forte objection à. Collocation formelle standard dans une lettre d'opposition officielle. <em>Opposition</em> (A) s'emploie dans <em>in opposition to</em> mais moins dans <em>express opposition</em>. <em>Concern</em> (C) = préoccupation, moins fort. <em>Resistance</em> (D) est moins formel.", "154": "<b>(A) significant</b> — Adjectif épithète : <em>significant levels of noise</em>. <em>Signify</em> (B) est un verbe. <em>Significance</em> (C) est un nom. <em>Significantly</em> (D) est un adverbe.", "155": "<b>(A) application</b> — <em>Planning application</em> = demande de permis de construire. Terme juridique précis dans le domaine de l'urbanisme britannique. <em>Form</em> (B) = formulaire. <em>Request</em> (C) = demande générique. <em>Submission</em> (D) = dépôt de dossier, possible mais moins spécifique.", "156": "<b>(D) We trust that you will give this matter your most careful and prompt attention.</b> — Formule de pression polie et standard dans une lettre d'opposition formelle, avant l'ouverture au dialogue. (A) est utile mais s'intègrerait mieux dans une conclusion administrative. (B) et (C) sont hors propos."};
+var LABELS={"141": {"A": "visualisation", "B": "visualising", "C": "visualise", "D": "visual"}, "142": {"A": "delivered", "B": "delivering", "C": "deliver", "D": "delivery"}, "143": {"A": "rectify", "B": "verify", "C": "magnify", "D": "notify"}, "144": {"A": "I will send you the finalised attendee list by end of day tomorrow.", "B": "The Merton account contract was signed last March.", "C": "Please ensure you bring printed copies of the slides for all attendees.", "D": "Thursday's presentation has been added to the company calendar."}, "145": {"A": "closed", "B": "restricted", "C": "reduced", "D": "limited"}, "146": {"A": "The council apologises for any inconvenience this may cause to local residents and businesses.", "B": "Victoria Street was last resurfaced in 2018.", "C": "The water main was originally installed in 1962.", "D": "Residents may submit objections to the closure via the council website."}, "147": {"A": "designated", "B": "designed", "C": "determined", "D": "defined"}, "148": {"A": "access", "B": "entry", "C": "admission", "D": "approach"}, "149": {"A": "secured", "B": "acquiring", "C": "gained", "D": "achieved"}, "150": {"A": "worldwide", "B": "overall", "C": "broadly", "D": "extensively"}, "151": {"A": "expand", "B": "expansion", "C": "expanding", "D": "expanded"}, "152": {"A": "growing", "B": "grow", "C": "grown", "D": "growth"}, "153": {"A": "opposition", "B": "objection", "C": "concern", "D": "resistance"}, "154": {"A": "significant", "B": "signify", "C": "significance", "D": "significantly"}, "155": {"A": "application", "B": "form", "C": "request", "D": "submission"}, "156": {"A": "A copy of this letter has been forwarded to the local planning authority for their records.", "B": "The hospital was founded in 1932 and serves a catchment area of 180,000 residents.", "C": "Harrington Medical Devices is currently operating from a temporary facility in Manchester.", "D": "We trust that you will give this matter your most careful and prompt attention."}};
+var TOTAL_Q=16;var remaining=480;var timerEl=document.getElementById('timer');
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+timerEl.textContent=fmt(remaining);
+var iv=setInterval(function(){remaining--;timerEl.textContent=fmt(remaining);if(remaining<=120)timerEl.classList.add('warn');if(remaining<=0){clearInterval(iv);timerEl.textContent='00:00';}},1000);
+var btn=document.getElementById('submit-btn');var qnums=Object.keys(KEYS).map(Number);
+function allAnswered(){return qnums.every(function(n){return document.querySelector('input[name="q'+n+'"]:checked');});}
+document.querySelectorAll('input[type=radio]').forEach(function(r){r.addEventListener('change',function(){var num=r.name.replace('q','');var card=document.getElementById('qc'+num);if(card)card.classList.add('answered');btn.disabled=!allAnswered();});});
+btn.addEventListener('click',function(){if(!allAnswered())return;var score=0;var list=document.getElementById('corr-list');list.innerHTML='';qnums.forEach(function(n){var sel=document.querySelector('input[name="q'+n+'"]:checked').value;var correct=KEYS[n];var ok=sel===correct;if(ok)score++;var labelMap=LABELS[n]||{};var card=document.createElement('div');card.className='corr-card '+(ok?'correct':'wrong');card.innerHTML='<div class="c-head"><span class="badge-'+(ok?'ok':'err')+'">'+(ok?'&#10003;':'&#10007;')+'</span> Q.'+n+'</div>'+'<div class="c-ans">'+(ok?'<span class="good">('+correct+') '+labelMap[correct]+'</span>':'<span class="bad">('+sel+') '+labelMap[sel]+'</span> &rarr; <span class="good">('+correct+') '+labelMap[correct]+'</span>')+'</div>'+'<div class="c-expl">'+EXPL[n]+'</div>';list.appendChild(card);});document.getElementById('score-display').textContent=score+'/'+TOTAL_Q;document.getElementById('score-pct').textContent=Math.round(score/TOTAL_Q*100)+'% correct';var res=document.getElementById('results');res.style.display='block';res.scrollIntoView({behavior:'smooth'});});
+</script>
+</body>
+</html>

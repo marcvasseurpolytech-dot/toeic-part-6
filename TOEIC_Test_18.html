@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 6 - Test 18 - Grammar in Context</title>
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+  :root{--navy:#00274C;--blue:#1565C0;--light-blue:#E3F0FF;--accent:#F59E0B;--green:#16A34A;--red:#DC2626;--bg:#F8FAFC;--white:#FFFFFF;--text:#1E293B;--muted:#64748B;--border:#CBD5E1;--passage-bg:#FEFCE8;--passage-border:#FDE68A}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  header{background:var(--navy);color:white;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+  .hdr-brand{font-family:'Merriweather',serif;font-size:.85rem;line-height:1.4;opacity:.9}
+  .hdr-brand span{display:block;font-size:.75rem;opacity:.7}
+  .hdr-title{font-family:'Merriweather',serif;font-size:1rem;font-weight:700;letter-spacing:.04em;text-align:center}
+  #timer{background:var(--accent);color:var(--navy);font-family:'Merriweather',serif;font-size:1.5rem;font-weight:700;padding:6px 18px;border-radius:6px;letter-spacing:.08em;min-width:90px;text-align:center;transition:background .3s}
+  #timer.warn{background:#EF4444;color:white;animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+  main{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  .directions{background:var(--white);border:2px solid var(--navy);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:.92rem}
+  .directions strong{display:block;font-size:.95rem;margin-bottom:6px;color:var(--navy)}
+  .section-header{background:var(--navy);color:white;padding:8px 16px;border-radius:6px 6px 0 0;font-family:'Merriweather',serif;font-size:.88rem;font-weight:700;letter-spacing:.04em;margin-top:32px}
+  .passage-label{font-size:.88rem;font-style:italic;color:var(--muted);margin:0 0 8px}
+  .passage-block{background:var(--passage-bg);border:1.5px solid var(--passage-border);border-radius:0 0 8px 8px;padding:18px 20px;margin-bottom:20px;font-family:'Merriweather',serif;font-size:.9rem;line-height:1.75}
+  .passage-block p{margin-bottom:.5em}
+  .blank{border-bottom:2px solid var(--navy);padding:0 8px;font-weight:700;color:var(--blue);font-family:'Source Sans 3',sans-serif;font-size:.85rem}
+  .question-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;transition:border-color .2s}
+  .question-card.answered{border-color:var(--blue)}
+  .q-label{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .options label{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.4;transition:background .15s}
+  .options label:hover{background:var(--light-blue)}
+  .options input[type=radio]{margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .submit-wrap{text-align:center;margin:32px 0 8px}
+  #submit-btn{background:var(--blue);color:white;border:none;border-radius:8px;padding:14px 40px;font-family:'Source Sans 3',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.04em;transition:background .2s,transform .15s;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+  #submit-btn:hover:not(:disabled){background:var(--navy);transform:translateY(-1px)}
+  #submit-btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none;transform:none}
+  .req-note{text-align:center;color:var(--muted);font-size:.82rem;margin-top:6px}
+  #results{display:none;margin-top:36px}
+  .score-banner{background:var(--navy);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:24px}
+  .score-banner .score-num{font-family:'Merriweather',serif;font-size:3rem;font-weight:700;color:var(--accent)}
+  .score-banner .score-sub{font-size:.9rem;opacity:.8;margin-top:4px}
+  .correction-title{font-family:'Merriweather',serif;font-size:1.05rem;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:8px;margin-bottom:16px}
+  .corr-card{border-radius:8px;padding:14px 16px;margin-bottom:10px;border-left:5px solid}
+  .corr-card.correct{background:#F0FDF4;border-color:var(--green)}
+  .corr-card.wrong{background:#FEF2F2;border-color:var(--red)}
+  .c-head{display:flex;align-items:center;gap:8px;font-weight:700;margin-bottom:6px;font-size:.93rem}
+  .badge-ok{background:var(--green);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .badge-err{background:var(--red);color:white;border-radius:4px;padding:1px 8px;font-size:.8rem}
+  .c-ans{font-size:.88rem;margin-bottom:6px}
+  .c-ans .good{color:var(--green);font-weight:700}
+  .c-ans .bad{color:var(--red);text-decoration:line-through}
+  .c-expl{font-size:.87rem;color:#374151;background:rgba(255,255,255,.7);border-radius:6px;padding:8px 10px;border-left:3px solid var(--muted);line-height:1.55}
+  @media(max-width:600px){header{padding:10px 14px;flex-wrap:wrap;gap:6px}.hdr-title{order:-1;width:100%;text-align:center}#timer{font-size:1.2rem}main{padding:16px 12px 48px}}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="hdr-brand">Marc VASSEUR<span>Polytech Lille · Intensif TOEIC</span></div>
+  <div class="hdr-title">TOEIC PART 6 — TEST 18</div>
+  <div id="timer">08:00</div>
+</header>
+<main>
+<div class="directions">
+  <strong>PART 6 – DIRECTIONS</strong>
+  Read the texts below. A word, phrase, or sentence is missing in parts of each text. Four answer choices are given below the text. Select the best answer to complete the text. Then mark the letter (A), (B), (C), or (D).
+</div>
+
+<div class="section-header">Questions 141-144 — Article</div>
+<p class="passage-label" style="margin-top:12px">Questions 141-144 refer to the following article.</p>
+<div class="passage-block">
+<p><strong>REMOTE WORKING SET TO REMAIN A PERMANENT FIXTURE FOR MANY FIRMS</strong></p>
+<p>A new study published by the National Institute for Workplace Research suggests that remote working arrangements, which became <span class="blank">141</span> during the pandemic, are now firmly embedded in the culture of many organisations.</p>
+<p>The study, which <span class="blank">142</span> responses from over 2,400 HR managers across 18 industries, found that 68% of companies now offer some form of permanent hybrid working arrangement.</p>
+<p>The research also highlighted significant benefits associated with flexible working, including improved staff <span class="blank">143</span> and reduced overhead costs. However, concerns were raised about the challenges of maintaining team cohesion in dispersed work environments.</p>
+<p>Experts suggest that the most successful organisations are those that have <span class="blank">144</span> formal hybrid working policies that clearly define expectations for both employers and employees.</p>
+</div>
+
+<div class="question-card" id="qc141">
+  <div class="q-label">141.</div>
+  <div class="options">
+    <label><input type="radio" name="q141" value="A"> (A)&nbsp;widespread</label>
+    <label><input type="radio" name="q141" value="B"> (B)&nbsp;widened</label>
+    <label><input type="radio" name="q141" value="C"> (C)&nbsp;widening</label>
+    <label><input type="radio" name="q141" value="D"> (D)&nbsp;widely</label>
+  </div>
+</div>
+<div class="question-card" id="qc142">
+  <div class="q-label">142.</div>
+  <div class="options">
+    <label><input type="radio" name="q142" value="A"> (A)&nbsp;analysed</label>
+    <label><input type="radio" name="q142" value="B"> (B)&nbsp;gathered</label>
+    <label><input type="radio" name="q142" value="C"> (C)&nbsp;compiled</label>
+    <label><input type="radio" name="q142" value="D"> (D)&nbsp;drew</label>
+  </div>
+</div>
+<div class="question-card" id="qc143">
+  <div class="q-label">143.</div>
+  <div class="options">
+    <label><input type="radio" name="q143" value="A"> (A)&nbsp;retention</label>
+    <label><input type="radio" name="q143" value="B"> (B)&nbsp;retaining</label>
+    <label><input type="radio" name="q143" value="C"> (C)&nbsp;retain</label>
+    <label><input type="radio" name="q143" value="D"> (D)&nbsp;retentive</label>
+  </div>
+</div>
+<div class="question-card" id="qc144">
+  <div class="q-label">144.</div>
+  <div class="options">
+    <label><input type="radio" name="q144" value="A"> (A)&nbsp;adopted</label>
+    <label><input type="radio" name="q144" value="B"> (B)&nbsp;adapted</label>
+    <label><input type="radio" name="q144" value="C"> (C)&nbsp;adjourned</label>
+    <label><input type="radio" name="q144" value="D"> (D)&nbsp;adhered</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 145-148 — Letter</div>
+<p class="passage-label" style="margin-top:12px">Questions 145-148 refer to the following letter.</p>
+<div class="passage-block">
+<p>March 4</p><p>Mr. Benjamin Hart, Customer Relations Manager, Apex Home Appliances</p>
+<p>Dear Mr. Hart,</p>
+<p>I am writing to express my dissatisfaction with the service I received following the purchase of an AX-900 dishwasher on February 8. The appliance developed a fault within its first week. A technician confirmed it contained a <span class="blank">145</span> component and stated a replacement would be ordered.</p>
+<p>It has now been three weeks since that visit, and I have received no <span class="blank">146</span> regarding the status of my repair. My repeated attempts to contact your customer service team by telephone have been met with excessive waiting times.</p>
+<p>I am therefore requesting that Apex either provides a full repair within seven days or <span class="blank">147</span> the appliance with a new unit of equivalent specification.</p>
+<p><span class="blank">148</span></p>
+<p>Yours sincerely,<br>Margaret Holloway</p>
+</div>
+
+<div class="question-card" id="qc145">
+  <div class="q-label">145.</div>
+  <div class="options">
+    <label><input type="radio" name="q145" value="A"> (A)&nbsp;defective</label>
+    <label><input type="radio" name="q145" value="B"> (B)&nbsp;defect</label>
+    <label><input type="radio" name="q145" value="C"> (C)&nbsp;defection</label>
+    <label><input type="radio" name="q145" value="D"> (D)&nbsp;defectively</label>
+  </div>
+</div>
+<div class="question-card" id="qc146">
+  <div class="q-label">146.</div>
+  <div class="options">
+    <label><input type="radio" name="q146" value="A"> (A)&nbsp;communication</label>
+    <label><input type="radio" name="q146" value="B"> (B)&nbsp;update</label>
+    <label><input type="radio" name="q146" value="C"> (C)&nbsp;information</label>
+    <label><input type="radio" name="q146" value="D"> (D)&nbsp;notice</label>
+  </div>
+</div>
+<div class="question-card" id="qc147">
+  <div class="q-label">147.</div>
+  <div class="options">
+    <label><input type="radio" name="q147" value="A"> (A)&nbsp;replaces</label>
+    <label><input type="radio" name="q147" value="B"> (B)&nbsp;replace</label>
+    <label><input type="radio" name="q147" value="C"> (C)&nbsp;replacing</label>
+    <label><input type="radio" name="q147" value="D"> (D)&nbsp;replacement</label>
+  </div>
+</div>
+<div class="question-card" id="qc148">
+  <div class="q-label">148.</div>
+  <div class="options">
+    <label><input type="radio" name="q148" value="A"> (A)&nbsp;I trust that you will treat this matter with the urgency it deserves.</label>
+    <label><input type="radio" name="q148" value="B"> (B)&nbsp;I am available to be contacted at the number provided above.</label>
+    <label><input type="radio" name="q148" value="C"> (C)&nbsp;I purchased the AX-900 based on consumer review recommendations.</label>
+    <label><input type="radio" name="q148" value="D"> (D)&nbsp;Apex Home Appliances has an excellent market reputation.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 149-152 — Notice</div>
+<p class="passage-label" style="margin-top:12px">Questions 149-152 refer to the following notice.</p>
+<div class="passage-block">
+<p><strong>PARKVIEW BUSINESS CENTRE — NOTICE TO ALL TENANTS</strong></p>
+<p>We are pleased to announce that the installation of electric vehicle charging stations in Car Park B will be completed by Friday, April 11. A total of 24 charging points will be made <span class="blank">149</span> to tenants and their visitors.</p>
+<p>Use of the charging stations will be managed through the ChargePoint app. Tenants wishing to <span class="blank">150</span> this facility are asked to register their vehicle details and payment method via the app before their first use.</p>
+<p>Charging rates are set at £0.32 per kWh for standard charging and £0.48 per kWh for rapid charging. A £2.00 session fee applies in <span class="blank">151</span> to the per-kWh rate.</p>
+<p><span class="blank">152</span> For any technical issues, please contact the facilities team at facilities@parkviewbc.com or call extension 312.</p>
+</div>
+
+<div class="question-card" id="qc149">
+  <div class="q-label">149.</div>
+  <div class="options">
+    <label><input type="radio" name="q149" value="A"> (A)&nbsp;available</label>
+    <label><input type="radio" name="q149" value="B"> (B)&nbsp;accessible</label>
+    <label><input type="radio" name="q149" value="C"> (C)&nbsp;open</label>
+    <label><input type="radio" name="q149" value="D"> (D)&nbsp;free</label>
+  </div>
+</div>
+<div class="question-card" id="qc150">
+  <div class="q-label">150.</div>
+  <div class="options">
+    <label><input type="radio" name="q150" value="A"> (A)&nbsp;access</label>
+    <label><input type="radio" name="q150" value="B"> (B)&nbsp;use</label>
+    <label><input type="radio" name="q150" value="C"> (C)&nbsp;utilise</label>
+    <label><input type="radio" name="q150" value="D"> (D)&nbsp;register for</label>
+  </div>
+</div>
+<div class="question-card" id="qc151">
+  <div class="q-label">151.</div>
+  <div class="options">
+    <label><input type="radio" name="q151" value="A"> (A)&nbsp;addition</label>
+    <label><input type="radio" name="q151" value="B"> (B)&nbsp;addition to</label>
+    <label><input type="radio" name="q151" value="C"> (C)&nbsp;additional</label>
+    <label><input type="radio" name="q151" value="D"> (D)&nbsp;additionally</label>
+  </div>
+</div>
+<div class="question-card" id="qc152">
+  <div class="q-label">152.</div>
+  <div class="options">
+    <label><input type="radio" name="q152" value="A"> (A)&nbsp;The building management reserves the right to amend the tariff structure with 30 days notice.</label>
+    <label><input type="radio" name="q152" value="B"> (B)&nbsp;Car Park A will remain exclusively for non-EV vehicles until further notice.</label>
+    <label><input type="radio" name="q152" value="C"> (C)&nbsp;ChargePoint app registration is free and takes under two minutes.</label>
+    <label><input type="radio" name="q152" value="D"> (D)&nbsp;The installation was funded through a government green infrastructure grant.</label>
+  </div>
+</div>
+
+<div class="section-header">Questions 153-156 — Advertisement</div>
+<p class="passage-label" style="margin-top:12px">Questions 153-156 refer to the following advertisement.</p>
+<div class="passage-block">
+<p><strong>LEXARA TRANSLATION SERVICES — PRECISION IN EVERY LANGUAGE</strong></p>
+<p>In today's global marketplace, clear and accurate communication is not a luxury — it is a <span class="blank">153</span>. Lexara Translation Services provides certified translation in over 90 languages for businesses, law firms, government agencies, and individual clients.</p>
+<p>Our team of more than 300 professional translators are all <span class="blank">154</span> native speakers with subject-matter expertise in legal, medical, technical, and financial translation. Every document is reviewed by a second linguist before delivery.</p>
+<p>We offer a standard turnaround of five business days, with <span class="blank">155</span> options available for urgent requirements. All translations are delivered in the format of your choice — PDF, Word, or certified hard copy.</p>
+<p><span class="blank">156</span> Request a free quote at lexara-translations.com, or call our multilingual team on 020 8844 6600.</p>
+</div>
+
+<div class="question-card" id="qc153">
+  <div class="q-label">153.</div>
+  <div class="options">
+    <label><input type="radio" name="q153" value="A"> (A)&nbsp;necessity</label>
+    <label><input type="radio" name="q153" value="B"> (B)&nbsp;requirement</label>
+    <label><input type="radio" name="q153" value="C"> (C)&nbsp;essential</label>
+    <label><input type="radio" name="q153" value="D"> (D)&nbsp;must</label>
+  </div>
+</div>
+<div class="question-card" id="qc154">
+  <div class="q-label">154.</div>
+  <div class="options">
+    <label><input type="radio" name="q154" value="A"> (A)&nbsp;qualified</label>
+    <label><input type="radio" name="q154" value="B"> (B)&nbsp;qualifying</label>
+    <label><input type="radio" name="q154" value="C"> (C)&nbsp;certificated</label>
+    <label><input type="radio" name="q154" value="D"> (D)&nbsp;accredited</label>
+  </div>
+</div>
+<div class="question-card" id="qc155">
+  <div class="q-label">155.</div>
+  <div class="options">
+    <label><input type="radio" name="q155" value="A"> (A)&nbsp;expedited</label>
+    <label><input type="radio" name="q155" value="B"> (B)&nbsp;urgent</label>
+    <label><input type="radio" name="q155" value="C"> (C)&nbsp;express</label>
+    <label><input type="radio" name="q155" value="D"> (D)&nbsp;priority</label>
+  </div>
+</div>
+<div class="question-card" id="qc156">
+  <div class="q-label">156.</div>
+  <div class="options">
+    <label><input type="radio" name="q156" value="A"> (A)&nbsp;Volume discounts are available for clients submitting ten or more documents per month.</label>
+    <label><input type="radio" name="q156" value="B"> (B)&nbsp;Lexara was founded in 2001 and is headquartered in central London.</label>
+    <label><input type="radio" name="q156" value="C"> (C)&nbsp;Our translators work exclusively with documents in their native language.</label>
+    <label><input type="radio" name="q156" value="D"> (D)&nbsp;We do not accept machine-translated content for proofreading.</label>
+  </div>
+</div>
+
+<div class="submit-wrap">
+  <button id="submit-btn" disabled>Voir la correction</button>
+  <p class="req-note">Toutes les questions doivent être répondues avant d'afficher la correction.</p>
+</div>
+<div id="results">
+  <div class="score-banner"><div class="score-num" id="score-display">—</div><div class="score-sub" id="score-pct"></div></div>
+  <p class="correction-title">Correction détaillée</p>
+  <div id="corr-list"></div>
+</div>
+</main>
+<script>
+var KEYS={"141":"A","142":"B","143":"A","144":"A","145":"A","146":"B","147":"B","148":"A","149":"A","150":"B","151":"A","152":"C","153":"A","154":"A","155":"A","156":"A"};
+var EXPL={"141":"<b>(A) widespread</b> — Adjectif attribut postposé : <em>became widespread</em> = se sont généralisés. <em>Widened</em> (B) = élargi (transitif). <em>Widening</em> (C) est participe présent. <em>Widely</em> (D) est adverbe.","142":"<b>(B) gathered</b> — <em>A study that gathered responses</em> = une étude qui a recueilli des réponses. Collocation naturelle. <em>Analysed</em> (A) = analysé (étape suivante). <em>Compiled</em> (C) est formel mais moins courant. <em>Drew</em> (D) s'emploie avec <em>drew from</em>.","143":"<b>(A) retention</b> — <em>Improved staff retention</em> = amélioration de la rétention du personnel. Nom requis comme complément de <em>improved</em>. <em>Retaining</em> (B) est gérondif. <em>Retain</em> (C) est verbe. <em>Retentive</em> (D) est adjectif de sens différent.","144":"<b>(A) adopted</b> — <em>Have adopted formal hybrid working policies</em> = ont adopté des politiques formelles. <em>Adapted</em> (B) = modifié. <em>Adjourned</em> (C) = ajourné. <em>Adhered</em> (D) se construit avec <em>to</em>.","145":"<b>(A) defective</b> — Adjectif épithète : <em>a defective component</em> = un composant défectueux. <em>Defect</em> (B) est un nom. <em>Defection</em> (C) = trahison. <em>Defectively</em> (D) est adverbe.","146":"<b>(B) update</b> — <em>Received no update regarding the status of my repair</em> = n'a reçu aucune mise à jour. Terme précis dans un contexte de suivi client. <em>Communication</em> (A) est plus générique. <em>Information</em> (C) est possible mais vague. <em>Notice</em> (D) = notification formelle.","147":"<b>(B) replace</b> — Structure parallèle : <em>either provides... or replace...</em>. Infinitif de base dans une construction alternative après <em>or</em>. <em>Replaces</em> (A) est présent simple. <em>Replacing</em> (C) est gérondif. <em>Replacement</em> (D) est un nom.","148":"<b>(A) I trust that you will treat this matter with the urgency it deserves.</b> — Formule de clôture incisive et appropriée à une lettre de réclamation formelle. (B) est trop neutre. (C) est anecdotique. (D) est contradictoire avec le ton de la lettre.","149":"<b>(A) available</b> — <em>Made available to tenants</em> = mis à disposition des locataires. Collocation passive standard. <em>Accessible</em> (B) est possible mais moins naturel. <em>Open</em> (C) = ouvert, moins précis. <em>Free</em> (D) = gratuit, incorrect car des frais sont mentionnés.","150":"<b>(B) use</b> — <em>Wishing to use this facility</em> = souhaitant utiliser cet équipement. Verbe le plus naturel et direct. <em>Access</em> (A) implique l'accès physique. <em>Utilise</em> (C) est formel. <em>Register for</em> (D) signifie s'inscrire, qui est l'étape suivante.","151":"<b>(A) addition</b> — Locution : <em>in addition to the per-kWh rate</em>. Le nom <em>addition</em> est requis après <em>in</em>. <em>Addition to</em> (B) serait redondant avec <em>in</em>. <em>Additional</em> (C) est adjectif. <em>Additionally</em> (D) est adverbe de liaison.","152":"<b>(C) ChargePoint app registration is free and takes under two minutes.</b> — Information pratique et incitative, logiquement placée juste avant le contact technique. (A) est juridique mais non conclusif ici. (B) est utile mais hors paragraphe. (D) est anecdotique.","153":"<b>(A) necessity</b> — Nom attribut dans <em>it is a necessity</em> = c'est une nécessité. <em>Requirement</em> (B) est possible mais moins idiomatique dans cette formule rhétorique. <em>Essential</em> (C) est adjectif. <em>Must</em> (D) est un auxiliaire modal.","154":"<b>(A) qualified</b> — Adjectif épithète : <em>qualified native speakers</em> = locuteurs natifs qualifiés. <em>Qualifying</em> (B) est actif. <em>Certificated</em> (C) est moins courant. <em>Accredited</em> (D) désigne une accréditation institutionnelle.","155":"<b>(A) expedited</b> — <em>Expedited options</em> = options accélérées / express. Adjectif participial fréquent dans les services professionnels. <em>Urgent</em> (B) est adjectif descriptif, pas un type de service. <em>Express</em> (C) et <em>priority</em> (D) sont corrects mais moins formels dans ce contexte.","156":"<b>(A) Volume discounts are available for clients submitting ten or more documents per month.</b> — Information commerciale attractive avant le CTA. (B) est anecdotique. (C) est implicite. (D) introduit une restriction négative peu adaptée."};
+var LABELS={"141":{"A":"widespread","B":"widened","C":"widening","D":"widely"},"142":{"A":"analysed","B":"gathered","C":"compiled","D":"drew"},"143":{"A":"retention","B":"retaining","C":"retain","D":"retentive"},"144":{"A":"adopted","B":"adapted","C":"adjourned","D":"adhered"},"145":{"A":"defective","B":"defect","C":"defection","D":"defectively"},"146":{"A":"communication","B":"update","C":"information","D":"notice"},"147":{"A":"replaces","B":"replace","C":"replacing","D":"replacement"},"148":{"A":"I trust that you will treat this matter with the urgency it deserves.","B":"I am available to be contacted at the number provided above.","C":"I purchased the AX-900 based on consumer review recommendations.","D":"Apex Home Appliances has an excellent market reputation."},"149":{"A":"available","B":"accessible","C":"open","D":"free"},"150":{"A":"access","B":"use","C":"utilise","D":"register for"},"151":{"A":"addition","B":"addition to","C":"additional","D":"additionally"},"152":{"A":"The building management reserves the right to amend the tariff structure with 30 days notice.","B":"Car Park A will remain exclusively for non-EV vehicles until further notice.","C":"ChargePoint app registration is free and takes under two minutes.","D":"The installation was funded through a government green infrastructure grant."},"153":{"A":"necessity","B":"requirement","C":"essential","D":"must"},"154":{"A":"qualified","B":"qualifying","C":"certificated","D":"accredited"},"155":{"A":"expedited","B":"urgent","C":"express","D":"priority"},"156":{"A":"Volume discounts are available for clients submitting ten or more documents per month.","B":"Lexara was founded in 2001 and is headquartered in central London.","C":"Our translators work exclusively with documents in their native language.","D":"We do not accept machine-translated content for proofreading."}};
+
+var KEYS = {"141":"A","142":"C","143":"A","144":"B","145":"A","146":"A","147":"A","148":"A","149":"A","150":"C","151":"A","152":"B","153":"A","154":"B","155":"C","156":"C"};
+var EXPL = {
+  "141": "<b>(A) expected</b> — La structure passive <em>be expected to</em> (être prévu pour / être censé) est la collocation standard dans ce contexte formel. <em>Expecting</em> (B) serait actif et ne peut s'appliquer à un sujet inanimé. <em>Expectation</em> (C) est un nom. <em>Expects</em> (D) est actif et incompatible avec <em>be</em>.",
+  "142": "<b>(C) working</b> — Après <em>currently</em>, le participe présent <em>working</em> forme un groupe participial postposé modifiant <em>employees</em> : <em>employees currently working on the third floor</em>. <em>To work</em> (A) exigerait un verbe principal. <em>Worked</em> (B) serait passé simple. <em>Works</em> (D) est un verbe conjugué qui briserait la structure nominale.",
+  "143": "<b>(A) inconvenience</b> — La formule <em>any inconvenience this may cause</em> est une expression figée de politesse professionnelle dans les mémos. <em>Renovation</em> (B) est déjà le sujet du mémo. <em>Satisfaction</em> (C) est sémantiquement absurde dans ce contexte de gêne annoncée. <em>Confusion</em> (D) est moins idiomatique que <em>inconvenience</em>.",
+  "144": "<b>(B) Thank you for your cooperation and patience during this time.</b> — Cette phrase de clôture conclut le mémo sur une note courtoise avant l'adresse email. Les options (A), (C) et (D) introduisent des informations nouvelles et non contextualisées qui rompraient la cohérence du paragraphe final.",
+  "145": "<b>(A) qualified</b> — Adjectif épithète antéposé modifiant <em>candidates</em>. La structure <em>qualified candidates</em> est une collocation fixe du vocabulaire RH. <em>Qualifying</em> (B) aurait un sens actif (candidats qui qualifient quelque chose). <em>Qualification</em> (C) est un nom. <em>Qualify</em> (D) est un verbe.",
+  "146": "<b>(A) comprehensive</b> — Adjectif épithète devant <em>approach</em>. <em>A comprehensive approach</em> = une approche globale / intégrée. <em>Comprehension</em> (B) est un nom. <em>Comprehensively</em> (C) est un adverbe qui ne peut précéder un nom. <em>Comprehend</em> (D) est un verbe.",
+  "147": "<b>(A) satisfaction</b> — <em>Report high levels of satisfaction</em> est une collocation standard dans le discours commercial. <em>Application</em> (B) et <em>reservation</em> (D) sont sémantiquement incompatibles. <em>Regulation</em> (C) est hors contexte.",
+  "148": "<b>(A) worldwide</b> — Adverbe modifiant <em>available</em> : <em>services are available worldwide</em>. <em>World</em> (B) est un nom et ne peut modifier un adjectif seul. <em>Globally</em> (C) est synonyme mais moins naturel dans ce type de texte publicitaire. <em>International</em> (D) est adjectif et ne peut modifier <em>available</em> directement.",
+  "149": "<b>(A) regarding</b> — Préposition de sujet épistolaire : <em>I am writing regarding...</em> = je vous écris au sujet de. <em>Despite</em> (B) exprime une concession. <em>Instead of</em> (C) une substitution. <em>Due to</em> (D) une cause, incompatible avec le contexte d'un objet de courriel.",
+  "150": "<b>(C) lies</b> — La construction <em>where the gap lies</em> (où se trouve / se situe l'écart) est idiomatique et précise. <em>Originates</em> (A) serait possible mais moins naturel. <em>Occurred</em> (B) est au passé simple, incompatible avec <em>where</em> interrogatif indirect présent. <em>Appears</em> (D) affaiblit le sens.",
+  "151": "<b>(A) earliest</b> — La locution <em>at your earliest convenience</em> = dès que possible (formule épistolaire figée). <em>Early</em> (B) est adverbe ou adjectif simple. <em>Earlier</em> (C) est comparatif. <em>Most early</em> (D) est une forme incorrecte du superlatif.",
+  "152": "<b>(B) Please let me know if you need any additional information to proceed.</b> — Cette phrase de transition précède la formule de clôture et maintient la cohérence logique de la demande. (A) parle des embauches récentes, hors sujet. (C) évoque les revenus, non mentionnés. (D) introduit une information logistique sans lien.",
+  "153": "<b>(A) mandatory</b> — <em>Mandatory</em> = obligatoire, ce qui est cohérent avec le contexte d'un exercice d'évacuation officiel. <em>Optional</em> (B) et <em>voluntary</em> (C) sont sémantiquement opposés au sens attendu. <em>Recommended</em> (D) affaiblit le caractère obligatoire implicite d'un exercice de sécurité.",
+  "154": "<b>(B) during</b> — <em>During an evacuation</em> = pendant une évacuation. <em>During</em> est suivi d'un nom. <em>While</em> (A) et <em>when</em> (C) introduisent des propositions avec sujet et verbe. <em>Since</em> (D) exprime une durée depuis un point de départ.",
+  "155": "<b>(C) whether</b> — <em>To evaluate whether</em> = évaluer si (condition binaire : succès ou échec). <em>That</em> (A) introduirait une complétive affirmative, pas une condition. <em>What</em> (B) appellerait un complément d'objet. <em>How</em> (D) interrogerait sur la manière, pas sur la réussite de l'évacuation.",
+  "156": "<b>(C) Your observations and suggestions are welcome and will be reviewed.</b> — Cette phrase introduit naturellement le formulaire de retour mentionné dans la phrase suivante. (A) crée une tonalité négative peu adaptée. (B) parle des contacts d'urgence, déjà traité implicitement. (D) est une information pratique déjà couverte par le texte."
+};
+var LABELS = {
+  "141":{"A":"expected","B":"expecting","C":"expectation","D":"expects"},
+  "142":{"A":"to work","B":"worked","C":"working","D":"works"},
+  "143":{"A":"inconvenience","B":"renovation","C":"satisfaction","D":"confusion"},
+  "144":{"A":"The renovation budget has not yet been finalized.","B":"Thank you for your cooperation and patience during this time.","C":"All employees must submit a leave request by Friday.","D":"Construction materials will be delivered to the loading dock."},
+  "145":{"A":"qualified","B":"qualifying","C":"qualification","D":"qualify"},
+  "146":{"A":"comprehensive","B":"comprehension","C":"comprehensively","D":"comprehend"},
+  "147":{"A":"satisfaction","B":"application","C":"regulation","D":"reservation"},
+  "148":{"A":"worldwide","B":"world","C":"globally","D":"international"},
+  "149":{"A":"regarding","B":"despite","C":"instead of","D":"due to"},
+  "150":{"A":"originates","B":"occurred","C":"lies","D":"appears"},
+  "151":{"A":"earliest","B":"early","C":"earlier","D":"most early"},
+  "152":{"A":"The warehouse has recently hired three new staff members.","B":"Please let me know if you need any additional information to proceed.","C":"Our Q3 revenue figures exceeded the annual forecast.","D":"The shipment was rerouted through the Northgate distribution center."},
+  "153":{"A":"mandatory","B":"optional","C":"voluntary","D":"recommended"},
+  "154":{"A":"while","B":"during","C":"when","D":"since"},
+  "155":{"A":"that","B":"what","C":"whether","D":"how"},
+  "156":{"A":"Results of the previous drill were below the national average.","B":"All employees are reminded to update their emergency contact details.","C":"Your observations and suggestions are welcome and will be reviewed.","D":"Fire extinguishers are located at the end of each corridor."}
+};
+var TOTAL_Q = 16;
+var TOTAL_SEC = 480;
+var remaining = TOTAL_SEC;
+var timerEl = document.getElementById('timer');
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+timerEl.textContent = fmt(remaining);
+var iv = setInterval(function(){remaining--;timerEl.textContent=fmt(remaining);if(remaining<=120)timerEl.classList.add('warn');if(remaining<=0){clearInterval(iv);timerEl.textContent='00:00';}},1000);
+var btn = document.getElementById('submit-btn');
+var qnums = Object.keys(KEYS).map(Number);
+function allAnswered(){return qnums.every(function(n){return document.querySelector('input[name="q'+n+'"]:checked');});}
+document.querySelectorAll('input[type=radio]').forEach(function(r){
+  r.addEventListener('change',function(){
+    var num=r.name.replace('q','');
+    var card=document.getElementById('qc'+num);
+    if(card)card.classList.add('answered');
+    btn.disabled=!allAnswered();
+  });
+});
+btn.addEventListener('click',function(){
+  if(!allAnswered())return;
+  var score=0;
+  var list=document.getElementById('corr-list');
+  list.innerHTML='';
+  qnums.forEach(function(n){
+    var sel=document.querySelector('input[name="q'+n+'"]:checked').value;
+    var correct=KEYS[n];
+    var ok=sel===correct;
+    if(ok)score++;
+    var labelMap=LABELS[n]||{};
+    var card=document.createElement('div');
+    card.className='corr-card '+(ok?'correct':'wrong');
+    card.innerHTML='<div class="c-head"><span class="badge-'+(ok?'ok':'err')+'">'+(ok?'&#10003;':'&#10007;')+'</span> Q.'+n+'</div>'+
+      '<div class="c-ans">'+(ok?'<span class="good">('+correct+') '+labelMap[correct]+'</span>':'<span class="bad">('+sel+') '+labelMap[sel]+'</span> &rarr; <span class="good">('+correct+') '+labelMap[correct]+'</span>')+'</div>'+
+      '<div class="c-expl">'+EXPL[n]+'</div>';
+    list.appendChild(card);
+  });
+  document.getElementById('score-display').textContent=score+'/'+TOTAL_Q;
+  document.getElementById('score-pct').textContent=Math.round(score/TOTAL_Q*100)+'% correct';
+  var res=document.getElementById('results');
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth'});
+});
+
+</script>
+</body>
+</html>
